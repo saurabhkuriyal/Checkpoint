@@ -14,10 +14,10 @@ interface Task {
 
 export default function page() {
   const [tasks, setTasks] = useState<Task[]>([
-    { id: "1", name: "Vehicle Exterior Wash", time: "07:30", isDone: false, remarks: "" },
-    { id: "2", name: "Engine Fluid Check", time: "08:15", isDone: true, remarks: "Oil levels optimal" },
-    { id: "3", name: "Interior Sanitization", time: "09:00", isDone: false, remarks: "" },
-    { id: "4", name: "Tire Pressure Verification", time: "10:00", isDone: false, remarks: "" },
+    { id: "1", name: "Couting kids", time: "07:30", isDone: false, remarks: "" },
+    { id: "2", name: "Checking the bus", time: "08:15", isDone: true, remarks: "Oil levels optimal" },
+    { id: "3", name: "contacting with teachers", time: "09:00", isDone: false, remarks: "" },
+    { id: "4", name: "Dropping kids", time: "10:00", isDone: false, remarks: "" },
   ]);
 
   const [submittingId, setSubmittingId] = useState<string | null>(null);

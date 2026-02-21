@@ -1,9 +1,10 @@
 "use client";
 
+import axios from "axios";
 import { useState } from "react";
 
 interface TaskRow {
-    id: string;
+    TripId: string;
     name: string;
     description: string;
     time: string;
@@ -12,13 +13,13 @@ interface TaskRow {
 const generateId = () => Math.random().toString(36).substr(2, 9);
 
 const emptyTask = (): TaskRow => ({
-    id: generateId(),
+    TripId: generateId(),
     name: "",
     description: "",
     time: "",
 });
 
-export default function CreateTripPage() {
+export default function page() {
     const [tripName, setTripName] = useState("");
     const [tripDate, setTripDate] = useState("");
     const [tasks, setTasks] = useState<TaskRow[]>([emptyTask()]);
@@ -29,20 +30,23 @@ export default function CreateTripPage() {
 
     const removeRow = (id: string) => {
         if (tasks.length === 1) return;
-        setTasks((p) => p.filter((t) => t.id !== id));
+        setTasks((p) => p.filter((t) => t.TripId !== id));
     };
 
     const updateRow = (id: string, field: keyof TaskRow, value: string) =>
         setTasks((p) =>
-            p.map((t) => (t.id === id ? { ...t, [field]: value } : t))
+            p.map((t) => (t.TripId === id ? { ...t, [field]: value } : t))
         );
 
     const handleSave = async () => {
         setSaving(true);
+
+
         const payload = { tripName, tripDate, tasks, createdAt: new Date().toISOString() };
         console.log("Saving:", payload);
         try {
-            await new Promise((r) => setTimeout(r, 900));
+            const response = await axios.post("/api/new_trip", payload);
+            console.log("Response:", response.data);
             setSaved(true);
             setTimeout(() => setSaved(false), 3000);
         } catch {
@@ -174,7 +178,7 @@ export default function CreateTripPage() {
                             <tbody className="divide-y divide-slate-50">
                                 {tasks.map((task, index) => (
                                     <tr
-                                        key={task.id}
+                                        key={task.TripId}
                                         className="group hover:bg-blue-50/30 transition-colors duration-150"
                                     >
                                         {/* Row Number */}
@@ -189,7 +193,7 @@ export default function CreateTripPage() {
                                             <input
                                                 type="text"
                                                 value={task.name}
-                                                onChange={(e) => updateRow(task.id, "name", e.target.value)}
+                                                onChange={(e) => updateRow(task.TripId, "name", e.target.value)}
                                                 placeholder="Enter task name..."
                                                 className="w-full bg-transparent border-b-2 border-slate-100 focus:border-blue-500 px-0 py-1 text-sm font-semibold text-slate-800 placeholder:text-slate-300 outline-none transition-colors"
                                             />
@@ -200,7 +204,7 @@ export default function CreateTripPage() {
                                             <input
                                                 type="text"
                                                 value={task.description}
-                                                onChange={(e) => updateRow(task.id, "description", e.target.value)}
+                                                onChange={(e) => updateRow(task.TripId, "description", e.target.value)}
                                                 placeholder="Optional notes..."
                                                 className="w-full bg-transparent border-b-2 border-slate-100 focus:border-blue-500 px-0 py-1 text-sm text-slate-600 placeholder:text-slate-300 outline-none transition-colors"
                                             />
@@ -211,7 +215,7 @@ export default function CreateTripPage() {
                                             <input
                                                 type="time"
                                                 value={task.time}
-                                                onChange={(e) => updateRow(task.id, "time", e.target.value)}
+                                                onChange={(e) => updateRow(task.TripId, "time", e.target.value)}
                                                 className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2 py-1.5 text-xs font-black text-slate-700 outline-none focus:ring-2 focus:ring-blue-400/50 focus:border-blue-500 transition-all"
                                             />
                                         </td>
@@ -219,7 +223,7 @@ export default function CreateTripPage() {
                                         {/* Remove Button */}
                                         <td className="px-3 py-3 text-center">
                                             <button
-                                                onClick={() => removeRow(task.id)}
+                                                onClick={() => removeRow(task.TripId)}
                                                 disabled={tasks.length === 1}
                                                 title="Remove row"
                                                 className={`w-7 h-7 rounded-lg flex items-center justify-center mx-auto transition-all

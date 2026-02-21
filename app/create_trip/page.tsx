@@ -64,14 +64,14 @@ export default function CreateTripPage() {
             <header className="sticky top-0 z-50 bg-white border-b border-slate-100 shadow-sm">
                 <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
                     <div className="flex items-center gap-2.5 min-w-0">
-                        <div className="w-8 h-8 shrink-0 rounded-lg bg-emerald-500 flex items-center justify-center shadow shadow-emerald-200">
+                        <div className="w-8 h-8 shrink-0 rounded-lg bg-blue-600 flex items-center justify-center shadow shadow-blue-200">
                             <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5}
                                     d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                             </svg>
                         </div>
                         <div className="min-w-0">
-                            <p className="text-[9px] font-black text-emerald-600 uppercase tracking-widest leading-none">Admin</p>
+                            <p className="text-[9px] font-black text-blue-600 uppercase tracking-widest leading-none">Admin</p>
                             <h1 className="text-sm font-black text-slate-800 truncate">Create New Trip</h1>
                         </div>
                     </div>
@@ -81,7 +81,7 @@ export default function CreateTripPage() {
                         disabled={!isValid || saving}
                         className={`shrink-0 flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition-all active:scale-95
               ${isValid && !saving
-                                ? "bg-emerald-500 text-white shadow-md shadow-emerald-200 hover:bg-emerald-600"
+                                ? "bg-blue-600 text-white shadow-md shadow-blue-200 hover:bg-blue-700"
                                 : "bg-slate-100 text-slate-400 cursor-not-allowed"}`}
                     >
                         {saving ? (
@@ -99,7 +99,7 @@ export default function CreateTripPage() {
 
                 {/* ── Trip Info ── */}
                 <section className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-                    <div className="px-4 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-500 flex items-center gap-2">
+                    <div className="px-4 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 flex items-center gap-2">
                         <span className="text-white text-xs font-black uppercase tracking-widest">Trip Info</span>
                     </div>
                     <div className="p-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -112,7 +112,7 @@ export default function CreateTripPage() {
                                 value={tripName}
                                 onChange={(e) => setTripName(e.target.value)}
                                 placeholder="e.g. Morning School Run"
-                                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-sm font-semibold text-slate-800 placeholder:text-slate-300 outline-none focus:ring-2 focus:ring-emerald-400/50 focus:border-emerald-400 transition-all"
+                                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-sm font-semibold text-slate-800 placeholder:text-slate-300 outline-none focus:ring-2 focus:ring-blue-400/50 focus:border-blue-500 transition-all"
                             />
                         </div>
                         <div>
@@ -123,7 +123,7 @@ export default function CreateTripPage() {
                                 type="date"
                                 value={tripDate}
                                 onChange={(e) => setTripDate(e.target.value)}
-                                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-sm font-semibold text-slate-700 outline-none focus:ring-2 focus:ring-emerald-400/50 focus:border-emerald-400 transition-all"
+                                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-sm font-semibold text-slate-700 outline-none focus:ring-2 focus:ring-blue-400/50 focus:border-blue-500 transition-all"
                             />
                         </div>
                     </div>
@@ -138,7 +138,7 @@ export default function CreateTripPage() {
                             <h2 className="text-sm font-black text-slate-800">Task Checklist</h2>
                             <p className="text-[10px] text-slate-400 font-medium">Each row = one task the driver/staff must complete</p>
                         </div>
-                        <span className="bg-emerald-100 text-emerald-700 text-[11px] font-black px-2.5 py-1 rounded-full">
+                        <span className="bg-blue-100 text-blue-700 text-[11px] font-black px-2.5 py-1 rounded-full">
                             {tasks.length} {tasks.length === 1 ? "row" : "rows"}
                         </span>
                     </div>
@@ -175,11 +175,11 @@ export default function CreateTripPage() {
                                 {tasks.map((task, index) => (
                                     <tr
                                         key={task.id}
-                                        className="group hover:bg-emerald-50/30 transition-colors duration-150"
+                                        className="group hover:bg-blue-50/30 transition-colors duration-150"
                                     >
                                         {/* Row Number */}
                                         <td className="px-3 py-3 text-center">
-                                            <span className="inline-flex items-center justify-center w-6 h-6 rounded-md bg-slate-100 text-[10px] font-black text-slate-500 group-hover:bg-emerald-100 group-hover:text-emerald-600 transition-colors">
+                                            <span className="inline-flex items-center justify-center w-6 h-6 rounded-md bg-slate-100 text-[10px] font-black text-slate-500 group-hover:bg-blue-100 group-hover:text-blue-600 transition-colors">
                                                 {index + 1}
                                             </span>
                                         </td>
@@ -191,7 +191,7 @@ export default function CreateTripPage() {
                                                 value={task.name}
                                                 onChange={(e) => updateRow(task.id, "name", e.target.value)}
                                                 placeholder="Enter task name..."
-                                                className="w-full bg-transparent border-b-2 border-slate-100 focus:border-emerald-400 px-0 py-1 text-sm font-semibold text-slate-800 placeholder:text-slate-300 outline-none transition-colors"
+                                                className="w-full bg-transparent border-b-2 border-slate-100 focus:border-blue-500 px-0 py-1 text-sm font-semibold text-slate-800 placeholder:text-slate-300 outline-none transition-colors"
                                             />
                                         </td>
 
@@ -202,7 +202,7 @@ export default function CreateTripPage() {
                                                 value={task.description}
                                                 onChange={(e) => updateRow(task.id, "description", e.target.value)}
                                                 placeholder="Optional notes..."
-                                                className="w-full bg-transparent border-b-2 border-slate-100 focus:border-emerald-400 px-0 py-1 text-sm text-slate-600 placeholder:text-slate-300 outline-none transition-colors"
+                                                className="w-full bg-transparent border-b-2 border-slate-100 focus:border-blue-500 px-0 py-1 text-sm text-slate-600 placeholder:text-slate-300 outline-none transition-colors"
                                             />
                                         </td>
 
@@ -212,7 +212,7 @@ export default function CreateTripPage() {
                                                 type="time"
                                                 value={task.time}
                                                 onChange={(e) => updateRow(task.id, "time", e.target.value)}
-                                                className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2 py-1.5 text-xs font-black text-slate-700 outline-none focus:ring-2 focus:ring-emerald-400/50 focus:border-emerald-400 transition-all"
+                                                className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2 py-1.5 text-xs font-black text-slate-700 outline-none focus:ring-2 focus:ring-blue-400/50 focus:border-blue-500 transition-all"
                                             />
                                         </td>
 
@@ -244,7 +244,7 @@ export default function CreateTripPage() {
                             onClick={addRow}
                             className="flex items-center gap-2 text-emerald-600 hover:text-emerald-700 text-xs font-black uppercase tracking-wider transition-all hover:gap-3 active:scale-95"
                         >
-                            <div className="w-6 h-6 rounded-lg bg-emerald-500 flex items-center justify-center shadow-sm shadow-emerald-200">
+                            <div className="w-6 h-6 rounded-lg bg-blue-600 flex items-center justify-center shadow-sm shadow-blue-200">
                                 <svg className="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M12 4v16m8-8H4" />
                                 </svg>
@@ -261,7 +261,7 @@ export default function CreateTripPage() {
                         disabled={!isValid || saving}
                         className={`w-full py-4 rounded-2xl text-sm font-black uppercase tracking-widest transition-all active:scale-[0.98]
               ${isValid && !saving
-                                ? "bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-xl shadow-emerald-200"
+                                ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-xl shadow-blue-200"
                                 : "bg-slate-100 text-slate-400 cursor-not-allowed"}`}
                     >
                         {saving ? (

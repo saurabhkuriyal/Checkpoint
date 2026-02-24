@@ -4,48 +4,102 @@ import axios from "axios";
 import { useState } from "react";
 
 interface TaskRow {
-    TripId: string;
+    id: string;
     name: string;
     description: string;
     time: string;
+}
+
+interface DateGroup {
+    groupId: string;
     date: string;
+    tasks: TaskRow[];
 }
 
 const generateId = () => Math.random().toString(36).substr(2, 9);
 
 const emptyTask = (): TaskRow => ({
-    TripId: generateId(),
+    id: generateId(),
     name: "",
     description: "",
     time: "",
+});
+
+const emptyGroup = (): DateGroup => ({
+    groupId: generateId(),
     date: "",
+    tasks: [emptyTask()],
 });
 
 export default function page() {
     const [tripName, setTripName] = useState("");
     const [tripDate, setTripDate] = useState("");
     const [tripDiscussion, setTripDiscussion] = useState("");
-    const [tasks, setTasks] = useState<TaskRow[]>([emptyTask()]);
+    const [groups, setGroups] = useState<DateGroup[]>([emptyGroup()]);
     const [saving, setSaving] = useState(false);
     const [saved, setSaved] = useState(false);
 
-    const addRow = () => setTasks((p) => [...p, emptyTask()]);
+    /* ── Group helpers ── */
+    const addGroup = () => setGroups((p) => [...p, emptyGroup()]);
 
-    const removeRow = (id: string) => {
-        if (tasks.length === 1) return;
-        setTasks((p) => p.filter((t) => t.TripId !== id));
+    const removeGroup = (groupId: string) => {
+        if (groups.length === 1) return;
+        setGroups((p) => p.filter((g) => g.groupId !== groupId));
     };
 
-    const updateRow = (id: string, field: keyof TaskRow, value: string) =>
-        setTasks((p) =>
-            p.map((t) => (t.TripId === id ? { ...t, [field]: value } : t))
+    const updateGroupDate = (groupId: string, date: string) =>
+        setGroups((p) =>
+            p.map((g) => (g.groupId === groupId ? { ...g, date } : g))
         );
 
+    /* ── Task helpers ── */
+    const addTask = (groupId: string) =>
+        setGroups((p) =>
+            p.map((g) =>
+                g.groupId === groupId
+                    ? { ...g, tasks: [...g.tasks, emptyTask()] }
+                    : g
+            )
+        );
+
+    const removeTask = (groupId: string, taskId: string) =>
+        setGroups((p) =>
+            p.map((g) => {
+                if (g.groupId !== groupId) return g;
+                if (g.tasks.length === 1) return g; // keep at least one
+                return { ...g, tasks: g.tasks.filter((t) => t.id !== taskId) };
+            })
+        );
+
+    const updateTask = (
+        groupId: string,
+        taskId: string,
+        field: keyof TaskRow,
+        value: string
+    ) =>
+        setGroups((p) =>
+            p.map((g) =>
+                g.groupId === groupId
+                    ? {
+                        ...g,
+                        tasks: g.tasks.map((t) =>
+                            t.id === taskId ? { ...t, [field]: value } : t
+                        ),
+                    }
+                    : g
+            )
+        );
+
+    /* ── Save ── */
     const handleSave = async () => {
         setSaving(true);
-
-
-        const payload = { tripName, tripDate, tripDiscussion, tasks, createdAt: new Date().toISOString() };
+        const payload = {
+            tripName,
+            tripDate,
+            tripDiscussion,
+            groups,
+            createdAt: new Date().toISOString(),
+        };
         console.log("Saving:", payload);
         try {
             const response = await axios.post("/api/new_trip", payload);
@@ -59,10 +113,16 @@ export default function page() {
         }
     };
 
+    const totalTasks = groups.reduce((acc, g) => acc + g.tasks.length, 0);
+
     const isValid =
         tripName.trim() !== "" &&
         tripDate !== "" &&
-        tasks.every((t) => t.name.trim() !== "" && t.time !== "");
+        groups.every(
+            (g) =>
+                g.date !== "" &&
+                g.tasks.every((t) => t.name.trim() !== "" && t.time !== "")
+        );
 
     return (
         <div className="min-h-screen bg-[#f8fafc] font-sans">
@@ -148,142 +208,199 @@ export default function page() {
                     </div>
                 </section>
 
-                {/* ── Task Grid ── */}
+                {/* ── Task Checklist (grouped by date) ── */}
                 <section className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
 
                     {/* Section Header */}
                     <div className="px-4 py-3 border-b border-slate-100 flex items-center justify-between">
                         <div>
                             <h2 className="text-sm font-black text-slate-800">Task Checklist</h2>
-                            <p className="text-[10px] text-slate-400 font-medium">Each row = one task the driver/staff must complete</p>
+                            <p className="text-[10px] text-slate-400 font-medium">
+                                Add date groups, then add tasks under each date
+                            </p>
                         </div>
                         <span className="bg-blue-100 text-blue-700 text-[11px] font-black px-2.5 py-1 rounded-full">
-                            {tasks.length} {tasks.length === 1 ? "row" : "rows"}
+                            {totalTasks} {totalTasks === 1 ? "task" : "tasks"}
                         </span>
                     </div>
 
-                    {/* Grid Table – scrollable on small screens */}
-                    <div className="overflow-x-auto">
-                        <table className="w-full border-collapse text-left" style={{ minWidth: "520px" }}>
+                    {/* Date Groups */}
+                    <div className="divide-y divide-slate-100">
+                        {groups.map((group, groupIndex) => (
+                            <div key={group.groupId} className="p-4 space-y-3">
 
-                            {/* Column Headers */}
-                            <thead>
-                                <tr className="bg-slate-50/80 border-b border-slate-100">
-                                    <th className="px-3 py-2.5 w-8 text-center">
-                                        <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">#</span>
-                                    </th>
-                                    <th className="px-3 py-2.5">
-                                        <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">
-                                            Task Name <span className="text-red-400">*</span>
-                                        </span>
-                                    </th>
-                                    <th className="px-3 py-2.5">
-                                        <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Description</span>
-                                    </th>
-                                    <th className="px-3 py-2.5 w-32">
-                                        <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">
-                                            Time <span className="text-red-400">*</span>
-                                        </span>
-                                    </th>
-                                    <th className="px-3 py-2.5 w-36">
-                                        <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">
-                                            Date
-                                        </span>
-                                    </th>
-                                    <th className="px-3 py-2.5 w-10" />
-                                </tr>
-                            </thead>
+                                {/* ── Date Group Header ── */}
+                                <div className="flex items-center gap-3">
+                                    {/* Colored day badge */}
+                                    <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center shadow shadow-indigo-200">
+                                        <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                        </svg>
+                                    </div>
 
-                            {/* Task Rows */}
-                            <tbody className="divide-y divide-slate-50">
-                                {tasks.map((task, index) => (
-                                    <tr
-                                        key={task.TripId}
-                                        className="group hover:bg-blue-50/30 transition-colors duration-150"
-                                    >
-                                        {/* Row Number */}
-                                        <td className="px-3 py-3 text-center">
-                                            <span className="inline-flex items-center justify-center w-6 h-6 rounded-md bg-slate-100 text-[10px] font-black text-slate-500 group-hover:bg-blue-100 group-hover:text-blue-600 transition-colors">
-                                                {index + 1}
+                                    {/* Date label + picker */}
+                                    <div className="flex-1 flex items-center gap-2 min-w-0">
+                                        <span className="text-[10px] font-black text-indigo-600 uppercase tracking-widest whitespace-nowrap">
+                                            Day {groupIndex + 1}
+                                        </span>
+                                        <input
+                                            type="date"
+                                            value={group.date}
+                                            onChange={(e) => updateGroupDate(group.groupId, e.target.value)}
+                                            className="bg-indigo-50 border border-indigo-200 rounded-lg px-2.5 py-1.5 text-xs font-black text-indigo-700 outline-none focus:ring-2 focus:ring-indigo-400/50 focus:border-indigo-500 transition-all"
+                                        />
+                                        {group.date && (
+                                            <span className="text-[10px] font-semibold text-slate-400">
+                                                {new Date(group.date + "T00:00:00").toLocaleDateString("en-IN", {
+                                                    weekday: "short",
+                                                    day: "numeric",
+                                                    month: "short",
+                                                    year: "numeric",
+                                                })}
                                             </span>
-                                        </td>
+                                        )}
+                                    </div>
 
-                                        {/* Task Name */}
-                                        <td className="px-3 py-3">
-                                            <input
-                                                type="text"
-                                                value={task.name}
-                                                onChange={(e) => updateRow(task.TripId, "name", e.target.value)}
-                                                placeholder="Enter task name..."
-                                                className="w-full bg-transparent border-b-2 border-slate-100 focus:border-blue-500 px-0 py-1 text-sm font-semibold text-slate-800 placeholder:text-slate-300 outline-none transition-colors"
-                                            />
-                                        </td>
+                                    {/* Remove group button */}
+                                    <button
+                                        onClick={() => removeGroup(group.groupId)}
+                                        disabled={groups.length === 1}
+                                        title="Remove this date group"
+                                        className={`w-7 h-7 rounded-lg flex items-center justify-center transition-all
+                                            ${groups.length === 1
+                                                ? "opacity-20 cursor-not-allowed"
+                                                : "text-slate-300 hover:text-red-400 hover:bg-red-50 active:scale-90"}`}
+                                    >
+                                        <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5}
+                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+                                    </button>
+                                </div>
 
-                                        {/* Description */}
-                                        <td className="px-3 py-3">
-                                            <input
-                                                type="text"
-                                                value={task.description}
-                                                onChange={(e) => updateRow(task.TripId, "description", e.target.value)}
-                                                placeholder="Optional notes..."
-                                                className="w-full bg-transparent border-b-2 border-slate-100 focus:border-blue-500 px-0 py-1 text-sm text-slate-600 placeholder:text-slate-300 outline-none transition-colors"
-                                            />
-                                        </td>
+                                {/* ── Task Sub-Rows for this date ── */}
+                                <div className="ml-11 overflow-x-auto rounded-xl border border-slate-100">
+                                    <table className="w-full border-collapse text-left" style={{ minWidth: "460px" }}>
+                                        <thead>
+                                            <tr className="bg-slate-50/80 border-b border-slate-100">
+                                                <th className="px-3 py-2 w-8 text-center">
+                                                    <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">#</span>
+                                                </th>
+                                                <th className="px-3 py-2">
+                                                    <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">
+                                                        Task Name <span className="text-red-400">*</span>
+                                                    </span>
+                                                </th>
+                                                <th className="px-3 py-2">
+                                                    <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Description</span>
+                                                </th>
+                                                <th className="px-3 py-2 w-28">
+                                                    <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">
+                                                        Time <span className="text-red-400">*</span>
+                                                    </span>
+                                                </th>
+                                                <th className="px-3 py-2 w-8" />
+                                            </tr>
+                                        </thead>
+                                        <tbody className="divide-y divide-slate-50">
+                                            {group.tasks.map((task, taskIndex) => (
+                                                <tr
+                                                    key={task.id}
+                                                    className="group/row hover:bg-blue-50/30 transition-colors duration-150"
+                                                >
+                                                    {/* Row Number */}
+                                                    <td className="px-3 py-2.5 text-center">
+                                                        <span className="inline-flex items-center justify-center w-5 h-5 rounded-md bg-slate-100 text-[10px] font-black text-slate-500 group-hover/row:bg-blue-100 group-hover/row:text-blue-600 transition-colors">
+                                                            {taskIndex + 1}
+                                                        </span>
+                                                    </td>
 
-                                        {/* Time */}
-                                        <td className="px-3 py-3">
-                                            <input
-                                                type="time"
-                                                value={task.time}
-                                                onChange={(e) => updateRow(task.TripId, "time", e.target.value)}
-                                                className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2 py-1.5 text-xs font-black text-slate-700 outline-none focus:ring-2 focus:ring-blue-400/50 focus:border-blue-500 transition-all"
-                                            />
-                                        </td>
+                                                    {/* Task Name */}
+                                                    <td className="px-3 py-2.5">
+                                                        <input
+                                                            type="text"
+                                                            value={task.name}
+                                                            onChange={(e) => updateTask(group.groupId, task.id, "name", e.target.value)}
+                                                            placeholder="Enter task name..."
+                                                            className="w-full bg-transparent border-b-2 border-slate-100 focus:border-blue-500 px-0 py-1 text-sm font-semibold text-slate-800 placeholder:text-slate-300 outline-none transition-colors"
+                                                        />
+                                                    </td>
 
-                                        {/* Date */}
-                                        <td className="px-3 py-3">
-                                            <input
-                                                type="date"
-                                                value={task.date}
-                                                onChange={(e) => updateRow(task.TripId, "date", e.target.value)}
-                                                className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2 py-1.5 text-xs font-black text-slate-700 outline-none focus:ring-2 focus:ring-blue-400/50 focus:border-blue-500 transition-all"
-                                            />
-                                        </td>
+                                                    {/* Description */}
+                                                    <td className="px-3 py-2.5">
+                                                        <input
+                                                            type="text"
+                                                            value={task.description}
+                                                            onChange={(e) => updateTask(group.groupId, task.id, "description", e.target.value)}
+                                                            placeholder="Optional notes..."
+                                                            className="w-full bg-transparent border-b-2 border-slate-100 focus:border-blue-500 px-0 py-1 text-sm text-slate-600 placeholder:text-slate-300 outline-none transition-colors"
+                                                        />
+                                                    </td>
 
-                                        {/* Remove Button */}
-                                        <td className="px-3 py-3 text-center">
-                                            <button
-                                                onClick={() => removeRow(task.TripId)}
-                                                disabled={tasks.length === 1}
-                                                title="Remove row"
-                                                className={`w-7 h-7 rounded-lg flex items-center justify-center mx-auto transition-all
-                          ${tasks.length === 1
-                                                        ? "opacity-20 cursor-not-allowed"
-                                                        : "text-slate-300 hover:text-red-400 hover:bg-red-50 active:scale-90"}`}
-                                            >
-                                                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                    {/* Time */}
+                                                    <td className="px-3 py-2.5">
+                                                        <input
+                                                            type="time"
+                                                            value={task.time}
+                                                            onChange={(e) => updateTask(group.groupId, task.id, "time", e.target.value)}
+                                                            className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2 py-1.5 text-xs font-black text-slate-700 outline-none focus:ring-2 focus:ring-blue-400/50 focus:border-blue-500 transition-all"
+                                                        />
+                                                    </td>
+
+                                                    {/* Remove Task */}
+                                                    <td className="px-3 py-2.5 text-center">
+                                                        <button
+                                                            onClick={() => removeTask(group.groupId, task.id)}
+                                                            disabled={group.tasks.length === 1}
+                                                            title="Remove task"
+                                                            className={`w-6 h-6 rounded-lg flex items-center justify-center mx-auto transition-all
+                                                                ${group.tasks.length === 1
+                                                                    ? "opacity-20 cursor-not-allowed"
+                                                                    : "text-slate-300 hover:text-red-400 hover:bg-red-50 active:scale-90"}`}
+                                                        >
+                                                            <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5}
+                                                                    d="M6 18L18 6M6 6l12 12" />
+                                                            </svg>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+
+                                    {/* Add Task Row button */}
+                                    <div className="px-3 py-2 border-t border-slate-100 bg-slate-50/50">
+                                        <button
+                                            onClick={() => addTask(group.groupId)}
+                                            className="flex items-center gap-1.5 text-blue-600 hover:text-blue-700 text-[11px] font-black uppercase tracking-wider transition-all hover:gap-2 active:scale-95"
+                                        >
+                                            <div className="w-5 h-5 rounded-md bg-blue-600 flex items-center justify-center shadow-sm shadow-blue-200">
+                                                <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M12 4v16m8-8H4" />
                                                 </svg>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                                            </div>
+                                            Add Task
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
                     </div>
 
-                    {/* Add Row Button */}
-                    <div className="p-3 border-t border-slate-100 bg-slate-50/50">
+                    {/* Add Date Group button */}
+                    <div className="p-4 border-t border-slate-100 bg-slate-50/50">
                         <button
-                            onClick={addRow}
-                            className="flex items-center gap-2 text-emerald-600 hover:text-emerald-700 text-xs font-black uppercase tracking-wider transition-all hover:gap-3 active:scale-95"
+                            onClick={addGroup}
+                            className="flex items-center gap-2 text-indigo-600 hover:text-indigo-700 text-xs font-black uppercase tracking-wider transition-all hover:gap-3 active:scale-95"
                         >
-                            <div className="w-6 h-6 rounded-lg bg-blue-600 flex items-center justify-center shadow-sm shadow-blue-200">
+                            <div className="w-6 h-6 rounded-lg bg-indigo-600 flex items-center justify-center shadow-sm shadow-indigo-200">
                                 <svg className="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M12 4v16m8-8H4" />
                                 </svg>
                             </div>
-                            Add New Row
+                            Add Another Date
                         </button>
                     </div>
                 </section>
@@ -307,7 +424,7 @@ export default function page() {
                     </button>
                     {!isValid && (
                         <p className="text-center text-[11px] text-slate-400 font-medium">
-                            Fill Trip Name, Date, and all Task Names + Times to save
+                            Fill Trip Name, Trip Date, all Day Dates, and every Task Name + Time to save
                         </p>
                     )}
                 </div>

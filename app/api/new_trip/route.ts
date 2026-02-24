@@ -4,8 +4,8 @@ export async function POST(request: NextRequest) {
     try {
         console.log("new_trip is hitting");
 
-        const { tripName, tripDate, tripDiscussion, tasks } = await request.json();
-        console.log("Received Trip:", { tripName, tripDate, tripDiscussion, tasks });
+        const { tripName, tripDate, tripDiscussion, groups } = await request.json();
+        console.log("Received Trip:", { tripName, tripDate, tripDiscussion, groups });
         return NextResponse.json({ success: true, message: "Trip created successfully" });
     } catch (error) {
         console.error("API Error:", error);

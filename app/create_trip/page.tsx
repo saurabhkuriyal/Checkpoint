@@ -8,6 +8,7 @@ interface TaskRow {
     name: string;
     description: string;
     time: string;
+    date: string;
 }
 
 const generateId = () => Math.random().toString(36).substr(2, 9);
@@ -17,11 +18,13 @@ const emptyTask = (): TaskRow => ({
     name: "",
     description: "",
     time: "",
+    date: "",
 });
 
 export default function page() {
     const [tripName, setTripName] = useState("");
     const [tripDate, setTripDate] = useState("");
+    const [tripDiscussion, setTripDiscussion] = useState("");
     const [tasks, setTasks] = useState<TaskRow[]>([emptyTask()]);
     const [saving, setSaving] = useState(false);
     const [saved, setSaved] = useState(false);
@@ -42,7 +45,7 @@ export default function page() {
         setSaving(true);
 
 
-        const payload = { tripName, tripDate, tasks, createdAt: new Date().toISOString() };
+        const payload = { tripName, tripDate, tripDiscussion, tasks, createdAt: new Date().toISOString() };
         console.log("Saving:", payload);
         try {
             const response = await axios.post("/api/new_trip", payload);
@@ -130,6 +133,18 @@ export default function page() {
                                 className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-sm font-semibold text-slate-700 outline-none focus:ring-2 focus:ring-blue-400/50 focus:border-blue-500 transition-all"
                             />
                         </div>
+                        <div className="sm:col-span-2">
+                            <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">
+                                Trip Discussion
+                            </label>
+                            <textarea
+                                value={tripDiscussion}
+                                onChange={(e) => setTripDiscussion(e.target.value)}
+                                placeholder="Add any discussion notes, special instructions, or comments for this trip..."
+                                rows={3}
+                                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-sm font-semibold text-slate-800 placeholder:text-slate-300 outline-none focus:ring-2 focus:ring-blue-400/50 focus:border-blue-500 transition-all resize-none"
+                            />
+                        </div>
                     </div>
                 </section>
 
@@ -168,6 +183,11 @@ export default function page() {
                                     <th className="px-3 py-2.5 w-32">
                                         <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">
                                             Time <span className="text-red-400">*</span>
+                                        </span>
+                                    </th>
+                                    <th className="px-3 py-2.5 w-36">
+                                        <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">
+                                            Date
                                         </span>
                                     </th>
                                     <th className="px-3 py-2.5 w-10" />
@@ -216,6 +236,16 @@ export default function page() {
                                                 type="time"
                                                 value={task.time}
                                                 onChange={(e) => updateRow(task.TripId, "time", e.target.value)}
+                                                className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2 py-1.5 text-xs font-black text-slate-700 outline-none focus:ring-2 focus:ring-blue-400/50 focus:border-blue-500 transition-all"
+                                            />
+                                        </td>
+
+                                        {/* Date */}
+                                        <td className="px-3 py-3">
+                                            <input
+                                                type="date"
+                                                value={task.date}
+                                                onChange={(e) => updateRow(task.TripId, "date", e.target.value)}
                                                 className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2 py-1.5 text-xs font-black text-slate-700 outline-none focus:ring-2 focus:ring-blue-400/50 focus:border-blue-500 transition-all"
                                             />
                                         </td>

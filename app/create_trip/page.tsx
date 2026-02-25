@@ -2,6 +2,7 @@
 
 import axios from "axios";
 import { useState } from "react";
+import { templatesById } from "../../public/sampleData";
 
 interface TaskRow {
     id: string;
@@ -38,6 +39,15 @@ export default function page() {
     const [groups, setGroups] = useState<DateGroup[]>([emptyGroup()]);
     const [saving, setSaving] = useState(false);
     const [saved, setSaved] = useState(false);
+
+    const loadExample = (key: string) => {
+        const tpl = templatesById[key];
+        if (!tpl) return;
+        setTripName(tpl.tripName);
+        setTripDate(tpl.tripDate);
+        setTripDiscussion(tpl.tripDiscussion);
+        setGroups(tpl.groups);
+    };
 
     /* ── Group helpers ── */
     const addGroup = () => setGroups((p) => [...p, emptyGroup()]);
@@ -163,6 +173,23 @@ export default function page() {
             </header>
 
             <main className="max-w-4xl mx-auto px-4 py-5 space-y-5">
+                
+
+                {/* ──??? Template loader (demo) ── */}
+                <div className="flex gap-4">
+                    <button
+                        onClick={() => loadExample("goa")}
+                        className="text-sm text-blue-600 underline"
+                    >
+                        Load Goa template
+                    </button>
+                    <button
+                        onClick={() => loadExample("jaipur")}
+                        className="text-sm text-blue-600 underline"
+                    >
+                        Load Jaipur template
+                    </button>
+                </div>
 
                 {/* ── Trip Info ── */}
                 <section className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
@@ -427,6 +454,7 @@ export default function page() {
                             Fill Trip Name, Trip Date, all Day Dates, and every Task Name + Time to save
                         </p>
                     )}
+                  
                 </div>
 
             </main>

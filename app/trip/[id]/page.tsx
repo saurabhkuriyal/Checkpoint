@@ -5,19 +5,22 @@ import { useState } from "react";
 
 interface Task {
     id: string;
+    sNo: number;
     name: string;
+    description: string;
     time: string;
     isDone: boolean;
-    remarks: string;
+    evidence: string | null;
     submittedAt?: string;
+    userRemark: string;
 }
 
 export default function page() {
     const [tasks, setTasks] = useState<Task[]>([
-        { id: "1", name: "Couting kids", time: "07:30", isDone: false, remarks: "" },
-        { id: "2", name: "Checking the bus", time: "08:15", isDone: true, remarks: "Oil levels optimal" },
-        { id: "3", name: "contacting with teachers", time: "09:00", isDone: false, remarks: "" },
-        { id: "4", name: "Dropping kids", time: "10:00", isDone: false, remarks: "" },
+        { id: "1", sNo: 1, name: "Counting kids", description: "Count all kids present in the bus", time: "07:30", isDone: false, evidence: null, userRemark: "" },
+        { id: "2", sNo: 2, name: "Checking the bus", description: "Inspect seats and floor for left items", time: "08:15", isDone: true, evidence: null, userRemark: "" },
+        { id: "3", sNo: 3, name: "Contacting with teachers", description: "Confirm arrival with school staff", time: "09:00", isDone: false, evidence: null, userRemark: "" },
+        { id: "4", sNo: 4, name: "Dropping kids", description: "Ensure safe handover to parents", time: "10:00", isDone: false, evidence: null, userRemark: "" },
     ]);
 
     const [submittingId, setSubmittingId] = useState<string | null>(null);
@@ -28,13 +31,25 @@ export default function page() {
         );
     };
 
+    const handleFileUpload = (id: string, e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            updateTask(id, { evidence: file.name });
+            // Here you can integrate with your backend upload endpoint
+            // e.g., using FormData and axios.post()
+        }
+    };
+
     const addNewRow = () => {
         const newTask: Task = {
             id: Math.random().toString(36).substr(2, 9),
-            name: "",
+            sNo: tasks.length + 1,
+            name: "New Task",
+            description: "No description provided",
             time: "12:00",
             isDone: false,
-            remarks: "",
+            evidence: null,
+            userRemark: "",
         };
         setTasks([...tasks, newTask]);
     };
@@ -68,127 +83,115 @@ export default function page() {
     };
 
     return (
-        <div className="min-h-screen bg-[#f8fafc] text-slate-900 p-4 md:p-12 font-sans selection:bg-emerald-100 selection:text-emerald-900">
+        <div className="min-h-screen bg-[#fafafa] text-zinc-900 p-4 md:p-12 font-sans selection:bg-indigo-100 selection:text-indigo-900">
             <main className="max-w-7xl mx-auto">
                 {/* Header Section */}
                 <header className="mb-14 text-center">
-                    <div className="inline-block p-2 px-5 rounded-full bg-white border border-slate-200 text-slate-600 text-xs font-bold mb-6 animate-fade-in shadow-sm uppercase tracking-widest">
-                        Task Management System
+                    <div className="inline-block px-4 py-1.5 rounded-full bg-white border border-zinc-200 text-zinc-600 text-xs font-semibold mb-6 shadow-sm tracking-wide">
+                        Operations Dashboard
                     </div>
-                    <h1 className="text-4xl md:text-6xl font-black tracking-tight text-slate-900 mb-4 bg-clip-text text-transparent bg-gradient-to-br from-slate-900 to-slate-500">
-                        Daily Operations Checklist
+                    <h1 className="text-4xl md:text-5xl font-semibold tracking-tight text-zinc-900 mb-4">
+                        Trip Tasks
                     </h1>
-                    <p className="max-w-2xl mx-auto text-slate-500 text-lg md:text-xl font-medium">
-                        Manage, track, and submit operational tasks in real-time.
+                    <p className="max-w-xl mx-auto text-zinc-500 text-base">
+                        Complete your assigned tasks, upload evidence, and submit for verification.
                     </p>
                 </header>
 
-                {/* Task Table Container */}
-                <div className="bg-white rounded-[2.5rem] border border-slate-200 shadow-2xl shadow-slate-200/50 overflow-hidden animate-slide-up">
+                {/* Panel Container */}
+                <div className="bg-white rounded-3xl border border-zinc-200 shadow-xl shadow-zinc-200/40 overflow-hidden">
                     <div className="overflow-x-auto">
                         <table className="w-full text-left border-collapse">
                             <thead>
-                                <tr className="bg-slate-50/80 backdrop-blur-md border-b border-slate-100">
-                                    <th className="px-8 py-7 text-xs font-black text-slate-400 uppercase tracking-[0.2em]">Task Description</th>
-                                    <th className="px-8 py-7 text-xs font-black text-slate-400 uppercase tracking-[0.2em]">Scheduled Time</th>
-                                    <th className="px-8 py-7 text-xs font-black text-slate-400 uppercase tracking-[0.2em] text-center">Status Slider</th>
-                                    <th className="px-8 py-7 text-xs font-black text-slate-400 uppercase tracking-[0.2em]">Additional Remarks</th>
-                                    <th className="px-8 py-7 text-xs font-black text-slate-400 uppercase tracking-[0.2em]">Submitted At</th>
-                                    <th className="px-8 py-7 text-xs font-black text-slate-400 uppercase tracking-[0.2em] text-right">Actions</th>
+                                <tr className="bg-zinc-50 border-b border-zinc-200 text-xs font-semibold text-zinc-500 uppercase tracking-wider">
+                                    <th className="sticky left-0 z-20 bg-zinc-50 px-6 py-5 whitespace-nowrap min-w-[80px]">S.No.</th>
+                                    <th className=" left-[80px] z-20 bg-zinc-50 px-6 py-5 whitespace-nowrap min-w-[180px] shadow-[2px_0_5px_-2px_rgba(0,0,0,0.1)]">Task Name</th>
+                                    <th className="px-6 py-5 whitespace-nowrap min-w-[200px]">Description</th>
+                                    <th className="px-6 py-5 whitespace-nowrap text-center">Status</th>
+                                    <th className="px-6 py-5 whitespace-nowrap text-center">Time</th>
+                                    <th className="px-6 py-5 whitespace-nowrap min-w-[150px]">Remarks</th>
+                                    <th className="px-6 py-5 whitespace-nowrap text-center">Evidence</th>
+                                    <th className="px-6 py-5 whitespace-nowrap text-right">Action</th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-slate-100">
+                            <tbody className="divide-y divide-zinc-100 text-sm">
                                 {tasks.map((task) => (
-                                    <tr key={task.id} className="group hover:bg-slate-50/50 transition-all duration-300">
-                                        <td className="px-8 py-8">
-                                            <input
-                                                type="text"
-                                                value={task.name}
-                                                onChange={(e) => updateTask(task.id, { name: e.target.value })}
-                                                placeholder="Define task..."
-                                                className="w-full bg-transparent text-lg font-bold text-slate-800 placeholder:text-slate-300 outline-none focus:text-emerald-600 transition-colors"
+                                    <tr key={task.id} className="hover:bg-zinc-50 transition-colors group">
+                                        <td className="sticky left-0 z-10 bg-white group-hover:bg-zinc-50 px-6 py-4 text-zinc-400 font-medium min-w-[80px]">
+                                            #{task.sNo}
+                                        </td>
+
+                                        <td className="left-[80px] z-10 bg-white group-hover:bg-zinc-50 px-6 py-4 min-w-[180px] shadow-[2px_0_5px_-2px_rgba(0,0,0,0.1)]">
+                                            <span className="font-medium text-zinc-800">{task.name}</span>
+                                        </td>
+
+                                        <td className="px-6 py-4">
+                                            <span className="text-zinc-500 text-sm block max-w-[250px] truncate" title={task.description}>
+                                                {task.description}
+                                            </span>
+                                        </td>
+
+                                        <td className="px-6 py-4 text-center">
+                                            <label className="relative inline-flex items-center cursor-pointer">
+                                                <input
+                                                    type="checkbox"
+                                                    className="sr-only peer"
+                                                    checked={task.isDone}
+                                                    onChange={(e) => updateTask(task.id, { isDone: e.target.checked })}
+                                                />
+                                                <div className="w-11 h-6 bg-zinc-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-500"></div>
+                                            </label>
+                                        </td>
+
+                                        <td className="px-6 py-4 text-center">
+                                            <span className="text-zinc-600 font-medium">{task.time}</span>
+                                        </td>
+
+                                        <td className="px-6 py-4">
+                                            <textarea
+                                                rows={1}
+                                                value={task.userRemark}
+                                                onChange={(e) => updateTask(task.id, { userRemark: e.target.value })}
+                                                placeholder="Add remarks..."
+                                                className="w-full bg-transparent text-zinc-800 placeholder:text-zinc-400 outline-none resize-none overflow-hidden focus:text-indigo-600 transition-colors py-1 border-b border-transparent focus:border-indigo-200"
                                             />
                                         </td>
-                                        <td className="px-8 py-8 text-center">
-                                            <div className="relative inline-block">
-                                                <input
-                                                    type="time"
-                                                    value={task.time}
-                                                    onChange={(e) => updateTask(task.id, { time: e.target.value })}
-                                                    className="bg-slate-100/80 border border-slate-200 text-slate-700 px-4 py-2 rounded-2xl text-sm font-black outline-none focus:ring-4 focus:ring-emerald-500/10 focus:border-emerald-500 transition-all appearance-none cursor-pointer hover:bg-white"
-                                                />
-                                            </div>
-                                        </td>
-                                        <td className="px-8 py-8">
-                                            <div className="flex flex-col items-center gap-2">
-                                                <label className="relative inline-flex items-center cursor-pointer select-none">
+
+                                        <td className="px-6 py-4 text-center">
+                                            <div className="flex justify-center items-center">
+                                                <label className="cursor-pointer group flex flex-col items-center gap-1">
                                                     <input
-                                                        type="checkbox"
-                                                        className="sr-only peer"
-                                                        checked={task.isDone}
-                                                        onChange={(e) => updateTask(task.id, { isDone: e.target.checked })}
+                                                        type="file"
+                                                        accept="image/*"
+                                                        onChange={(e) => handleFileUpload(task.id, e)}
+                                                        className="hidden"
                                                     />
-                                                    <div className="w-20 h-9 bg-slate-200 rounded-full peer peer-checked:bg-emerald-500 transition-all duration-500 ease-in-out shadow-inner relative ring-4 ring-slate-100 peer-checked:ring-emerald-50/50">
-                                                        <div className="absolute inset-0 flex items-center justify-between px-2 text-[10px] font-black uppercase text-white opacity-0 peer-checked:opacity-100 transition-opacity duration-300">
-                                                            <span>Done</span>
+                                                    {task.evidence ? (
+                                                        <div className="px-3 py-1.5 bg-indigo-50 text-indigo-600 rounded-lg text-xs font-medium flex items-center gap-2 border border-indigo-100 hover:bg-indigo-100 transition-colors">
+                                                            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+                                                            <span className="max-w-[80px] truncate">{task.evidence}</span>
                                                         </div>
-                                                        <div className="absolute inset-0 flex items-center justify-end px-2 text-[10px] font-black uppercase text-slate-400 peer-checked:opacity-0 transition-opacity duration-300">
-                                                            <span>Pending</span>
+                                                    ) : (
+                                                        <div className="p-2 text-zinc-400 hover:text-indigo-500 hover:bg-indigo-50 rounded-xl transition-all border border-transparent hover:border-indigo-100">
+                                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
                                                         </div>
-                                                        <div className="absolute top-[3px] left-[3px] bg-white w-[30px] h-[30px] rounded-full transition-all duration-500 ease-in-out shadow-lg peer-checked:translate-x-[44px] flex items-center justify-center">
-                                                            {task.isDone ? (
-                                                                <svg className="w-4 h-4 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                                                                </svg>
-                                                            ) : (
-                                                                <div className="w-1.5 h-1.5 bg-slate-300 rounded-full" />
-                                                            )}
-                                                        </div>
-                                                    </div>
+                                                    )}
                                                 </label>
                                             </div>
                                         </td>
-                                        <td className="px-8 py-8">
-                                            <div className="relative">
-                                                <textarea
-                                                    rows={1}
-                                                    value={task.remarks}
-                                                    onChange={(e) => updateTask(task.id, { remarks: e.target.value })}
-                                                    placeholder="Observation details..."
-                                                    className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-3 text-sm font-medium outline-none focus:ring-4 focus:ring-emerald-500/10 focus:border-emerald-500 transition-all placeholder:text-slate-400 resize-none overflow-hidden"
-                                                />
-                                            </div>
-                                        </td>
-                                        <td className="px-8 py-8">
-                                            {task.submittedAt ? (
-                                                <div className="flex flex-col">
-                                                    <span className="text-emerald-600 font-black text-sm">{task.submittedAt}</span>
-                                                    <span className="text-[10px] text-slate-400 font-bold uppercase tracking-tighter">Verified Submission</span>
-                                                </div>
-                                            ) : (
-                                                <span className="text-slate-300 text-xs font-bold italic">Not yet submitted</span>
-                                            )}
-                                        </td>
-                                        <td className="px-8 py-8 text-right">
+
+                                        <td className="px-6 py-4 text-right">
                                             <button
                                                 onClick={() => handleSubmit(task)}
-                                                disabled={submittingId !== null}
-                                                className={`group relative overflow-hidden px-8 py-3.5 rounded-2xl font-black text-sm tracking-widest uppercase transition-all active:scale-95 ${submittingId === task.id
-                                                    ? "bg-slate-100 text-slate-400 cursor-not-allowed"
-                                                    : "bg-slate-900 hover:bg-emerald-600 text-white shadow-xl shadow-slate-200 hover:shadow-emerald-200/50"
+                                                disabled={submittingId !== null || task.submittedAt !== undefined}
+                                                className={`relative px-4 py-2 rounded-xl font-semibold text-xs transition-all ${task.submittedAt
+                                                    ? "bg-zinc-100 text-zinc-400 cursor-not-allowed border border-zinc-200"
+                                                    : submittingId === task.id
+                                                        ? "bg-indigo-100 text-indigo-400 cursor-not-allowed"
+                                                        : "bg-zinc-900 hover:bg-indigo-600 text-white shadow-md shadow-zinc-200 hover:shadow-indigo-200 active:scale-95"
                                                     }`}
                                             >
-                                                <span className={`flex items-center gap-3 ${submittingId === task.id ? "opacity-0" : "opacity-100"}`}>
-                                                    {task.submittedAt ? "Update" : "Submit"}
-                                                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                                    </svg>
-                                                </span>
-                                                {submittingId === task.id && (
-                                                    <div className="absolute inset-0 flex items-center justify-center">
-                                                        <div className="w-5 h-5 border-3 border-slate-300 border-t-slate-600 rounded-full animate-spin" />
-                                                    </div>
-                                                )}
+                                                {task.submittedAt ? "Submitted" : submittingId === task.id ? "Submitting..." : "Submit"}
                                             </button>
                                         </td>
                                     </tr>
@@ -197,61 +200,25 @@ export default function page() {
                         </table>
                     </div>
 
-                    {/* Table Footer / Add Action */}
-                    <div className="bg-slate-50/50 p-8 flex flex-col md:flex-row items-center justify-between gap-6 border-t border-slate-100">
+                    {/* Table Footer */}
+                    <div className="bg-zinc-50 border-t border-zinc-200 p-6 flex flex-col md:flex-row items-center justify-between gap-4">
                         <button
                             onClick={addNewRow}
-                            className="flex items-center gap-4 bg-white border-2 border-slate-200 hover:border-emerald-500 hover:text-emerald-600 text-slate-500 px-8 py-4 rounded-[1.5rem] font-black text-sm uppercase tracking-widest transition-all shadow-sm hover:shadow-lg active:scale-95 group"
+                            className="flex items-center gap-2 text-sm font-semibold text-zinc-600 hover:text-indigo-600 transition-colors px-4 py-2 rounded-xl hover:bg-indigo-50"
                         >
-                            <div className="w-10 h-10 rounded-2xl bg-slate-50 flex items-center justify-center group-hover:bg-emerald-50 transition-colors">
-                                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M12 4v16m8-8H4" />
-                                </svg>
-                            </div>
-                            Insert New Task Entry
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"></path></svg>
+                            Add Task Record
                         </button>
-                        <div className="flex items-center gap-10">
-                            <div className="text-right">
-                                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Queue Status</p>
-                                <p className="text-lg font-black text-slate-800 tracking-tight">
-                                    {tasks.filter(t => t.isDone).length} / {tasks.length} Completed
-                                </p>
-                            </div>
-                            <div className="h-12 w-[1px] bg-slate-200 hidden md:block" />
-                            <div className="hidden md:block">
-                                <div className="w-32 h-3 bg-slate-200 rounded-full overflow-hidden">
-                                    <div
-                                        className="h-full bg-emerald-500 transition-all duration-1000"
-                                        style={{ width: `${(tasks.filter(t => t.isDone).length / tasks.length) * 100}%` }}
-                                    />
-                                </div>
+
+                        <div className="flex items-center gap-4 text-sm font-medium text-zinc-500">
+                            <div className="flex items-center gap-2">
+                                <div className="w-2 h-2 rounded-full bg-indigo-500"></div>
+                                <span>{tasks.filter(t => t.isDone).length} of {tasks.length} Completed</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </main>
-
-            <style jsx global>{`
-        @keyframes fade-in { 
-          from { opacity: 0; transform: translateY(-10px); } 
-          to { opacity: 1; transform: translateY(0); } 
-        }
-        @keyframes slide-up { 
-          from { opacity: 0; transform: translateY(30px); } 
-          to { opacity: 1; transform: translateY(0); } 
-        }
-        .animate-fade-in { animation: fade-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        .animate-slide-up { animation: slide-up 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        
-        ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: #f1f5f9; }
-        ::-webkit-scrollbar-thumb { 
-          background: #cbd5e1; 
-          border-radius: 10px; 
-          border: 3px solid #f1f5f9;
-        }
-        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
-      `}</style>
         </div>
     );
 }

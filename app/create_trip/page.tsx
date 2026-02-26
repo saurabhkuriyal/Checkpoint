@@ -173,7 +173,7 @@ export default function page() {
             </header>
 
             <main className="max-w-4xl mx-auto px-4 py-5 space-y-5">
-                
+
 
                 {/* ──??? Template loader (demo) ── */}
                 <div className="flex gap-4">
@@ -454,7 +454,7 @@ export default function page() {
                             Fill Trip Name, Trip Date, all Day Dates, and every Task Name + Time to save
                         </p>
                     )}
-                  
+
                 </div>
 
             </main>

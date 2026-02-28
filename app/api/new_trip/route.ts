@@ -1,8 +1,10 @@
+import connectDB from "@/utils/db";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
     try {
         console.log("new_trip is hitting");
+        await connectDB();
 
         const { tripName, tripDate, tripDiscussion, groups } = await request.json();
         console.log("Received Trip:", { tripName, tripDate, tripDiscussion, groups });

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const connectionString: string = process.env.MONGODB_URI;
+const connectionString = process.env.MONGODB_URI as string;
 
 if (!connectionString) {
     throw new Error("Please provide a MongoDB connection string");

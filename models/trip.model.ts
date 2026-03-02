@@ -30,6 +30,10 @@ const taskSchema = new mongoose.Schema({
 })
 
 const daysSchema = new mongoose.Schema({
+    groupId: {
+        type: String,
+        //required: [true, "Group ID is required"],
+    },
     date: {
         type: String,
         required: [true, "Date is required"],
@@ -44,15 +48,19 @@ const tripSchema = new mongoose.Schema({
         type: String,
         required: [true, "Name is required"],
     },
-    TripCoordinatorId: {
-        type: "String",
-        required: [true, "Who will be the coordinator"],
-    },
-    Duration: {
+    tripDiscussion: {
         type: String,
-        required: [true, "Duration is mendatory"]
+        required: [true, "Discussion is required"],
     },
-    days: [daysSchema],
+    tripCoordinatorId: {
+        type: "String",
+        //required: [true, "Who will be the coordinator"],
+    },
+    tripDate: {
+        type: String,
+        //required: [true, "Duration is mendatory"]
+    },
+    groups: [daysSchema],
 })
 
 const TripModel = mongoose.models.Trip || mongoose.model("Trip", tripSchema);

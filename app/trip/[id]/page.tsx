@@ -1,7 +1,7 @@
 "use client";
 
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface Task {
     id: string;
@@ -23,6 +23,20 @@ export default function page() {
         { id: "4", sNo: 4, name: "Dropping kids", description: "Ensure safe handover to parents", time: "10:00", isDone: false, evidence: null, userRemark: "" },
     ]);
 
+    useEffect(() => {
+        const fetchTrip = async () => {
+            try {
+                const response = await axios.get(
+                    `http://localhost:3000/api/get_trip/69a56a4f4b90833d41bdc0d3`);
+                console.log("Response:-------", response.data);
+
+            } catch (error) {
+                console.error("Error fetching trip:", error);
+            }
+        };
+        fetchTrip();
+    }, []);
+
     const [submittingId, setSubmittingId] = useState<string | null>(null);
 
     const updateTask = (id: string, updates: Partial<Task>) => {
@@ -39,20 +53,6 @@ export default function page() {
             // e.g., using FormData and axios.post()
         }
     };
-
-    // const addNewRow = () => {
-    //     const newTask: Task = {
-    //         id: Math.random().toString(36).substr(2, 9),
-    //         sNo: tasks.length + 1,
-    //         name: "New Task",
-    //         description: "No description provided",
-    //         time: "12:00",
-    //         isDone: false,
-    //         evidence: null,
-    //         userRemark: "",
-    //     };
-    //     setTasks([...tasks, newTask]);
-    // };
 
     const handleSubmit = async (task: Task) => {
         setSubmittingId(task.id);

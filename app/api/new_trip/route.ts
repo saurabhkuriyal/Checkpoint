@@ -1,3 +1,4 @@
+import TripModel from "@/models/trip.model";
 import connectDB from "@/utils/db";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -6,8 +7,15 @@ export async function POST(request: NextRequest) {
         console.log("new_trip is hitting");
         await connectDB();
 
-        const { tripName, tripDate, tripDiscussion, groups } = await request.json();
-        console.log("Received Trip:", { tripName, tripDate, tripDiscussion, groups });
+        const newTrip = await request.json();
+        console.log("data from fronted", newTrip);
+
+
+        const addTrip = new TripModel(newTrip);
+        await addTrip.save();
+
+        console.log("added to db", addTrip);
+
         return NextResponse.json({ success: true, message: "Trip created successfully" });
     } catch (error) {
         console.error("API Error:", error);

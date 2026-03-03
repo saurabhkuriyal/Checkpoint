@@ -16,19 +16,17 @@ interface Task {
 }
 
 export default function page() {
-    const [tasks, setTasks] = useState<Task[]>([
-        { id: "1", sNo: 1, name: "Counting kids", description: "Count all kids present in the bus", time: "07:30", isDone: false, evidence: null, userRemark: "" },
-        { id: "2", sNo: 2, name: "Checking the bus", description: "Inspect seats and floor for left items", time: "08:15", isDone: true, evidence: null, userRemark: "" },
-        { id: "3", sNo: 3, name: "Contacting with teachers", description: "Confirm arrival with school staff", time: "09:00", isDone: false, evidence: null, userRemark: "" },
-        { id: "4", sNo: 4, name: "Dropping kids", description: "Ensure safe handover to parents", time: "10:00", isDone: false, evidence: null, userRemark: "" },
-    ]);
+    const [tasks, setTasks] = useState<Task[]>([]);
+    const [option, setOption] = useState<number>();
 
     useEffect(() => {
         const fetchTrip = async () => {
             try {
                 const response = await axios.get(
-                    `http://localhost:3000/api/get_trip/69a56a4f4b90833d41bdc0d3`);
+                    `/api/get_trip/69a56a4f4b90833d41bdc0d3`);
                 console.log("Response:-------", response.data);
+                console.log("Trip-----", response.data.trip.groups);
+                setTasks(response.data.trip.groups);
 
             } catch (error) {
                 console.error("Error fetching trip:", error);
@@ -82,6 +80,17 @@ export default function page() {
         }
     };
 
+    const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        console.log(e.target.value);
+        const selectedOption: number = Number(e.target.value);
+        setOption(selectedOption);
+        console.log("----", selectedOption);
+
+        const newTask: Task[] = tasks[selectedOption] ? [tasks[selectedOption]] : [];
+        setTasks(newTask);
+
+    }
+
     return (
         <div className="min-h-screen bg-[#fafafa] text-zinc-900 p-4 md:p-12 font-sans selection:bg-indigo-100 selection:text-indigo-900">
             <main className="max-w-7xl mx-auto">
@@ -97,6 +106,15 @@ export default function page() {
                         Complete your assigned tasks, upload evidence, and submit for verification.
                     </p>
                 </header>
+
+                <select className="border h-10" onChange={handleSelectChange}>
+                    <option value="-1">Select a number</option>
+                    <option value="0">1</option>
+                    <option value="1">2</option>
+                    <option value="2">3</option>
+                </select>
+
+
 
                 {/* Panel Container */}
                 <div className="bg-white rounded-3xl border border-zinc-200 shadow-xl shadow-zinc-200/40 overflow-hidden">

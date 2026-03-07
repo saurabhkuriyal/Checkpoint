@@ -3,11 +3,33 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req: NextRequest) {
     try {
         console.log("Task submission is hitting");
+        const tripId = req.nextUrl.searchParams.get('tripId');
+        console.log("trip", tripId);
+
         const body = await req.json();
         console.log("Body: ", body);
-        const trip = await TripModel.findById(body.tripId);
+
+        const taskId = body._id;
+        console.log("task id", taskId);
+
+        const trip = await TripModel.findById(tripId);
+
+        //console.log("trip", trip);
+
         if (!trip) {
             return NextResponse.json({ message: "Trip not found" }, { status: 404 });
+        }
+
+        for (let i: number = 0; i < trip.groups.length; i++) {
+            console.log("is it running or not");
+
+            for (let j: number = 0; j < trip.groups[i].tasks.length; j++) {
+                console.log("is it running or not in loop 2 ");
+                if (trip.groups[i].tasks[j]._id == taskId) {
+                    console.log("----->", trip.groups[i].tasks[j]);
+
+                }
+            }
         }
 
         return NextResponse.json({ message: "Task submitted successfully" });

@@ -27,6 +27,8 @@ interface TaskGroup {
 }
 
 export default function page() {
+    const [tripName, setTripName] = useState<string>("");
+    const [tripId, setTripId] = useState<string>("");
     const [groups, setGroups] = useState<TaskGroup[]>([]);
     const [selectedGroupIndex, setSelectedGroupIndex] = useState<number>(0);
     const tasks = groups[selectedGroupIndex]?.tasks || [];
@@ -37,6 +39,8 @@ export default function page() {
                 const response = await axios.get(
                     `/api/get_trip/69abf20e6096c6f58cf2d499`);
                 console.log("Response:-------", response.data);
+                const thisTripId = response.data.trip._id;
+                setTripId(thisTripId);
                 console.log("Trip-----", response.data.trip.groups);
                 setGroups(response.data.trip.groups);
                 if (response.data.trip.groups && response.data.trip.groups.length > 0) {
@@ -91,7 +95,12 @@ export default function page() {
         try {
             const response = await axios.post(
                 "/api/task-submission",
-                taskData
+                taskData,
+                {
+                    params: {
+                        tripId: tripId
+                    }
+                }
             );
             console.log("Response:", response.data);
             updateTask(taskId, { submittedAt: now });

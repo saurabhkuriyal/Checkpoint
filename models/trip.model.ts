@@ -14,11 +14,10 @@ const taskSchema = new mongoose.Schema({
         required: [true, "Time is required"],
     },
     status: {
-        type: String,
-        enum: ["pending", "completed"],
-        default: "pending",
+        type: Boolean,
+        default: false,
     },
-    remarks: {
+    userRemark: {
         type: String,
         default: "",
     },

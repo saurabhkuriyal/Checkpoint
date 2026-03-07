@@ -3,6 +3,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+
 interface Task {
     id?: string;
     _id?: string;
@@ -10,9 +11,9 @@ interface Task {
     name: string;
     description: string;
     time: string;
-    status?: string;
-    remarks?: string;
-    isDone?: boolean;
+    // status?: string;
+    // remarks?: string;
+    status?: boolean;
     evidence?: string | null;
     submittedAt?: string;
     userRemark?: string;
@@ -34,7 +35,7 @@ export default function page() {
         const fetchTrip = async () => {
             try {
                 const response = await axios.get(
-                    `/api/get_trip/69a56a4f4b90833d41bdc0d3`);
+                    `/api/get_trip/69abf20e6096c6f58cf2d499`);
                 console.log("Response:-------", response.data);
                 console.log("Trip-----", response.data.trip.groups);
                 setGroups(response.data.trip.groups);
@@ -89,7 +90,7 @@ export default function page() {
 
         try {
             const response = await axios.post(
-                "https://n8n.srv1134060.hstgr.cloud/webhook-test/ee5a691f-2d88-4824-88b5-762346d5b3fe",
+                "/api/task-submission",
                 taskData
             );
             console.log("Response:", response.data);
@@ -183,8 +184,8 @@ export default function page() {
                                                     <input
                                                         type="checkbox"
                                                         className="sr-only peer"
-                                                        checked={task.isDone || task.status === 'completed'}
-                                                        onChange={(e) => updateTask(taskId, { isDone: e.target.checked, status: e.target.checked ? 'completed' : 'pending' })}
+                                                        checked={task.status === true}
+                                                        onChange={(e) => updateTask(taskId, { status: e.target.checked })}
                                                     />
                                                     <div className="w-11 h-6 bg-zinc-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-500"></div>
                                                 </label>
@@ -197,8 +198,8 @@ export default function page() {
                                             <td className="px-6 py-4">
                                                 <textarea
                                                     rows={1}
-                                                    value={task.userRemark || task.remarks || ''}
-                                                    onChange={(e) => updateTask(taskId, { remarks: e.target.value, userRemark: e.target.value })}
+                                                    value={task.userRemark || ''}
+                                                    onChange={(e) => updateTask(taskId, { userRemark: e.target.value })}
                                                     placeholder="Add remarks..."
                                                     className="w-full bg-transparent text-zinc-800 placeholder:text-zinc-400 outline-none resize-none overflow-hidden focus:text-indigo-600 transition-colors py-1 border-b border-transparent focus:border-indigo-200"
                                                 />
@@ -230,7 +231,7 @@ export default function page() {
                                             <td className="px-6 py-4 text-right">
                                                 <button
                                                     onClick={() => handleSubmit(task)}
-                                                    disabled={submittingId !== null || task.submittedAt !== undefined}
+                                                    //disabled={submittingId !== null || task.submittedAt !== undefined}
                                                     className={`relative px-4 py-2 rounded-xl font-semibold text-xs transition-all ${task.submittedAt
                                                         ? "bg-zinc-100 text-zinc-400 cursor-not-allowed border border-zinc-200"
                                                         : submittingId === taskId
@@ -261,7 +262,7 @@ export default function page() {
                         <div className="flex items-center gap-4 text-sm font-medium text-zinc-500">
                             <div className="flex items-center gap-2">
                                 <div className="w-2 h-2 rounded-full bg-indigo-500"></div>
-                                <span>{tasks.filter(t => t.isDone || t.status === 'completed').length} of {tasks.length} Completed</span>
+                                <span>{tasks.filter(t => t.status === true).length} of {tasks.length} Completed</span>
                             </div>
                         </div>
                     </div>

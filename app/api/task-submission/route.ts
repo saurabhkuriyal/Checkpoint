@@ -9,6 +9,7 @@ export async function POST(req: NextRequest) {
         const body = await req.json();
         console.log("Body: ", body);
 
+
         const taskId = body._id;
         console.log("task id", taskId);
 
@@ -27,12 +28,16 @@ export async function POST(req: NextRequest) {
                 console.log("is it running or not in loop 2 ");
                 if (trip.groups[i].tasks[j]._id == taskId) {
                     console.log("----->", trip.groups[i].tasks[j]);
-
+                    trip.groups[i].tasks[j].status = body.status;
+                    trip.groups[i].tasks[j].userRemark = body.userRemark;
+                    trip.groups[i].tasks[j].submittedAt = body.submittedAt;
+                    await trip.save();
+                    return NextResponse.json({ message: "Task submitted successfully" });
                 }
             }
         }
 
-        return NextResponse.json({ message: "Task submitted successfully" });
+        return NextResponse.json({ message: "Something went wrong" });
     } catch (error) {
         console.error("Error submitting task:", error);
         return NextResponse.json({ message: "Error submitting task" }, { status: 500 });

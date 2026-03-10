@@ -132,6 +132,30 @@ export default function Page() {
                                                             <span>Submitted: <strong className="text-slate-600">{task.submittedAt || "—"}</strong></span>
                                                         </div>
                                                     </div>
+
+                                                    {/* Row 3: Images (if any) */}
+                                                    {(task.firstImageUrl || task.secondImageUrl) && (
+                                                        <div className="mt-3 flex gap-3">
+                                                            {task.firstImageUrl && (
+                                                                <a href={task.firstImageUrl} target="_blank" rel="noopener noreferrer" className="relative w-14 h-14 sm:w-16 sm:h-16 flex-shrink-0 rounded-xl overflow-hidden border border-slate-200 shadow-sm group flex items-center justify-center bg-slate-50">
+                                                                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                                                                    <img src={task.firstImageUrl} alt="Task Evidence 1" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                                                                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                                                                        <svg className="w-5 h-5 text-white drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" /></svg>
+                                                                    </div>
+                                                                </a>
+                                                            )}
+                                                            {task.secondImageUrl && (
+                                                                <a href={task.secondImageUrl} target="_blank" rel="noopener noreferrer" className="relative w-14 h-14 sm:w-16 sm:h-16 flex-shrink-0 rounded-xl overflow-hidden border border-slate-200 shadow-sm group flex items-center justify-center bg-slate-50">
+                                                                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                                                                    <img src={task.secondImageUrl} alt="Task Evidence 2" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                                                                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                                                                        <svg className="w-5 h-5 text-white drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" /></svg>
+                                                                    </div>
+                                                                </a>
+                                                            )}
+                                                        </div>
+                                                    )}
                                                 </div>
                                             </div>
                                         );

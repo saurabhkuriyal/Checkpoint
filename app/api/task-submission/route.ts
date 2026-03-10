@@ -1,4 +1,5 @@
 import TripModel from "@/models/trip.model";
+import connectDB from "@/utils/db";
 import { v2 as cloudinary, UploadApiResponse } from "cloudinary";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -10,6 +11,8 @@ cloudinary.config({
 
 export async function POST(req: NextRequest) {
     try {
+
+        await connectDB();
         console.log("Task submission is hitting");
         const tripId = req.nextUrl.searchParams.get('tripId');
         console.log("trip", tripId);

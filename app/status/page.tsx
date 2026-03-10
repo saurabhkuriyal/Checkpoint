@@ -18,6 +18,8 @@ export default function Page() {
         try {
             setIsLoading(true);
             const response = await axios.get("/api/getAllTrips");
+            console.log("----", response.data);
+
             setTripData(response.data);
         } catch (error) {
             console.error(error);

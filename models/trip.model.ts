@@ -25,6 +25,14 @@ const taskSchema = new mongoose.Schema({
         type: String,
         default: "",
     },
+    firstImageUrl: {
+        type: String,
+        default: "",
+    },
+    secondImageUrl: {
+        type: String,
+        default: "",
+    },
 
 })
 

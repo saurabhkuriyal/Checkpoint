@@ -81,10 +81,6 @@ export async function POST(req: NextRequest) {
             secondImageUrl = uploadResponse2.secure_url;
         }
 
-
-
-
-
         const taskId = body._id;
         console.log("task id", taskId);
 

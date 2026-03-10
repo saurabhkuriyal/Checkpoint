@@ -6,7 +6,15 @@ export async function POST(req: NextRequest) {
         const tripId = req.nextUrl.searchParams.get('tripId');
         console.log("trip", tripId);
 
-        const body = await req.json();
+        const formData = await req.formData();
+        console.log("Data: ", formData);
+
+        const taskDataStr = formData.get("taskData") as string;
+        if (!taskDataStr) {
+            return NextResponse.json({ message: "No task data provided" }, { status: 400 });
+        }
+
+        const body = JSON.parse(taskDataStr);
         console.log("Body: ", body);
 
 
@@ -15,7 +23,7 @@ export async function POST(req: NextRequest) {
 
         const trip = await TripModel.findById(tripId);
 
-        //console.log("trip", trip);
+        console.log("trip", trip);
 
         if (!trip) {
             return NextResponse.json({ message: "Trip not found" }, { status: 404 });

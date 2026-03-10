@@ -15,6 +15,7 @@ interface Task {
     // remarks?: string;
     status?: boolean;
     evidence?: string | null;
+    evidence2?: string | null;
     submittedAt?: string;
     userRemark?: string;
 }
@@ -32,6 +33,8 @@ export default function page() {
     const [groups, setGroups] = useState<TaskGroup[]>([]);
     const [selectedGroupIndex, setSelectedGroupIndex] = useState<number>(0);
     const tasks = groups[selectedGroupIndex]?.tasks || [];
+    const [firstImage, setFirstImage] = useState<File | null>(null);
+    const [secondImage, setSecondImage] = useState<File | null>(null);
 
     useEffect(() => {
         const fetchTrip = async () => {
@@ -68,12 +71,18 @@ export default function page() {
         }));
     };
 
-    const handleFileUpload = (id: string, e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleFileUpload = (id: string, e: React.ChangeEvent<HTMLInputElement>, imageIndex: number = 1) => {
         const file = e.target.files?.[0];
+        console.log("filess", file);
+
         if (file) {
-            updateTask(id, { evidence: file.name });
-            // Here you can integrate with your backend upload endpoint
-            // e.g., using FormData and axios.post()
+            if (imageIndex === 1) {
+                updateTask(id, { evidence: file.name });
+                setFirstImage(file)
+            } else {
+                updateTask(id, { evidence2: file.name });
+                setSecondImage(file)
+            }
         }
     };
 
@@ -90,13 +99,25 @@ export default function page() {
         });
 
         const taskData = { ...task, submittedAt: now };
-        console.log("Submitting Task Data:", taskData);
+        //console.log("Submitting Task Data:", taskData);
+
+        const formData = new FormData();
+        formData.append("taskData", JSON.stringify(taskData));
+        formData.append("firstImage", firstImage!);
+        formData.append("secondImage", secondImage!);
+
+        console.log("Here is the formData", formData);
+
 
         try {
             const response = await axios.post(
                 "/api/task-submission",
-                taskData,
+                formData,
+
                 {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
                     params: {
                         tripId: tripId
                     }
@@ -215,18 +236,36 @@ export default function page() {
                                             </td>
 
                                             <td className="px-6 py-4 text-center">
-                                                <div className="flex justify-center items-center">
+                                                <div className="flex justify-center items-center gap-2">
                                                     <label className="cursor-pointer group flex flex-col items-center gap-1">
                                                         <input
                                                             type="file"
                                                             accept="image/*"
-                                                            onChange={(e) => handleFileUpload(taskId, e)}
+                                                            onChange={(e) => handleFileUpload(taskId, e, 1)}
                                                             className="hidden"
                                                         />
                                                         {task.evidence ? (
-                                                            <div className="px-3 py-1.5 bg-indigo-50 text-indigo-600 rounded-lg text-xs font-medium flex items-center gap-2 border border-indigo-100 hover:bg-indigo-100 transition-colors">
+                                                            <div className="px-3 py-1.5 bg-indigo-50 text-indigo-600 rounded-lg text-xs font-medium flex items-center gap-2 border border-indigo-100 hover:bg-indigo-100 transition-colors" title={task.evidence}>
                                                                 <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
-                                                                <span className="max-w-[80px] truncate">{task.evidence}</span>
+                                                                <span className="max-w-[60px] truncate">{task.evidence}</span>
+                                                            </div>
+                                                        ) : (
+                                                            <div className="p-2 text-zinc-400 hover:text-indigo-500 hover:bg-indigo-50 rounded-xl transition-all border border-transparent hover:border-indigo-100">
+                                                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                                                            </div>
+                                                        )}
+                                                    </label>
+                                                    <label className="cursor-pointer group flex flex-col items-center gap-1">
+                                                        <input
+                                                            type="file"
+                                                            accept="image/*"
+                                                            onChange={(e) => handleFileUpload(taskId, e, 2)}
+                                                            className="hidden"
+                                                        />
+                                                        {task.evidence2 ? (
+                                                            <div className="px-3 py-1.5 bg-indigo-50 text-indigo-600 rounded-lg text-xs font-medium flex items-center gap-2 border border-indigo-100 hover:bg-indigo-100 transition-colors" title={task.evidence2}>
+                                                                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+                                                                <span className="max-w-[60px] truncate">{task.evidence2}</span>
                                                             </div>
                                                         ) : (
                                                             <div className="p-2 text-zinc-400 hover:text-indigo-500 hover:bg-indigo-50 rounded-xl transition-all border border-transparent hover:border-indigo-100">

@@ -169,162 +169,325 @@ export const templatesById: Record<string, TripTemplate> = {
 
         ]
     },
-    jaipur: {
-    tripName: "MERI College – Manali",
-    tripDate: "2026-03-30",
-    tripDiscussion: "Operational Control Checklist for Manali Tour. TO: Ankit. Monitoring: Central / Tour Manager.",
+  jaipur: {
+    tripName: "Camp O Royale",
+    tripDate: "Day 1",
+    tripDiscussion: "3-Day Student Group – Operational Control Checklist for Camp O Royale.",
     groups: [
         {
             groupId: generateId(),
-            date: "2026-03-30",
+            date: "Day 1 – Arrival + Adventure + Experience",
             tasks: [
-                { id: generateId(), name: "Student arrival confirmation", description: "Ensure all reported at college. Evidence: Head count", time: "08:00 PM" },
-                { id: generateId(), name: "Teacher arrival confirmation", description: "Confirm all present. Evidence: Count", time: "08:00 PM" },
-                { id: generateId(), name: "Bus readiness", description: "Check AC, seats, cleanliness. Evidence: Bus photo", time: "08:00 PM" },
-                
-                { id: generateId(), name: "Head count", description: "Final student + teacher count", time: "08:30 PM" },
-                { id: generateId(), name: "Luggage tagging", description: "Ensure all bags loaded", time: "08:30 PM" },
-                { id: generateId(), name: "Safety briefing", description: "Travel discipline rules", time: "08:30 PM" },
+                // 12:30–01:30 PM – ARRIVAL & WELCOME
+                { id: generateId(), name: "Arrival coordination", description: "Ensure team ready at gate. Evidence: Photo", time: "12:30–01:30 PM" },
+                { id: generateId(), name: "Welcome drink", description: "Serve immediately on arrival. Evidence: Photo", time: "12:30–01:30 PM" },
+                { id: generateId(), name: "Luggage handling", description: "Assist unloading. Evidence: Photo", time: "12:30–01:30 PM" },
+                { id: generateId(), name: "Head count", description: "Confirm students + teachers. Evidence: Record", time: "12:30–01:30 PM" },
 
-                { id: generateId(), name: "Final head count", description: "Before bus moves", time: "09:00 PM" },
-                { id: generateId(), name: "Seat allocation", description: "Students settled", time: "09:00 PM" },
-                { id: generateId(), name: "Teacher comfort check", description: "Confirm", time: "09:00 PM" },
+                // 01:30 PM – BRIEFING
+                { id: generateId(), name: "Forest safety briefing", description: "No wandering alone", time: "01:30 PM" },
+                { id: generateId(), name: "Property rules", description: "No room hopping", time: "01:30 PM" },
+                { id: generateId(), name: "Timing discipline", description: "Strict adherence", time: "01:30 PM" },
+                { id: generateId(), name: "Emergency protocol", description: "Share contact person", time: "01:30 PM" },
+                { id: generateId(), name: "Adventure safety", description: "Pre-warning", time: "01:30 PM" },
 
-                { id: generateId(), name: "Driver monitoring", description: "No rash driving", time: "Night" },
-                { id: generateId(), name: "Student discipline", description: "No movement in bus", time: "Night" },
-                { id: generateId(), name: "Medical check", description: "Any motion sickness", time: "Night" }
+                // 02:00 PM – ROOM ALLOCATION
+                { id: generateId(), name: "Room distribution", description: "Smooth & quick. Evidence: Rooming list", time: "02:00 PM" },
+                { id: generateId(), name: "Room inspection briefing", description: "Damage responsibility. Evidence: Photo/video", time: "02:00 PM" },
+                { id: generateId(), name: "Key control", description: "Proper allocation. Evidence: Record", time: "02:00 PM" },
+
+                // 02:30 PM – LUNCH
+                { id: generateId(), name: "Food readiness check", description: "Before service", time: "02:30 PM" },
+                { id: generateId(), name: "Taste check", description: "Manager + teacher", time: "02:30 PM" },
+                { id: generateId(), name: "Teacher service", description: "Separate attention", time: "02:30 PM" },
+                { id: generateId(), name: "Feedback collection", description: "After meal", time: "02:30 PM" },
+
+                // 03:00 PM – ADVENTURE ACTIVITIES (Pre-Activity)
+                { id: generateId(), name: "Safety briefing", description: "Mandatory", time: "03:00 PM" },
+                { id: generateId(), name: "Instructor introduction", description: "Build trust", time: "03:00 PM" },
+                { id: generateId(), name: "Group division", description: "2 groups", time: "03:00 PM" },
+                { id: generateId(), name: "Equipment check", description: "Before start", time: "03:00 PM" },
+
+                // 03:00 PM – ADVENTURE ACTIVITIES (Execution)
+                { id: generateId(), name: "Group rotation", description: "Smooth transition", time: "03:00 PM" },
+                { id: generateId(), name: "Instructor supervision", description: "Continuous", time: "03:00 PM" },
+                { id: generateId(), name: "Injury check", description: "Immediate response", time: "03:00 PM" },
+                { id: generateId(), name: "Hydration check", description: "Regular", time: "03:00 PM" },
+
+                // 06:00 PM – EVENING TEA & SNACKS
+                { id: generateId(), name: "Snack readiness", description: "Confirm", time: "06:00 PM" },
+                { id: generateId(), name: "Teacher service", description: "Priority", time: "06:00 PM" },
+                { id: generateId(), name: "Student control", description: "No crowding", time: "06:00 PM" },
+
+                // 07:00 PM – JUNGLE TREK (High Risk)
+                { id: generateId(), name: "Safety briefing", description: "Torch + group discipline", time: "07:00 PM" },
+                { id: generateId(), name: "Guide allocation", description: "Mandatory", time: "07:00 PM" },
+                { id: generateId(), name: "Head count", description: "Before & after", time: "07:00 PM" },
+                { id: generateId(), name: "No isolation rule", description: "Strict", time: "07:00 PM" },
+
+                // 08:00 PM – BONFIRE + MOVIE / STAR GAZING
+                { id: generateId(), name: "Bonfire setup", description: "Safe distance", time: "08:00 PM" },
+                { id: generateId(), name: "Seating arrangement", description: "Organized", time: "08:00 PM" },
+                { id: generateId(), name: "Engagement", description: "Movie / storytelling", time: "08:00 PM" },
+                { id: generateId(), name: "Discipline control", description: "No chaos", time: "08:00 PM" },
+
+                // 10:00 PM – DINNER
+                { id: generateId(), name: "Food check", description: "Taste + quality", time: "10:00 PM" },
+                { id: generateId(), name: "Teacher service", description: "Priority", time: "10:00 PM" },
+                { id: generateId(), name: "Feedback", description: "Record", time: "10:00 PM" },
+
+                // 11:00 PM – ROOM ROUND
+                { id: generateId(), name: "Visit each room", description: "Check comfort", time: "11:00 PM" },
+                { id: generateId(), name: "Noise control", description: "Enforce discipline", time: "11:00 PM" },
+                { id: generateId(), name: "Medical check", description: "Any issue", time: "11:00 PM" }
             ]
         },
         {
             groupId: generateId(),
-            date: "2026-03-31",
+            date: "Day 2 – Trek + Team Building + Treasure Hunt",
             tasks: [
-                { id: generateId(), name: "Head count", description: "Before deboarding", time: "Morning" },
-                { id: generateId(), name: "Breakfast coordination", description: "Verify menu. Evidence: Breakfast photo", time: "Morning" },
+                // 06:00 AM – TAPOVAN TREK (High Risk)
+                { id: generateId(), name: "Wake-up call", description: "Ensure readiness", time: "06:00 AM" },
+                { id: generateId(), name: "Safety briefing", description: "Before start", time: "06:00 AM" },
+                { id: generateId(), name: "Guide presence", description: "Mandatory", time: "06:00 AM" },
+                { id: generateId(), name: "Head count", description: "Start & end", time: "06:00 AM" },
+                { id: generateId(), name: "Hydration", description: "Carry water", time: "06:00 AM" },
 
-                { id: generateId(), name: "Bus/Local Transport check", description: "Confirm condition", time: "Transfer" },
-                { id: generateId(), name: "Head count", description: "Before departure", time: "Transfer" },
+                // 08:30 AM – RETURN + RECOVERY
+                { id: generateId(), name: "Rest coordination", description: "Ensure recovery", time: "08:30 AM" },
+                { id: generateId(), name: "Medical check", description: "Any fatigue/injury", time: "08:30 AM" },
 
-                { id: generateId(), name: "Room allocation", description: "Rooms allocated equally to boys and girls", time: "11:00 AM" },
-                { id: generateId(), name: "Room briefing", description: "Damage responsibility", time: "11:00 AM" },
-                { id: generateId(), name: "Movement control", description: "No room switching", time: "11:00 AM" },
+                // 10:00 AM – BREAKFAST
+                { id: generateId(), name: "Breakfast check", description: "Standard food + teacher care protocol", time: "10:00 AM" },
 
-                { id: generateId(), name: "Escort on Boys section", description: "Escort members should be with boys section", time: "11:00 AM" },
+                // 11:00 AM – REST PERIOD
+                { id: generateId(), name: "Room discipline", description: "Ensure rest", time: "11:00 AM" },
+                { id: generateId(), name: "No outdoor roaming", description: "Strict", time: "11:00 AM" },
 
+                // 01:00 PM – LUNCH
+                { id: generateId(), name: "Lunch check", description: "Standard protocol", time: "01:00 PM" },
 
-                { id: generateId(), name: "Lunch -Menu check", description: "Match plan", time: "01:30 PM" },
-                { id: generateId(), name: "Teacher care", description: "Separate service", time: "01:30 PM" },
+                // 03:00 PM – TREASURE HUNT (Pre-Activity)
+                { id: generateId(), name: "Story briefing", description: "Make it engaging", time: "03:00 PM" },
+                { id: generateId(), name: "Group division", description: "Teams", time: "03:00 PM" },
+                { id: generateId(), name: "Rules explanation", description: "Clearly defined", time: "03:00 PM" },
 
-                { id: generateId(), name: "For Vashisht Temple -Head count", description: "At every location. Evidence: Group photo", time: "03:00 PM" },
-                { id: generateId(), name: "Group discipline", description: "No isolation", time: "03:00 PM" },
+                // 03:00 PM – TREASURE HUNT (Execution)
+                { id: generateId(), name: "Checkpoint setup", description: "Clear markers", time: "03:00 PM" },
+                { id: generateId(), name: "Staff allocation", description: "At each point", time: "03:00 PM" },
+                { id: generateId(), name: "Time control", description: "Strict", time: "03:00 PM" },
+                { id: generateId(), name: "Fair play monitoring", description: "Ensure", time: "03:00 PM" },
 
-                { id: generateId(), name: "For Hadimba Temple -Head count", description: "At every location. Evidence: Group photo", time: "03:00 PM" },
-                { id: generateId(), name: "Group discipline", description: "No isolation", time: "03:00 PM" },
+                // 05:30 PM – SNACKS
+                { id: generateId(), name: "Snacks service", description: "Serve on time", time: "05:30 PM" },
 
+                // 07:00 PM – BONFIRE + MUSIC
+                { id: generateId(), name: "Music control", description: "Volume + timing", time: "07:00 PM" },
+                { id: generateId(), name: "Student engagement", description: "Dance / interaction", time: "07:00 PM" },
+                { id: generateId(), name: "Teacher comfort", description: "Priority", time: "07:00 PM" },
 
-                { id: generateId(), name: "Tibetian Monastery -Head count", description: "At every location. Evidence: Group photo", time: "03:00 PM" },
-                { id: generateId(), name: "Group discipline", description: "No isolation", time: "03:00 PM" },
-            
+                // 09:00 PM – DINNER
+                { id: generateId(), name: "Dinner check", description: "Standard protocol", time: "09:00 PM" },
 
-                { id: generateId(), name: "Mall Road -Head count", description: "At every location. Evidence: Group photo", time: "03:00 PM" },
-                { id: generateId(), name: "Group discipline", description: "No isolation", time: "03:00 PM" },
-                { id: generateId(), name: "Market control", description: "Fixed time at Mall Road", time: "03:00 PM" },
-
-
-                { id: generateId(), name: "Dinner-Taste check", description: "TO + Teacher", time: "08:00 PM" },
-                { id: generateId(), name: "Feedback", description: "Record issues", time: "08:00 PM" },
-
-                { id: generateId(), name: "Night Check-Visit rooms", description: "Check wellbeing", time: "10:30 PM" },
-                { id: generateId(), name: "Discipline", description: "Lights off", time: "10:30 PM" }
+                // 10:30 PM – ROOM ROUND
+                { id: generateId(), name: "Room round", description: "Standard check", time: "10:30 PM" }
             ]
         },
         {
             groupId: generateId(),
-            date: "2026-04-01",
+            date: "Day 3 – Checkout & Departure",
             tasks: [
-                { id: generateId(), name: "Breakfast check", description: "Standard food check", time: "07:30 AM" },
-                
-                { id: generateId(), name: "Vehicle check", description: "Snow suitability", time: "08:30 AM" },
-                { id: generateId(), name: "Head count", description: "Before departure", time: "08:30 AM" },
+                // 08:00 AM – BREAKFAST
+                { id: generateId(), name: "Breakfast check", description: "Standard protocol", time: "08:00 AM" },
 
-                { id: generateId(), name: "Safety briefing", description: "Snow discipline. Strict: No unsupervised snow activity or student alone", time: "10:30 AM" },
-                { id: generateId(), name: "Activity monitoring", description: "No risky activity without permission", time: "10:30 AM" },
-                { id: generateId(), name: "Vendor control", description: "Only approved vendors", time: "10:30 AM" },
+                // 09:00–11:00 AM – PACKING & CHECKOUT PREP
+                { id: generateId(), name: "Luggage packing", description: "Ensure readiness", time: "09:00–11:00 AM" },
+                { id: generateId(), name: "Room inspection", description: "Damage check", time: "09:00–11:00 AM" },
+                { id: generateId(), name: "Key collection", description: "Proper", time: "09:00–11:00 AM" },
 
-                { id: generateId(), name: "Time control", description: "Avoid delays", time: "Atal Tunnel" },
-                { id: generateId(), name: "Head count", description: "Before departure", time: "Atal Tunnel" },
+                // 11:00 AM – LIGHT REFRESHMENT
+                { id: generateId(), name: "Light refreshment", description: "Serve on time", time: "11:00 AM" },
 
-                { id: generateId(), name: "Return to Hotel", description: "Make sure return of everyone", time: "Atal Tunnel" },
-                
-                { id: generateId(), name: "DJ supervision", description: "No indiscipline", time: "Evening" },
-                { id: generateId(), name: "Teacher presence", description: "Mandatory", time: "Evening" },
+                // 11:30 AM – BRAND TASKS: Google Review
+                { id: generateId(), name: "QR sharing", description: "Show code. Evidence: Screenshot", time: "11:30 AM" },
+                { id: generateId(), name: "Instruction", description: "Guide students how to review. Evidence: Video/photo", time: "11:30 AM" },
+                { id: generateId(), name: "Target", description: "Minimum 60% students. Evidence: Count", time: "11:30 AM" },
 
-                { id: generateId(), name: "Dinner-Taste check", description: "TO + Teacher", time: "08:00 PM" },
-                { id: generateId(), name: "Feedback", description: "Record issues", time: "08:00 PM" },
+                // 11:30 AM – BRAND TASKS: Instagram Tagging
+                { id: generateId(), name: "Share handle", description: "Share Camp O Royale Instagram handle. Evidence: Screenshot", time: "11:30 AM" },
+                { id: generateId(), name: "Story posting", description: "Encourage students to post & tag. Evidence: Story screenshots", time: "11:30 AM" },
+                { id: generateId(), name: "Repost collection", description: "Save best content. Evidence: Archive", time: "11:30 AM" },
 
-                { id: generateId(), name: "Night Check-Visit rooms", description: "Check wellbeing", time: "10:30 PM" },
-                { id: generateId(), name: "Discipline", description: "Lights off", time: "10:30 PM" }
-            ]
-        },
-        {
-            groupId: generateId(),
-            date: "2026-04-02",
-            tasks: [
+                // 11:30 AM – BRAND TASKS: Teacher Network
+                { id: generateId(), name: "Collect contacts", description: "Name + school. Evidence: List", time: "11:30 AM" },
+                { id: generateId(), name: "Permission", description: "For community. Evidence: Verbal consent", time: "11:30 AM" },
+                { id: generateId(), name: "Relationship building", description: "Personal interaction", time: "11:30 AM" },
 
-                { id: generateId(), name: "Breakfast check", description: "Standard food check", time: "07:30 AM" },
-                
-                { id: generateId(), name: "Take student feedback", description: "ensure student feedback", time: "07:30 AM" },
-
-                { id: generateId(), name: "Safety briefing", description: "EnsuresRiver proximity rules", time: "09:00 AM" },
-                { id: generateId(), name: "Group control", description: "No entering water", time: "09:00 AM" },
-                { id: generateId(), name: "Photo coordination", description: "Controlled movement", time: "09:00 AM" },
-
-                { id: generateId(), name: "Room inspection", description: "Damage check", time: "11:00 AM" },
-                { id: generateId(), name: "Key collection", description: "Clearance", time: "11:00 AM" },
-
-                { id: generateId(), name: "Lunch -Menu check", description: "Match plan", time: "01:30 PM" },
-                { id: generateId(), name: "Teacher care", description: "Separate service", time: "01:30 PM" },
-
-
-                { id: generateId(), name: "Head count", description: "Before departure", time: "02:00 PM" },
-                { id: generateId(), name: "Luggage check", description: "Ensure all loaded", time: "02:00 PM" },
-
-                { id: generateId(), name: "Time control", description: "Avoid delays", time: "Enroute" },
-                { id: generateId(), name: "Student discipline", description: "Group movement", time: "Enroute" },
-
-                { id: generateId(), name: "Food check", description: "Hygiene & quality", time: "Dinner" },
-                { id: generateId(), name: "Teacher care", description: "Check satisfaction", time: "Dinner" },
-
-                { id: generateId(), name: "QR sharing", description: "Share Google review QR link. Evidence: Screenshot", time: "Return Journey" },
-                { id: generateId(), name: "Instruction", description: "Guide students how to review. Evidence: Video/photo", time: "Return Journey" },
-                { id: generateId(), name: "Minimum target", description: "At least 60–70% students. Evidence: Count", time: "Return Journey" },
-                { id: generateId(), name: "Review check", description: "Confirm posting. Evidence: Screenshot", time: "Return Journey" },
-
-                { id: generateId(), name: "Share Insta ID", description: "@backpackers (your handle). Evidence: Screenshot", time: "Return Journey" },
-                { id: generateId(), name: "Ask students", description: "Post story/reel tagging Backpackers. Evidence: Story screenshots", time: "Return Journey" },
-                { id: generateId(), name: "Repost content", description: "Collect best stories. Evidence: Archive", time: "Return Journey" },
-
-                { id: generateId(), name: "Collect numbers", description: "Take all teacher contacts. Evidence: List", time: "Return Journey" },
-                { id: generateId(), name: "Permission", description: "Inform about Backpackers community. Evidence: Verbal consent", time: "Return Journey" },
-                { id: generateId(), name: "Save properly", description: "Add name + school. Evidence: Sheet entry", time: "Return Journey" },
-
-                { id: generateId(), name: "Explain benefit", description: "Future tours / priority offers", time: "Return Journey" },
-                { id: generateId(), name: "Create connect", description: "Personal relationship building", time: "Return Journey" },
-                { id: generateId(), name: "Follow-up note", description: "Add to WhatsApp / CRM later", time: "Return Journey" }
-            ]
-        },
-        {
-            groupId: generateId(),
-            date: "2026-04-03",
-            tasks: [
-                { id: generateId(), name: "Head count", description: "Final count", time: "05:00-06:00 AM" },
-                { id: generateId(), name: "Luggage check", description: "Nothing left", time: "05:00-06:00 AM" },
-                { id: generateId(), name: "Student handover", description: "Ensure safe dispersal", time: "05:00-06:00 AM" },
-
-                { id: generateId(), name: "Group photo", description: "End of tour", time: "Final Task" },
-                { id: generateId(), name: "Teacher feedback", description: "Record", time: "Final Task" }
+                // 12:00 PM – DEPARTURE
+                { id: generateId(), name: "Final head count", description: "Mandatory", time: "12:00 PM" },
+                { id: generateId(), name: "Luggage check", description: "Nothing left", time: "12:00 PM" },
+                { id: generateId(), name: "Farewell coordination", description: "Smooth exit", time: "12:00 PM" }
             ]
         }
     ]
 }
 };
+
+//   jaipur: {
+//     tripName: "MERI College – Manali",
+//     tripDate: "2026-03-30",
+//     tripDiscussion: "Operational Control Checklist for Manali Tour. TO: Ankit. Monitoring: Central / Tour Manager.",
+//     groups: [
+//         {
+//             groupId: generateId(),
+//             date: "2026-03-30",
+//             tasks: [
+//                 { id: generateId(), name: "Student arrival confirmation", description: "Ensure all reported at college. Evidence: Head count", time: "08:00 PM" },
+//                 { id: generateId(), name: "Teacher arrival confirmation", description: "Confirm all present. Evidence: Count", time: "08:00 PM" },
+//                 { id: generateId(), name: "Bus readiness", description: "Check AC, seats, cleanliness. Evidence: Bus photo", time: "08:00 PM" },
+                
+//                 { id: generateId(), name: "Head count", description: "Final student + teacher count", time: "08:30 PM" },
+//                 { id: generateId(), name: "Luggage tagging", description: "Ensure all bags loaded", time: "08:30 PM" },
+//                 { id: generateId(), name: "Safety briefing", description: "Travel discipline rules", time: "08:30 PM" },
+
+//                 { id: generateId(), name: "Final head count", description: "Before bus moves", time: "09:00 PM" },
+//                 { id: generateId(), name: "Seat allocation", description: "Students settled", time: "09:00 PM" },
+//                 { id: generateId(), name: "Teacher comfort check", description: "Confirm", time: "09:00 PM" },
+
+//                 { id: generateId(), name: "Driver monitoring", description: "No rash driving", time: "Night" },
+//                 { id: generateId(), name: "Student discipline", description: "No movement in bus", time: "Night" },
+//                 { id: generateId(), name: "Medical check", description: "Any motion sickness", time: "Night" }
+//             ]
+//         },
+//         {
+//             groupId: generateId(),
+//             date: "2026-03-31",
+//             tasks: [
+//                 { id: generateId(), name: "Head count", description: "Before deboarding", time: "Morning" },
+//                 { id: generateId(), name: "Breakfast coordination", description: "Verify menu. Evidence: Breakfast photo", time: "Morning" },
+
+//                 { id: generateId(), name: "Bus/Local Transport check", description: "Confirm condition", time: "Transfer" },
+//                 { id: generateId(), name: "Head count", description: "Before departure", time: "Transfer" },
+
+//                 { id: generateId(), name: "Room allocation", description: "Rooms allocated equally to boys and girls", time: "11:00 AM" },
+//                 { id: generateId(), name: "Room briefing", description: "Damage responsibility", time: "11:00 AM" },
+//                 { id: generateId(), name: "Movement control", description: "No room switching", time: "11:00 AM" },
+
+//                 { id: generateId(), name: "Escort on Boys section", description: "Escort members should be with boys section", time: "11:00 AM" },
+
+
+//                 { id: generateId(), name: "Lunch -Menu check", description: "Match plan", time: "01:30 PM" },
+//                 { id: generateId(), name: "Teacher care", description: "Separate service", time: "01:30 PM" },
+
+//                 { id: generateId(), name: "For Vashisht Temple -Head count", description: "At every location. Evidence: Group photo", time: "03:00 PM" },
+//                 { id: generateId(), name: "Group discipline", description: "No isolation", time: "03:00 PM" },
+
+//                 { id: generateId(), name: "For Hadimba Temple -Head count", description: "At every location. Evidence: Group photo", time: "03:00 PM" },
+//                 { id: generateId(), name: "Group discipline", description: "No isolation", time: "03:00 PM" },
+
+
+//                 { id: generateId(), name: "Tibetian Monastery -Head count", description: "At every location. Evidence: Group photo", time: "03:00 PM" },
+//                 { id: generateId(), name: "Group discipline", description: "No isolation", time: "03:00 PM" },
+            
+
+//                 { id: generateId(), name: "Mall Road -Head count", description: "At every location. Evidence: Group photo", time: "03:00 PM" },
+//                 { id: generateId(), name: "Group discipline", description: "No isolation", time: "03:00 PM" },
+//                 { id: generateId(), name: "Market control", description: "Fixed time at Mall Road", time: "03:00 PM" },
+
+
+//                 { id: generateId(), name: "Dinner-Taste check", description: "TO + Teacher", time: "08:00 PM" },
+//                 { id: generateId(), name: "Feedback", description: "Record issues", time: "08:00 PM" },
+
+//                 { id: generateId(), name: "Night Check-Visit rooms", description: "Check wellbeing", time: "10:30 PM" },
+//                 { id: generateId(), name: "Discipline", description: "Lights off", time: "10:30 PM" }
+//             ]
+//         },
+//         {
+//             groupId: generateId(),
+//             date: "2026-04-01",
+//             tasks: [
+//                 { id: generateId(), name: "Breakfast check", description: "Standard food check", time: "07:30 AM" },
+                
+//                 { id: generateId(), name: "Vehicle check", description: "Snow suitability", time: "08:30 AM" },
+//                 { id: generateId(), name: "Head count", description: "Before departure", time: "08:30 AM" },
+
+//                 { id: generateId(), name: "Safety briefing", description: "Snow discipline. Strict: No unsupervised snow activity or student alone", time: "10:30 AM" },
+//                 { id: generateId(), name: "Activity monitoring", description: "No risky activity without permission", time: "10:30 AM" },
+//                 { id: generateId(), name: "Vendor control", description: "Only approved vendors", time: "10:30 AM" },
+
+//                 { id: generateId(), name: "Time control", description: "Avoid delays", time: "Atal Tunnel" },
+//                 { id: generateId(), name: "Head count", description: "Before departure", time: "Atal Tunnel" },
+
+//                 { id: generateId(), name: "Return to Hotel", description: "Make sure return of everyone", time: "Atal Tunnel" },
+                
+//                 { id: generateId(), name: "DJ supervision", description: "No indiscipline", time: "Evening" },
+//                 { id: generateId(), name: "Teacher presence", description: "Mandatory", time: "Evening" },
+
+//                 { id: generateId(), name: "Dinner-Taste check", description: "TO + Teacher", time: "08:00 PM" },
+//                 { id: generateId(), name: "Feedback", description: "Record issues", time: "08:00 PM" },
+
+//                 { id: generateId(), name: "Night Check-Visit rooms", description: "Check wellbeing", time: "10:30 PM" },
+//                 { id: generateId(), name: "Discipline", description: "Lights off", time: "10:30 PM" }
+//             ]
+//         },
+//         {
+//             groupId: generateId(),
+//             date: "2026-04-02",
+//             tasks: [
+
+//                 { id: generateId(), name: "Breakfast check", description: "Standard food check", time: "07:30 AM" },
+                
+//                 { id: generateId(), name: "Take student feedback", description: "ensure student feedback", time: "07:30 AM" },
+
+//                 { id: generateId(), name: "Safety briefing", description: "EnsuresRiver proximity rules", time: "09:00 AM" },
+//                 { id: generateId(), name: "Group control", description: "No entering water", time: "09:00 AM" },
+//                 { id: generateId(), name: "Photo coordination", description: "Controlled movement", time: "09:00 AM" },
+
+//                 { id: generateId(), name: "Room inspection", description: "Damage check", time: "11:00 AM" },
+//                 { id: generateId(), name: "Key collection", description: "Clearance", time: "11:00 AM" },
+
+//                 { id: generateId(), name: "Lunch -Menu check", description: "Match plan", time: "01:30 PM" },
+//                 { id: generateId(), name: "Teacher care", description: "Separate service", time: "01:30 PM" },
+
+
+//                 { id: generateId(), name: "Head count", description: "Before departure", time: "02:00 PM" },
+//                 { id: generateId(), name: "Luggage check", description: "Ensure all loaded", time: "02:00 PM" },
+
+//                 { id: generateId(), name: "Time control", description: "Avoid delays", time: "Enroute" },
+//                 { id: generateId(), name: "Student discipline", description: "Group movement", time: "Enroute" },
+
+//                 { id: generateId(), name: "Food check", description: "Hygiene & quality", time: "Dinner" },
+//                 { id: generateId(), name: "Teacher care", description: "Check satisfaction", time: "Dinner" },
+
+//                 { id: generateId(), name: "QR sharing", description: "Share Google review QR link. Evidence: Screenshot", time: "Return Journey" },
+//                 { id: generateId(), name: "Instruction", description: "Guide students how to review. Evidence: Video/photo", time: "Return Journey" },
+//                 { id: generateId(), name: "Minimum target", description: "At least 60–70% students. Evidence: Count", time: "Return Journey" },
+//                 { id: generateId(), name: "Review check", description: "Confirm posting. Evidence: Screenshot", time: "Return Journey" },
+
+//                 { id: generateId(), name: "Share Insta ID", description: "@backpackers (your handle). Evidence: Screenshot", time: "Return Journey" },
+//                 { id: generateId(), name: "Ask students", description: "Post story/reel tagging Backpackers. Evidence: Story screenshots", time: "Return Journey" },
+//                 { id: generateId(), name: "Repost content", description: "Collect best stories. Evidence: Archive", time: "Return Journey" },
+
+//                 { id: generateId(), name: "Collect numbers", description: "Take all teacher contacts. Evidence: List", time: "Return Journey" },
+//                 { id: generateId(), name: "Permission", description: "Inform about Backpackers community. Evidence: Verbal consent", time: "Return Journey" },
+//                 { id: generateId(), name: "Save properly", description: "Add name + school. Evidence: Sheet entry", time: "Return Journey" },
+
+//                 { id: generateId(), name: "Explain benefit", description: "Future tours / priority offers", time: "Return Journey" },
+//                 { id: generateId(), name: "Create connect", description: "Personal relationship building", time: "Return Journey" },
+//                 { id: generateId(), name: "Follow-up note", description: "Add to WhatsApp / CRM later", time: "Return Journey" }
+//             ]
+//         },
+//         {
+//             groupId: generateId(),
+//             date: "2026-04-03",
+//             tasks: [
+//                 { id: generateId(), name: "Head count", description: "Final count", time: "05:00-06:00 AM" },
+//                 { id: generateId(), name: "Luggage check", description: "Nothing left", time: "05:00-06:00 AM" },
+//                 { id: generateId(), name: "Student handover", description: "Ensure safe dispersal", time: "05:00-06:00 AM" },
+
+//                 { id: generateId(), name: "Group photo", description: "End of tour", time: "Final Task" },
+//                 { id: generateId(), name: "Teacher feedback", description: "Record", time: "Final Task" }
+//             ]
+//         }
+//     ]
+// }

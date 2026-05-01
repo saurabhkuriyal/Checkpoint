@@ -27,7 +27,7 @@ interface TaskGroup {
     tasks: Task[];
 }
 
-export default function page() {
+export default function Page() {
     const [tripName, setTripName] = useState<string>("");
     const [tripId, setTripId] = useState<string>("");
     const [groups, setGroups] = useState<TaskGroup[]>([]);

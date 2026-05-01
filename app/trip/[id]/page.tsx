@@ -40,7 +40,7 @@ export default function page() {
         const fetchTrip = async () => {
             try {
                 const response = await axios.get(
-                    `/api/get_trip/69e7c28c65f6b802efa109a9`);
+                    `/api/get_trip/69f42a3b332c4982f383080b`);
                 console.log("Response:-------", response.data);
                 const thisTripId = response.data.trip._id;
                 setTripId(thisTripId);

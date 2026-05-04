@@ -176,7 +176,7 @@ export const templatesById: Record<string, TripTemplate> = {
     groups:[
   {
     groupId: generateId(),
-    date: "Day 01 - Departure",
+    date: "2026-03-09",
     tasks: [
       { id: generateId(), name: "Pre-Departure Setup", description: "Arrive early at school, check bus readiness, coordinate with driver and teachers, prepare attendance list", time: "19:30" },
       { id: generateId(), name: "Student Reporting & Attendance", description: "Headcount, mark attendance, verify student IDs", time: "20:30" },
@@ -188,7 +188,7 @@ export const templatesById: Record<string, TripTemplate> = {
   },
   {
     groupId: generateId(),
-    date: "Day 02 - Arrival & Sightseeing",
+    date: "2026-03-10",
     tasks: [
       { id: generateId(), name: "Arrival & Headcount", description: "Check all students present after arrival", time: "06:00" },
       { id: generateId(), name: "Vehicle Transfer", description: "Manage transfer from bus to local vehicles with luggage", time: "06:30" },
@@ -204,7 +204,7 @@ export const templatesById: Record<string, TripTemplate> = {
   },
   {
     groupId: generateId(),
-    date: "Day 03 - Trek Day",
+    date: "2026-03-11",
     tasks: [
       { id: generateId(), name: "Wake-Up Coordination", description: "Wake-up call and ensure all students are ready", time: "07:00" },
       { id: generateId(), name: "Breakfast", description: "Food tasting and ensure proper meal before trek", time: "08:00" },
@@ -218,7 +218,7 @@ export const templatesById: Record<string, TripTemplate> = {
   },
   {
     groupId: generateId(),
-    date: "Day 04 - Return",
+    date: "2026-03-12",
     tasks: [
       { id: generateId(), name: "Wake-Up & Packing", description: "Wake-up call, ensure luggage packed and rooms cleared", time: "06:30" },
       { id: generateId(), name: "Breakfast", description: "Food tasting and coordinate meal before checkout", time: "08:00" },
@@ -232,7 +232,7 @@ export const templatesById: Record<string, TripTemplate> = {
   },
   {
     groupId: generateId(),
-    date: "Day 05 - Arrival",
+    date: "2026-03-13",
     tasks: [
       { id: generateId(), name: "Arrival at School", description: "Ensure safe arrival and coordination", time: "06:00" },
       { id: generateId(), name: "Final Handover", description: "Hand over students to parents after final count", time: "06:30" }

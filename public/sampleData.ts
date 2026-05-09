@@ -29,145 +29,399 @@ export const templatesById: Record<string, TripTemplate> = {
         tripName: "Goa getaway",
         tripDate: "2026-03-13",
         tripDiscussion: "This is a two-day sample trip to Goa.",
-        groups: [
+  groups: [
+{
+   groupId: generateId(),
+   date: "DAY 01 – DEPARTURE & MUSSORIE TRANSFER",
+   tasks: [
 
-            {
-                groupId: generateId(),
-                date: "2026-03-13",
-                tasks: [
-                    { id: generateId(), name: "Train Status Check", description: "Verify train running status. Evidence: Screenshot", time: "3:30" },
-                    { id: generateId(), name: "Teacher Coordination", description: "Confirm arrival time of students. Evidence: Call log", time: "3:30" },
+      {
+         id: generateId(),
+         name: "Coordinator Reporting & Setup",
+         description: "Setup buses and attendance lists",
+         time: "03:00"
+      },
 
-                    { id: generateId(), name: "Student Head Count", description: "Confirm total students. Evidence: Group photo at station", time: "4:00" },
-                    { id: generateId(), name: "Teacher Head Count", description: "Confirm teachers. Evidence: Group photo at station", time: "4:00" },
-                    { id: generateId(), name: "Luggage Check", description: "Ensure all baggage tagged. Evidence: Group photo at station", time: "4:00" },
+      {
+         id: generateId(),
+         name: "Student Reporting & Attendance",
+         description: "Mark attendance and headcount",
+         time: "04:00"
+      },
 
-                    { id: generateId(), name: "Coach Number Verification", description: "Confirm coach details", time: "4:30" },
-                    { id: generateId(), name: "Seat Allocation", description: "Guide students to seats", time: "4:30" },
-                    { id: generateId(), name: "Luggage Placement", description: "Safe luggage arrangement", time: "4:30" },
+      {
+         id: generateId(),
+         name: "Final Briefing",
+         description: "Give safety and discipline briefing",
+         time: "04:20"
+      },
 
-                    { id: generateId(), name: "Final Head Count", description: "Confirm all boarded", time: "4:45" },
-                    { id: generateId(), name: "Safety Briefing", description: "Train discipline rules", time: "4:45" },
-                    { id: generateId(), name: "Teacher Comfort Check", description: "Ask teachers if comfortable", time: "4:45" }
-                ]
-            },
+      {
+         id: generateId(),
+         name: "Departure From School",
+         description: "Verify seating and final count",
+         time: "04:30"
+      },
 
-            {
-                groupId: generateId(),
-                date: "2026-03-14",
-                tasks: [
-                    { id: generateId(), name: "Head Count On Train", description: "Confirm students", time: "2:30" },
-                    { id: generateId(), name: "Luggage Verification", description: "Ensure nothing left", time: "2:30" },
+      {
+         id: generateId(),
+         name: "Journey Monitoring",
+         description: "Maintain discipline during travel",
+         time: "06:00"
+      },
 
-                    { id: generateId(), name: "Bus Vendor Call", description: "Confirm buses ready. Evidence: Bus interior photo", time: "2:45" },
-                    { id: generateId(), name: "Bus Number & Driver Contact", description: "Record details. Evidence: Bus interior photo", time: "2:45" },
-                    { id: generateId(), name: "Bus Inspection", description: "AC / seating / cleanliness. Evidence: Bus interior photo", time: "2:45" },
+      {
+         id: generateId(),
+         name: "Vendor Coordination",
+         description: "Coordinate breakfast vendor readiness",
+         time: "07:30"
+      },
 
-                    { id: generateId(), name: "Hotel Arrival Confirmation", description: "Inform reception", time: "6:00" },
-                    { id: generateId(), name: "Lobby Seating Arrangement", description: "Students wait calmly", time: "6:00" },
-                    { id: generateId(), name: "Washroom Coordination", description: "Freshen up rooms", time: "6:00" },
+      {
+         id: generateId(),
+         name: "Breakfast Coordination",
+         description: "Manage breakfast and seating",
+         time: "08:00"
+      },
 
-                    { id: generateId(), name: "Menu Verification", description: "Match approved menu. Evidence: Breakfast photo", time: "8:00" },
-                    { id: generateId(), name: "Taste Check", description: "TO + Teacher. Evidence: Breakfast photo", time: "8:00" },
-                    { id: generateId(), name: "Teacher Table Arrangement", description: "Serve teachers separately. Evidence: Breakfast photo", time: "8:00" },
+         {
+         id: generateId(),
+         name: "Breakfast- Teacher wellfare check",
+         description: "Ask of teacher wellfare",
+         time: "08:20"
+      },
 
-                    { id: generateId(), name: "Room Allocation", description: "Smooth key distribution", time: "11:00" },
-                    { id: generateId(), name: "Room Briefing", description: "Damage responsibility rules", time: "11:00" },
-                    { id: generateId(), name: "Movement Rule", description: "No visiting other rooms", time: "11:00" },
+      {
+         id: generateId(),
+         name: "Arrival at Dehradun ISBT",
+         description: "Coordinate luggage and headcount",
+         time: "09:00"
+      },
 
-                    { id: generateId(), name: "Menu Verification", description: "Match menu", time: "1:30" },
-                    { id: generateId(), name: "Teacher Care", description: "Ask satisfaction", time: "1:30" },
+      {
+         id: generateId(),
+         name: "Transfer to Mussorie",
+         description: "Manage Bolero boarding process",
+         time: "09:30"
+      },
 
-                    { id: generateId(), name: "Guide Coordination", description: "Confirm guide availability. Evidence: Group photo", time: "3:00" },
-                    { id: generateId(), name: "Student Briefing", description: "Historical significance. Evidence: Group photo", time: "3:00" },
-                    { id: generateId(), name: "Head Count", description: "Before entry & exit. Evidence: Group photo", time: "3:00" },
+      {
+         id: generateId(),
+         name: "Hotel Arrival & Pre Check-In",
+         description: "Coordinate hotel room readiness",
+         time: "11:00"
+      },
 
-                    { id: generateId(), name: "Head Count", description: "Entry & exit", time: "5:00" },
-                    { id: generateId(), name: "Discipline Monitoring", description: "Students remain in groups", time: "5:00" },
+      {
+         id: generateId(),
+         name: "Room Allotment",
+         description: "Assign rooms to students",
+         time: "11:30"
+      },
 
-                    { id: generateId(), name: "Safety Briefing", description: "Lake discipline", time: "6:30" },
-                    { id: generateId(), name: "Boat Ride Coordination", description: "Optional activity", time: "6:30" },
+      {
+         id: generateId(),
+         name: "Lunch Coordination",
+         description: "Coordinate lunch service",
+         time: "14:00"
+      },
 
-                    { id: generateId(), name: "Student Supervision", description: "Maintain discipline", time: "8:00" },
-                    { id: generateId(), name: "Teacher Presence", description: "Ensure monitoring", time: "8:00" },
+       {
+         id: generateId(),
+         name: " Teacher wellfare check",
+         description: "Ask of teacher wellfare",
+         time: "14:20"
+      },
 
-                    { id: generateId(), name: "Dinner Readiness Check", description: "Verify menu", time: "9:00" },
-                    { id: generateId(), name: "Taste Check", description: "TO + Teacher", time: "9:00" },
+      {
+         id: generateId(),
+         name: "Departure for BHATTA FALLS",
+         description: "Coordinate sightseeing departure",
+         time: "15:00"
+      },
 
-                    { id: generateId(), name: "Visit Each Room", description: "Check student wellbeing", time: "10:30" },
-                    { id: generateId(), name: "Lights Off", description: "Discipline control", time: "10:30" }
-                ]
-            },
+      {
+         id: generateId(),
+         name: "Cable Car Safety Briefing",
+         description: "Give cable car safety instructions",
+         time: "15:30"
+      },
 
-            {
-                groupId: generateId(),
-                date: "2026-03-15",
-                tasks: [
-                    { id: generateId(), name: "Menu Verification", description: "Match approved menu. Evidence: Breakfast photo", time: "8:00" },
-                    { id: generateId(), name: "Taste Check", description: "TO + Teacher. Evidence: Breakfast photo", time: "8:00" },
-                    { id: generateId(), name: "Teacher Table Arrangement", description: "Serve teachers separately. Evidence: Breakfast photo", time: "8:00" },
+      {
+         id: generateId(),
+         name: "Cable Car Coordination",
+         description: "Manage cable car movement",
+         time: "15:50"
+      },
 
-                    { id: generateId(), name: "Bus Vendor Confirmation", description: "Confirm buses 1 hour before departure", time: "8:30" },
-                    { id: generateId(), name: "Head Count", description: "Before departure", time: "8:30" },
+      {
+         id: generateId(),
+         name: "MALL ROAD Safety Briefing",
+         description: "Give market safety instructions",
+         time: "18:00"
+      },
 
-                    { id: generateId(), name: "Guide Coordination", description: "Historical explanation. Evidence: Group photo", time: "11:00" },
-                    { id: generateId(), name: "Head Count", description: "Entry & exit. Evidence: Group photo", time: "11:00" },
+      {
+         id: generateId(),
+         name: "MALL ROAD Visit Coordination",
+         description: "Supervise market area movement",
+         time: "18:15"
+      },
 
-                    { id: generateId(), name: "Market Discipline", description: "Students remain in groups", time: "5:30" },
-                    { id: generateId(), name: "Craft Activity Coordination", description: "Participate in workshop", time: "5:30" },
+      {
+         id: generateId(),
+         name: "Dinner Coordination",
+         description: "Coordinate dinner arrangements",
+         time: "21:00"
+      },
 
-                    { id: generateId(), name: "Dinner Readiness Check", description: "Verify menu", time: "9:00" },
-                    { id: generateId(), name: "Taste Check", description: "TO + Teacher", time: "9:00" },
+     {
+         id: generateId(),
+         name: " Teacher wellfare check",
+         description: "Ask of teacher wellfare",
+         time: "21:20"
+      }, 
 
-                ]
-            },
+      {
+         id: generateId(),
+         name: "Night Discipline Check",
+         description: "Ensure room discipline maintained",
+         time: "22:30"
+      }
+   ]
+},
 
-            {
-                groupId: generateId(),
-                date: "2026-03-16",
-                tasks: [
-                    { id: generateId(), name: "Menu Verification", description: "Match approved menu. Evidence: Breakfast photo", time: "8:00" },
-                    { id: generateId(), name: "Taste Check", description: "TO + Teacher. Evidence: Breakfast photo", time: "8:00" },
-                    { id: generateId(), name: "Teacher Table Arrangement", description: "Serve teachers separately. Evidence: Breakfast photo", time: "8:00" },
+{
+   groupId: generateId(),
+   date: "DAY 02 – GEORGE EVEREST TREK & ASTRO CAMPING",
+   tasks: [
 
-                    { id: generateId(), name: "Safety Briefing", description: "Lake area discipline", time: "9:00" },
-                    { id: generateId(), name: "Head Count", description: "Entry & exit", time: "9:00" },
+      {
+         id: generateId(),
+         name: "Wake-Up Coordination",
+         description: "Wake students on time",
+         time: "06:30"
+      },
 
-                    { id: generateId(), name: "Educational Briefing", description: "Historical importance", time: "10:30" },
-                    { id: generateId(), name: "Group Photo", description: "Mandatory", time: "10:30" },
+      {
+         id: generateId(),
+         name: "Breakfast Coordination",
+         description: "Manage breakfast before trek",
+         time: "08:00"
+      },
 
-                    { id: generateId(), name: "Room Inspection", description: "Damage check", time: "12:00" },
-                    { id: generateId(), name: "Key Collection", description: "Clearance", time: "12:00" },
+      {
+         id: generateId(),
+         name: " Teacher wellfare check",
+         description: "Ask of teacher wellfare",
+         time: "08:20"
+      },
 
-                    { id: generateId(), name: "Menu Verification", description: "Match menu", time: "1:30" },
-                    { id: generateId(), name: "Teacher Care", description: "Ask satisfaction", time: "1:30" },
+      {
+         id: generateId(),
+         name: "Trek Safety Briefing",
+         description: "Give trekking safety briefing",
+         time: "09:00"
+      },
 
+      {
+         id: generateId(),
+         name: "Departure for GEORGE EVEREST PEAK",
+         description: "Coordinate trek departure",
+         time: "09:30"
+      },
 
-                    { id: generateId(), name: "Guide Briefing", description: "Fort history", time: "3:00" },
-                    { id: generateId(), name: "Head Count", description: "Entry & exit", time: "3:00" },
+      {
+         id: generateId(),
+         name: "Trek Management",
+         description: "Monitor trek safety discipline",
+         time: "10:00"
+      },
 
-                    { id: generateId(), name: "Dinner Readiness Check", description: "Verify menu", time: "9:00" },
-                    { id: generateId(), name: "Taste Check", description: "TO + Teacher", time: "9:00" },
+      {
+         id: generateId(),
+         name: "Lunch Transfer Coordination",
+         description: "Coordinate lunch transfer movement",
+         time: "13:00"
+      },
 
-                    { id: generateId(), name: "Bus Coordination", description: "Confirm driver", time: "9:30" },
-                    { id: generateId(), name: "Head Count", description: "Before departure", time: "9:30" },
+      {
+         id: generateId(),
+         name: " Teacher wellfare check",
+         description: "Ask of teacher wellfare",
+         time: "13:20"
+      },
 
-                    { id: generateId(), name: "Coach Verification", description: "Confirm seat numbers", time: "12:45" },
-                    { id: generateId(), name: "Final Head Count", description: "Before departure", time: "12:45" }
-                ]
-            },
+      {
+         id: generateId(),
+         name: "Hotel Return & Lunch",
+         description: "Coordinate hotel lunch service",
+         time: "14:00"
+      },
 
-            {
-                groupId: generateId(),
-                date: "2026-03-17",
-                tasks: [
-                    { id: generateId(), name: "Head Count", description: "Confirm all students", time: "11:00" },
-                    { id: generateId(), name: "Luggage Check", description: "Ensure nothing left", time: "11:00" },
-                    { id: generateId(), name: "Group Photo", description: "End of tour documentation", time: "11:00" }
-                ]
-            }
+      {
+         id: generateId(),
+         name: "TREASURE HUNT Safety Briefing",
+         description: "Give activity safety instructions",
+         time: "17:00"
+      },
 
-        ]
+      {
+         id: generateId(),
+         name: "TREASURE HUNT Activity",
+         description: "Conduct treasure hunt activity",
+         time: "17:20"
+      },
+
+      {
+         id: generateId(),
+         name: "ASTRO CAMPING Setup",
+         description: "Prepare astro camping setup",
+         time: "18:30"
+      },
+
+      {
+         id: generateId(),
+         name: "ASTRO CAMPING Session",
+         description: "Manage astro camping session",
+         time: "19:00"
+      },
+
+      {
+         id: generateId(),
+         name: "DJ Night Coordination",
+         description: "Coordinate DJ night activities",
+         time: "20:00"
+      },
+
+      {
+         id: generateId(),
+         name: "Dinner Coordination",
+         description: "Coordinate dinner service",
+         time: "21:00"
+      },
+
+      {
+         id: generateId(),
+         name: " Teacher wellfare check",
+         description: "Ask of teacher wellfare",
+         time: "21:20"
+      },
+
+      {
+         id: generateId(),
+         name: "End of Day Reporting",
+         description: "Submit operational day report",
+         time: "22:30"
+      },
+
+      {
+         id: generateId(),
+         name: "Night Discipline Check",
+         description: "Check room discipline status",
+         time: "23:00"
+      }
+   ]
+},
+
+{
+   groupId: generateId(),
+   date: "DAY 03 – RETURN JOURNEY",
+   tasks: [
+
+      {
+         id: generateId(),
+         name: "Wake-Up & Packing",
+         description: "Ensure luggage packing completed",
+         time: "07:00"
+      },
+
+      {
+         id: generateId(),
+         name: "Breakfast Coordination",
+         description: "Manage breakfast before checkout",
+         time: "09:00"
+      },
+
+      {
+         id: generateId(),
+         name: " Teacher wellfare check",
+         description: "Ask of teacher wellfare",
+         time: "09:20"
+      },
+
+      {
+         id: generateId(),
+         name: "Hotel Checkout",
+         description: "Complete hotel clearance process",
+         time: "10:00"
+      },
+
+      {
+         id: generateId(),
+         name: "Bolero Boarding",
+         description: "Coordinate student boarding",
+         time: "10:15"
+      },
+
+      {
+         id: generateId(),
+         name: "Departure From Mussorie",
+         description: "Verify final departure headcount",
+         time: "10:30"
+      },
+
+      {
+         id: generateId(),
+         name: "Vendor Coordination",
+         description: "Coordinate lunch vendor readiness",
+         time: "11:30"
+      },
+
+      {
+         id: generateId(),
+         name: "Lunch at MUKHIYA DHABA",
+         description: "Coordinate buffet lunch service",
+         time: "12:30"
+      },
+
+      {
+         id: generateId(),
+         name: " Teacher wellfare check",
+         description: "Ask of teacher wellfare",
+         time: "12:40"
+      },
+
+      {
+         id: generateId(),
+         name: "Departure for School",
+         description: "Coordinate return boarding process",
+         time: "13:30"
+      },
+
+      {
+         id: generateId(),
+         name: "Journey Monitoring",
+         description: "Maintain return journey discipline",
+         time: "16:00"
+      },
+
+      {
+         id: generateId(),
+         name: "Arrival at School",
+         description: "Verify student arrival safely",
+         time: "19:00"
+      },
+
+      {
+         id: generateId(),
+         name: "Final Handover & Tour Closure",
+         description: "Complete student handover process",
+         time: "19:30"
+      }
+   ]
+}
+]
     },
   jaipur: {
     tripName: "JIBHI - TIRTHAN VALLEY TRIP",

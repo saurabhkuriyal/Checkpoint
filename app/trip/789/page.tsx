@@ -36,6 +36,7 @@ export default function Page() {
     const [firstImage, setFirstImage] = useState<File | null>(null);
     const [secondImage, setSecondImage] = useState<File | null>(null);
 
+    //to call specific file by entering id manually
     useEffect(() => {
         const fetchTrip = async () => {
             try {

@@ -1,6 +1,7 @@
 "use client";
 
 import axios from "axios";
+import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 
@@ -28,6 +29,10 @@ interface TaskGroup {
 }
 
 export default function Page() {
+
+    const newId=useParams();
+    console.log("New id is-=-=-==-=-=-=-=-=-= ", newId.id);
+    
     const [tripName, setTripName] = useState<string>("");
     const [tripId, setTripId] = useState<string>("");
     const [groups, setGroups] = useState<TaskGroup[]>([]);
@@ -40,7 +45,7 @@ export default function Page() {
         const fetchTrip = async () => {
             try {
                 const response = await axios.get(
-                    `/api/get_trip/6a0b588e6377028d0ea6d423`);
+                    `/api/get_trip/${newId.id}`);
                 console.log("Response:-------", response.data);
                 const thisTripId = response.data.trip._id;
                 setTripId(thisTripId);

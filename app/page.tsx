@@ -73,7 +73,7 @@ export default function page() {
         {/* Header Section */}
         <header className="mb-14 text-center">
           <div className="inline-block p-2 px-5 rounded-full bg-white border border-slate-200 text-slate-600 text-xs font-bold mb-6 animate-fade-in shadow-sm uppercase tracking-widest">
-            Task Management System
+            Task Management System Hiii
           </div>
           <h1 className="text-4xl md:text-6xl font-black tracking-tight text-slate-900 mb-4 bg-clip-text text-transparent bg-gradient-to-br from-slate-900 to-slate-500">
             Daily Operations Checklist

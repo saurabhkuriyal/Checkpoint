@@ -73,10 +73,10 @@ export default function page() {
         {/* Header Section */}
         <header className="mb-14 text-center">
           <div className="inline-block p-2 px-5 rounded-full bg-white border border-slate-200 text-slate-600 text-xs font-bold mb-6 animate-fade-in shadow-sm uppercase tracking-widest">
-            Task Management System Hiii
+            Task Management System 
           </div>
           <h1 className="text-4xl md:text-6xl font-black tracking-tight text-slate-900 mb-4 bg-clip-text text-transparent bg-gradient-to-br from-slate-900 to-slate-500">
-            Daily Operations Checklist
+            Daily Operations Checklist It is for feature version, not for production use
           </h1>
           <p className="max-w-2xl mx-auto text-slate-500 text-lg md:text-xl font-medium">
             Manage, track, and submit operational tasks in real-time.

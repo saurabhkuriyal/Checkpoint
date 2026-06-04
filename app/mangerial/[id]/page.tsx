@@ -159,7 +159,7 @@ export default function Page() {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-indigo-50/80 via-white to-purple-50/80 text-zinc-900 p-2 sm:p-4 md:p-8 lg:p-12 font-sans selection:bg-indigo-200 selection:text-indigo-900 transition-all duration-500 overflow-x-hidden">
+        <div className="min-h-screen bg-linear-to-br from-indigo-50/80 via-white to-purple-50/80 text-zinc-900 p-2 sm:p-4 md:p-8 lg:p-12 font-sans selection:bg-indigo-200 selection:text-indigo-900 transition-all duration-500 overflow-x-hidden">
             <style>{`
                 @keyframes slideFadeIn {
                     from { opacity: 0; transform: translateY(20px); }
@@ -178,7 +178,7 @@ export default function Page() {
                     <div className="inline-block px-4 md:px-5 py-1.5 md:py-2 rounded-full bg-white/80 backdrop-blur-sm border border-indigo-100 text-indigo-600 text-[10px] md:text-xs font-bold mb-4 md:mb-6 shadow-sm tracking-wide uppercase letter-spacing-widest">
                         Operations Dashboard
                     </div>
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 mb-3 md:mb-4 pb-1 md:pb-2 drop-shadow-sm">
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-transparent bg-clip-text bg-linear-to-r from-indigo-600 via-purple-600 to-indigo-600 mb-3 md:mb-4 pb-1 md:pb-2 drop-shadow-sm">
                         Megha Catereres Manager Task Checklist
                     </h1>
                     <p className="max-w-xl mx-auto text-zinc-600 text-sm md:text-base font-medium">
@@ -207,8 +207,8 @@ export default function Page() {
                         <table className="w-full text-left border-separate border-spacing-y-4">
                             <thead>
                                 <tr className="text-[10px] md:text-xs font-extrabold text-indigo-900/50 uppercase tracking-widest">
-                                    <th className="sticky left-0 z-20 px-3 md:px-6 py-3 whitespace-nowrap min-w-[40px] md:min-w-[80px]">S.No.</th>
-                                    <th className=" left-[40px] md:left-[80px] z-20 px-4 md:px-6 py-3 whitespace-nowrap min-w-[140px] md:min-w-[180px]">Task Name</th>
+                                    <th className="sticky left-0 z-20 px-3 md:px-6 py-3 whitespace-nowrap min-w-10 md:min-w-[80px]">S.No.</th>
+                                    <th className=" left-[40px] md:left-20 z-20 px-4 md:px-6 py-3 whitespace-nowrap min-w-[140px] md:min-w-[180px]">Task Name</th>
                                     <th className="px-4 md:px-6 py-3 whitespace-nowrap min-w-[160px] md:min-w-[200px]">Description</th>
                                     <th className="px-4 md:px-6 py-3 whitespace-nowrap text-center">Status</th>
                                     <th className="px-4 md:px-6 py-3 whitespace-nowrap text-center">Time</th>

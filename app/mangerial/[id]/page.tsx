@@ -29,7 +29,7 @@ interface TaskGroup {
 export default function Page() {
     const newId = useParams();
     console.log("New id is-=-=-==-=-=-=-=-=-= ", newId.id);
-    
+
     const [tripName, setTripName] = useState<string>("");
     const [tripId, setTripId] = useState<string>("");
     const [groups, setGroups] = useState<TaskGroup[]>([]);
@@ -99,7 +99,7 @@ export default function Page() {
         });
 
         const taskData = { ...task, submittedAt: now };
-        
+
         const formData = new FormData();
         formData.append("taskData", JSON.stringify(taskData));
         if (firstImage) formData.append("firstImage", firstImage);

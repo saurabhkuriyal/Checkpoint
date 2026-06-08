@@ -3,11 +3,9 @@ import mongoose from "mongoose";
 const taskSchema = new mongoose.Schema({
     task: {
         type: String,
-        required: [true, "Topic is required"],
     },
     time: {
         type: String,
-        required: [true, "Time is required"],
     },
     status: {
         type: String,

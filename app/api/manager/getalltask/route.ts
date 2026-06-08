@@ -14,6 +14,6 @@ export async function GET() {
     }
     catch (error) {
         console.log("error in getting all tasks", error);
-        return NextResponse.json({ message: "Error" }, { status: 500 });
+        return NextResponse.json({ message: "Error", status: 500 });
     }
 }

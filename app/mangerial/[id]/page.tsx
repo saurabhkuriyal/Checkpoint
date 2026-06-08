@@ -17,21 +17,19 @@ interface Task {
 }
 
 export default function ManagerialPage() {
-    const params = useParams();
-    const id = params?.id as string;
 
+
+    const [dayId, setDayId] = useState<string>("");
     const [month, setMonth] = useState<string>("");
     const [date, setDate] = useState<string>("");
     const [tasks, setTasks] = useState<Task[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
-        if (id && id !== 'new') {
-            getAllTasks(id);
-        } else {
-            fetchTask();
-        }
-    }, [id]);
+
+        fetchTask();
+
+    }, []);
 
     const fetchTask = async () => {
         const now = new Date();
@@ -50,6 +48,7 @@ export default function ManagerialPage() {
         }
         try {
             const response = await axios.post("/api/manager/create-task", { data: data });
+            console.log("Response: ", response.data);
             if (response.data.taskId) {
                 getAllTasks(response.data.taskId);
             }
@@ -63,13 +62,13 @@ export default function ManagerialPage() {
         try {
             setLoading(true);
             const response = await axios.get(`/api/manager/gettask/${taskId}`);
-            if (response.data?.tasks?.tasks) {
-                setTasks(response.data.tasks.tasks);
-                setDate(response.data.tasks.date || date);
-                setMonth(response.data.tasks.month || month);
-            } else if (Array.isArray(response.data?.tasks)) {
-                setTasks(response.data.tasks);
-            }
+            console.log("------", response.data);
+            const data = response.data.tasks;
+            setDayId(data._id);
+            setTasks(data.tasks);
+            setDate(data.date);
+            setMonth(data.month);
+
         } catch (error) {
             console.log("error in getting tasks", error);
         } finally {
@@ -81,8 +80,6 @@ export default function ManagerialPage() {
         const newTask: Task = {
             task: "",
             status: "pending",
-            firstImageUrl: "",
-            secondImageUrl: "",
         };
         setTasks([...tasks, newTask]);
     };
@@ -112,11 +109,13 @@ export default function ManagerialPage() {
         console.log("Submitting task:", taskToSubmit);
 
         const formData = new FormData();
-        if (taskToSubmit._id) formData.append("taskId", taskToSubmit._id);
-        formData.append("task", taskToSubmit.task);
-        formData.append("status", taskToSubmit.status);
-        if (taskToSubmit.time) formData.append("time", taskToSubmit.time);
-        formData.append("submittedAt", new Date().toISOString());
+
+        const taskData = { ...taskToSubmit };
+        delete taskData.firstImageFile;
+        delete taskData.secondImageFile;
+        taskData.submittedAt = new Date().toISOString();
+
+        formData.append("taskData", JSON.stringify(taskData));
 
         if (taskToSubmit.firstImageFile) {
             formData.append("firstImage", taskToSubmit.firstImageFile);
@@ -126,11 +125,18 @@ export default function ManagerialPage() {
         }
 
         try {
-            // Replace with your actual update/submit API call
             const response = await axios.post("/api/manager/update-task", formData, {
                 headers: { "Content-Type": "multipart/form-data" },
+                params: {
+                    dayId: dayId
+                }
             });
             console.log("Response:", response.data);
+
+            const updatedTasks = [...tasks];
+            updatedTasks[index].submittedAt = taskData.submittedAt;
+            setTasks(updatedTasks);
+
             alert(`Task submitted successfully!`);
         } catch (error) {
             console.error("Error submitting task:", error);
@@ -188,7 +194,7 @@ export default function ManagerialPage() {
                                 ) : tasks.length === 0 ? (
                                     <tr>
                                         <td colSpan={5} className="px-6 py-12 text-center text-slate-400 font-medium">
-                                            No tasks found for today. Click "Add New Row" to start.
+                                            No tasks found for this date.
                                         </td>
                                     </tr>
                                 ) : (
@@ -283,6 +289,11 @@ export default function ManagerialPage() {
                                                 >
                                                     <span>Submit</span>
                                                 </button>
+                                                {task.submittedAt && (
+                                                    <div className="text-[10px] text-slate-400 mt-2 font-medium">
+                                                        Submitted: {new Date(task.submittedAt).toLocaleTimeString()}
+                                                    </div>
+                                                )}
                                             </td>
                                         </tr>
                                     ))

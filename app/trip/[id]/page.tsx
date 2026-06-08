@@ -30,9 +30,9 @@ interface TaskGroup {
 
 export default function Page() {
 
-    const newId=useParams();
+    const newId = useParams();
     console.log("New id is-=-=-==-=-=-=-=-=-= ", newId.id);
-    
+
     const [tripName, setTripName] = useState<string>("");
     const [tripId, setTripId] = useState<string>("");
     const [groups, setGroups] = useState<TaskGroup[]>([]);

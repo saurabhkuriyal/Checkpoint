@@ -3,10 +3,12 @@ import connectDB from "@/utils/db";
 import { NextRequest, NextResponse } from "next/server";
 
 
-export async function GET(req: NextRequest) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
     try {
         await connectDB();
-        const tasks = await TaskModel.find();
+        const { id } = await params
+        console.log("id is", id);
+        const tasks = await TaskModel.findById(id);
         if (!tasks) {
             return NextResponse.json({ message: "No tasks found", status: 404 });
         }
@@ -15,3 +17,4 @@ export async function GET(req: NextRequest) {
         console.log("error in getting task", error);
         return NextResponse.json({ message: "Error in getting task", status: 500, error });
     }
+}

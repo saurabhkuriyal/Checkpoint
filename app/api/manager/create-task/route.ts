@@ -9,19 +9,21 @@ export async function POST(req: NextRequest) {
         const { data } = body;
         const { formattedDate, monthName } = data;
 
+        var taskId: string = "";
         console.log("formatted date and month are ", formattedDate, monthName);
 
         const checkTask = await TaskModel.findOne({ date: formattedDate });
 
         if (checkTask) {
-            return NextResponse.json({ message: "Task already exists", status: 200, });
+            taskId = checkTask?._id;
+            return NextResponse.json({ message: "Task already exists", status: 404, taskId });
         }
 
         const newTask = new TaskModel({ date: formattedDate, month: monthName });
         const createT = await newTask.save();
+        taskId = createT?._id;
         console.log("Task created", createT);
-
-        return NextResponse.json({ message: "Task created successfully", task: newTask });
+        return NextResponse.json({ message: "Task created successfully", task: newTask, taskId });
     } catch (error) {
         console.log("error in ", error);
 

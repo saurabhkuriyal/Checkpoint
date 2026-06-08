@@ -5,20 +5,19 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req: NextRequest) {
     try {
         await connectDB();
-        console.log("Task Creation is running");
-
         const body = await req.json();
         const { data } = body;
         const { formattedDate, monthName } = data;
 
+        console.log("formatted date and month are ", formattedDate, monthName);
 
-        const checkTask = await TaskModel.findOne({ formattedDate: formattedDate, });
+        const checkTask = await TaskModel.findOne({ date: formattedDate });
 
         if (checkTask) {
             return NextResponse.json({ message: "Task already exists" });
         }
 
-        const newTask = new TaskModel({ formattedDate: formattedDate, monthName: monthName });
+        const newTask = new TaskModel({ date: formattedDate, month: monthName });
         const createT = await newTask.save();
         console.log("Task created", createT);
 

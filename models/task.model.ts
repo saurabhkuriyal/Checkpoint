@@ -38,6 +38,6 @@ const daySchema = new mongoose.Schema({
 })
 
 
-const TaskModel = mongoose.models.Task || mongoose.model("Task", taskSchema);
+const TaskModel = mongoose.models.Task || mongoose.model("Task", daySchema);
 
 export default TaskModel;

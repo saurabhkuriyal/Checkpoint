@@ -15,4 +15,3 @@ export async function GET(req: NextRequest) {
         console.log("error in getting task", error);
         return NextResponse.json({ message: "Error in getting task", status: 500, error });
     }
-}

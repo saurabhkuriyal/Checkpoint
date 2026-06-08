@@ -7,7 +7,6 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     try {
         await connectDB();
         const { id } = await params
-        console.log("id is", id);
         const tasks = await TaskModel.findById(id);
         if (!tasks) {
             return NextResponse.json({ message: "No tasks found", status: 404 });

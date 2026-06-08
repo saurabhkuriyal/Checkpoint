@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
         const checkTask = await TaskModel.findOne({ date: formattedDate });
 
         if (checkTask) {
-            return NextResponse.json({ message: "Task already exists" });
+            return NextResponse.json({ message: "Task already exists", status: 200, });
         }
 
         const newTask = new TaskModel({ date: formattedDate, month: monthName });

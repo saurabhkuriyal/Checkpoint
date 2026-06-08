@@ -28,7 +28,7 @@ function page() {
             monthName: monthName,
         }
 
-        const response = await axios.post("/api/create-task", { data: data });
+        const response = await axios.post("/api/manager/create-task", { data: data });
 
         console.log("task is", response.data);
     }

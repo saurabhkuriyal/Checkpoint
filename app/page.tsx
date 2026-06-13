@@ -1,6 +1,7 @@
 "use client"
 import Header from "@/component/Header"
 import Link from "next/link"
+import Footer from "@/component/Footer"
 
 export default function page() {
   return (
@@ -8,7 +9,7 @@ export default function page() {
       <Header />
 
       <main className="pt-28 pb-24 px-4 md:px-8 max-w-7xl mx-auto space-y-24">
-        
+
         {/* Hero Section */}
         <section className="relative flex flex-col lg:flex-row items-center gap-12 mt-4 lg:mt-12">
           {/* Text Content */}
@@ -17,7 +18,7 @@ export default function page() {
               Discover The World
             </div>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-slate-900 leading-tight">
-              Embark on your next <br className="hidden lg:block"/>
+              Embark on your next <br className="hidden lg:block" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600">
                 Great Adventure
               </span>
@@ -31,12 +32,12 @@ export default function page() {
               </Link>
             </div>
           </div>
-          
+
           {/* Image Content */}
           <div className="flex-1 w-full relative group">
             <div className="relative h-[450px] lg:h-[600px] w-full rounded-3xl overflow-hidden shadow-2xl shadow-blue-900/10 border-4 border-white">
-              <img 
-                src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+              <img
+                src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
                 alt="Beautiful mountain landscape with a traveler"
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
               />
@@ -52,7 +53,7 @@ export default function page() {
         <section id="development" className="py-16 relative">
           {/* Decorative background for the section */}
           <div className="absolute inset-0 bg-white rounded-[3rem] shadow-sm border border-slate-100 -z-10 transform scale-x-[1.02]"></div>
-          
+
           <div className="text-center mb-16 space-y-4 px-4">
             <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">Current Development</h2>
             <p className="text-slate-500 max-w-2xl mx-auto text-lg font-medium">
@@ -64,7 +65,7 @@ export default function page() {
             {/* TRIP Box */}
             <Link href="/trip" className="group relative overflow-hidden bg-white rounded-3xl p-8 lg:p-10 shadow-lg border border-slate-200 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-2 flex flex-col items-center text-center">
               <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-gradient-to-br from-blue-100 to-transparent rounded-full z-0 opacity-50 group-hover:scale-150 transition-transform duration-500"></div>
-              
+
               <div className="relative z-10 w-24 h-24 mb-8 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center text-white shadow-xl shadow-cyan-500/30 group-hover:scale-110 transition-transform duration-300 group-hover:rotate-3">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -74,9 +75,9 @@ export default function page() {
               <p className="relative z-10 text-slate-500 text-lg leading-relaxed">
                 Plan your next great adventure, view comprehensive itineraries, and manage all your travel details seamlessly in one unified space.
               </p>
-              
+
               <div className="relative z-10 mt-10 flex items-center text-blue-600 font-bold text-lg group-hover:gap-3 transition-all">
-                Enter Portal 
+                Enter Portal
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 ml-1" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
                 </svg>
@@ -96,9 +97,9 @@ export default function page() {
               <p className="relative z-10 text-slate-500 text-lg leading-relaxed">
                 Access your secure administrative dashboard to oversee global bookings, manage branches, and view high-level analytics.
               </p>
-              
+
               <div className="relative z-10 mt-10 flex items-center text-purple-600 font-bold text-lg group-hover:gap-3 transition-all">
-                Enter Portal 
+                Enter Portal
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 ml-1" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
                 </svg>
@@ -118,9 +119,9 @@ export default function page() {
               <p className="relative z-10 text-slate-500 text-lg leading-relaxed">
                 Automate your social media presence, schedule engaging posts, and seamlessly interact with your community.
               </p>
-              
+
               <div className="relative z-10 mt-10 flex items-center text-pink-600 font-bold text-lg group-hover:gap-3 transition-all">
-                Enter Portal 
+                Enter Portal
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 ml-1" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
                 </svg>
@@ -130,6 +131,7 @@ export default function page() {
         </section>
 
       </main>
+      <Footer />
     </div>
   )
 }

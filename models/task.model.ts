@@ -29,7 +29,7 @@ const taskSchema = new mongoose.Schema({
 
 const daySchema = new mongoose.Schema({
     date: {
-        type: Date,
+        type: String,
     },
     month: {
         type: String,

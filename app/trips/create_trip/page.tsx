@@ -2,7 +2,7 @@
 
 import axios from "axios";
 import { useState } from "react";
-import { templatesById } from "../../public/sampleData";
+import { templatesById } from "../../../public/sampleData";
 
 interface TaskRow {
     id: string;

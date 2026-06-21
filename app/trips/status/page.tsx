@@ -30,7 +30,7 @@ export default function Page() {
 
     const handleTripClick = (id: string) => {
         console.log("Trip ID clicked:", id);
-        router.push(`/tripStatusPage/${id}`);
+        router.push(`/trips/tripStatusPage/${id}`);
 
     }
 

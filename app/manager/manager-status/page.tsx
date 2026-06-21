@@ -28,7 +28,7 @@ function page() {
 
     const handleRowClick = (id: string) => {
         console.log("Clicked ID:", id);
-        router.push(`/task-status/${id}`);
+        router.push(`/manager/task-status/${id}`);
     }
 
     const formatDateStr = (isoString: string) => {

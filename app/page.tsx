@@ -1,12 +1,11 @@
 "use client"
-import Header from "@/component/Header"
+
 import Link from "next/link"
-import Footer from "@/component/Footer"
+
 
 export default function page() {
   return (
     <div className="min-h-screen bg-slate-50 font-sans selection:bg-blue-200 overflow-hidden">
-      <Header />
 
       <main className="pt-28 pb-24 px-4 md:px-8 max-w-7xl mx-auto space-y-24">
 
@@ -131,7 +130,6 @@ export default function page() {
         </section>
 
       </main>
-      <Footer />
     </div>
   )
 }

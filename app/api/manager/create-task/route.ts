@@ -7,10 +7,11 @@ export async function POST(req: NextRequest) {
         await connectDB();
         const body = await req.json();
         const { data } = body;
-        const { formattedDate, monthName } = data;
+        const { formattedDate, monthName, tasks } = data;
 
         var taskId: string = "";
         console.log("formatted date and month are ", formattedDate, monthName);
+
 
         const checkTask = await TaskModel.findOne({ date: formattedDate });
 
@@ -19,7 +20,7 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ message: "Task already exists", status: 404, taskId });
         }
 
-        const newTask = new TaskModel({ date: formattedDate, month: monthName });
+        const newTask = new TaskModel({ date: formattedDate, month: monthName, tasks: tasks });
         const createT = await newTask.save();
         taskId = createT?._id;
         console.log("Task created", createT);

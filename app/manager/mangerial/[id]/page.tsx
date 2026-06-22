@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'next/navigation';
+import { newtasks } from '@/public/manager-task';
 
 interface Task {
     _id?: string;
@@ -43,6 +44,7 @@ export default function ManagerialPage() {
         const data = {
             formattedDate: formattedDate,
             monthName: monthName,
+            tasks: newtasks
         }
         try {
             const response = await axios.post("/api/manager/create-task", { data: data });

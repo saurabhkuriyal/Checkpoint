@@ -88,30 +88,45 @@ export async function POST(req: NextRequest) {
 
         const dayDoc = await taskModel.findById(dayId);
 
-        console.log("----->", dayDoc);
 
         if (!dayDoc) {
             return NextResponse.json({ message: "Day document not found" }, { status: 404 });
         }
 
+        //checking if the task exist or not
+        const taskTobeUpdated = dayDoc.tasks.find((task: any) => task._id.toString() === body._id);
 
-        const newTask = {
-            task: body.task || "",
-            time: body.time || "",
-            status: body.status || "pending",
-            submittedAt: body.submittedAt || "",
-            firstImageUrl: firstImageUrl,
-            secondImageUrl: secondImageUrl,
-        };
-        const updatedTask = await dayDoc.tasks.push(newTask);
+        //if task doesn't existed the insert that in the task array
+        if (!taskTobeUpdated) {
+            const newTask = {
+                task: body.task || "",
+                time: body.time || "",
+                status: body.status || "pending",
+                submittedAt: body.submittedAt || "",
+                firstImageUrl: firstImageUrl,
+                secondImageUrl: secondImageUrl,
+            };
+            const updatedTask = await dayDoc.tasks.push(newTask);
 
-        console.log("Updated Task:", updatedTask);
-        if (!updatedTask) {
-            return NextResponse.json({ message: "Task not updated" }, { status: 500 });
+            console.log("Updated Task:", updatedTask);
+            if (!updatedTask) {
+                return NextResponse.json({ message: "Task not updated" }, { status: 500 });
+            }
+
+            await dayDoc.save();
+
         }
 
+        //if task exist then upated one 
+        taskTobeUpdated.firstImageUrl = firstImageUrl;
+        taskTobeUpdated.secondImageUrl = secondImageUrl;
+        taskTobeUpdated.time = body.time;
+        taskTobeUpdated.status = body.status;
+        taskTobeUpdated.submittedAt = body.submittedAt;
+        taskTobeUpdated.task = body.task;
         await dayDoc.save();
-        return NextResponse.json({ message: "Task saved successfully" });
+
+        return NextResponse.json({ message: "Task updated successfully" });
     } catch (error) {
         console.error(error);
         return NextResponse.json({ message: "Error" }, { status: 500 });

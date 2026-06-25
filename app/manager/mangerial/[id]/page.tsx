@@ -106,7 +106,7 @@ export default function ManagerialPage() {
         const file = e.target.files?.[0];
         if (file) {
             const objectUrl = URL.createObjectURL(file);
-            //for testing compression
+            //for image compression
             //console.log('originalFile instanceof Blob', file instanceof Blob); // true
             //console.log(`originalFile size ${file.size / 1024 / 1024} MB`);
 

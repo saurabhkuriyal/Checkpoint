@@ -3,7 +3,7 @@
 import axios from "axios";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-
+import imageCompression from 'browser-image-compression';
 
 interface Task {
     id?: string;
@@ -76,17 +76,33 @@ export default function Page() {
         }));
     };
 
-    const handleFileUpload = (id: string, e: React.ChangeEvent<HTMLInputElement>, imageIndex: number = 1) => {
+    const handleFileUpload = async (id: string, e: React.ChangeEvent<HTMLInputElement>, imageIndex: number = 1) => {
         const file = e.target.files?.[0];
         console.log("filess", file);
 
         if (file) {
+            //for image compression
+            //console.log('originalFile instanceof Blob', file instanceof Blob); // true
+            //console.log(`originalFile size ${file.size / 1024 / 1024} MB`);
+
+            //compress image
+            const options = {
+                maxSizeMB: 1,
+                maxWidthOrHeight: 1920,
+                useWebWorker: true,
+            }
+
+            const compressedFile = await imageCompression(file, options);
+            //console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
+            //console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`);
+
+            //End of cmpression code-----------
             if (imageIndex === 1) {
                 updateTask(id, { evidence: file.name });
-                setFirstImage(file)
+                setFirstImage(compressedFile)
             } else {
                 updateTask(id, { evidence2: file.name });
-                setSecondImage(file)
+                setSecondImage(compressedFile)
             }
         }
     };

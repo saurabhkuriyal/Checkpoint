@@ -262,6 +262,7 @@ export default function Page() {
                                                         <input
                                                             type="file"
                                                             accept="image/*"
+                                                            capture="environment"
                                                             onChange={(e) => handleFileUpload(taskId, e, 1)}
                                                             className="hidden"
                                                         />
@@ -280,6 +281,7 @@ export default function Page() {
                                                         <input
                                                             type="file"
                                                             accept="image/*"
+                                                            capture="environment"
                                                             onChange={(e) => handleFileUpload(taskId, e, 2)}
                                                             className="hidden"
                                                         />

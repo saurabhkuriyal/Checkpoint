@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'next/navigation';
 import { newtasks } from '@/public/manager-task';
+import imageCompression from 'browser-image-compression';
 
 interface Task {
     _id?: string;
@@ -101,15 +102,32 @@ export default function ManagerialPage() {
         setTasks(updatedTasks);
     };
 
-    const handleFileChange = (index: number, field: "firstImage" | "secondImage", e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleFileChange = async (index: number, field: "firstImage" | "secondImage", e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (file) {
             const objectUrl = URL.createObjectURL(file);
+            //for testing compression
+            //console.log('originalFile instanceof Blob', file instanceof Blob); // true
+            //console.log(`originalFile size ${file.size / 1024 / 1024} MB`);
+
+            //compress image
+            const options = {
+                maxSizeMB: 1,
+                maxWidthOrHeight: 1920,
+                useWebWorker: true,
+            }
+
+            const compressedFile = await imageCompression(file, options);
+            //console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
+            //console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`);
+
+            //End of cmpression code----------- 
+
             const updatedTasks = [...tasks];
             updatedTasks[index] = {
                 ...updatedTasks[index],
                 [`${field}Url`]: objectUrl,
-                [`${field}File`]: file
+                [`${field}File`]: compressedFile
             } as Task;
             setTasks(updatedTasks);
         }

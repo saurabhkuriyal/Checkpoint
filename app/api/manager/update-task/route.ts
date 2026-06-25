@@ -115,6 +115,7 @@ export async function POST(req: NextRequest) {
 
             await dayDoc.save();
 
+            return NextResponse.json({ message: "Task added successfully" });
         }
 
         //if task exist then upated one 

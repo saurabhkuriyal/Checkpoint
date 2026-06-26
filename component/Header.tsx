@@ -12,7 +12,7 @@ export default function Header() {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      
+
       // If scrolling down and we're past the top 50px, hide the navbar
       if (currentScrollY > lastScrollY && currentScrollY > 50) {
         setIsVisible(false);
@@ -33,7 +33,7 @@ export default function Header() {
     } else {
       document.body.style.overflow = 'unset';
     }
-    
+
     // Cleanup on unmount
     return () => { document.body.style.overflow = 'unset'; };
   }, [isMenuOpen]);
@@ -41,22 +41,21 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed top-4 left-4 right-4 z-50 transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
-          isVisible ? 'translate-y-0 opacity-100 scale-100' : '-translate-y-[150%] opacity-0 scale-95'
-        }`}
+        className={`fixed top-4 left-4 right-4 z-50 transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${isVisible ? 'translate-y-0 opacity-100 scale-100' : '-translate-y-[150%] opacity-0 scale-95'
+          }`}
       >
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between h-16 bg-white/70 dark:bg-black/70 backdrop-blur-xl border border-gray-200/50 dark:border-white/10 shadow-xl shadow-black/5 rounded-2xl px-4 md:px-6">
-            
+
             {/* Logo */}
             <div className="flex-shrink-0 flex items-center">
               <Link href="/" className="flex items-center gap-3 group">
-                <Image 
-                  src="/backpackers.png" 
-                  alt="Backpackers Logo" 
-                  width={180} 
-                  height={50} 
-                  className="h-12 w-auto object-contain transition-transform duration-300 ease-out group-hover:scale-105" 
+                <Image
+                  src="/backpackers.png"
+                  alt="Backpackers Logo"
+                  width={180}
+                  height={50}
+                  className="h-12 w-auto object-contain transition-transform duration-300 ease-out group-hover:scale-105"
                 />
               </Link>
             </div>
@@ -66,7 +65,7 @@ export default function Header() {
               {['Home', 'About', 'Future Additions', 'Branches', 'Contact', 'Automations'].map((item) => (
                 <Link
                   key={item}
-                  href={`#${item.toLowerCase()}`}
+                  href={item === 'Home' ? '/' : `#${item.toLowerCase()}`}
                   className="px-4 py-2 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100/50 dark:hover:bg-white/5 rounded-lg transition-all duration-200"
                 >
                   {item}
@@ -79,7 +78,7 @@ export default function Header() {
               <button className="hidden md:flex items-center justify-center px-5 py-2.5 bg-gray-900 dark:bg-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-100 text-white rounded-xl font-semibold text-sm transition-all duration-200 hover:scale-105 active:scale-95 shadow-md">
                 Get Started
               </button>
-              
+
               <button
                 className="md:hidden p-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-white/10 rounded-xl transition-colors active:scale-95"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -99,10 +98,9 @@ export default function Header() {
       </header>
 
       {/* Mobile Full-Screen Menu */}
-      <div 
-        className={`fixed inset-0 z-40 bg-white/95 dark:bg-black/95 backdrop-blur-2xl transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] md:hidden flex flex-col justify-center ${
-          isMenuOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-8'
-        }`}
+      <div
+        className={`fixed inset-0 z-40 bg-white/95 dark:bg-black/95 backdrop-blur-2xl transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] md:hidden flex flex-col justify-center ${isMenuOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-8'
+          }`}
       >
         <div className="flex flex-col items-center justify-center space-y-8 p-6">
           {['Home', 'About', 'Future Additions', 'Branches', 'Contact', 'Automations'].map((item, index) => (
@@ -121,7 +119,7 @@ export default function Header() {
               {item}
             </Link>
           ))}
-          <button 
+          <button
             className="mt-8 px-8 py-4 bg-gray-900 dark:bg-white text-white dark:text-black rounded-2xl font-bold text-lg w-full max-w-xs shadow-xl active:scale-95"
             style={{
               transitionDelay: isMenuOpen ? '300ms' : '0ms',

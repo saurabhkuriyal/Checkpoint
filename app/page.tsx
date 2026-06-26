@@ -62,7 +62,7 @@ export default function page() {
 
           <div className="grid lg:grid-cols-3 gap-8 max-w-7xl mx-auto px-4 md:px-8">
             {/* TRIP Box */}
-            <Link href="/trip" className="group relative overflow-hidden bg-white rounded-3xl p-8 lg:p-10 shadow-lg border border-slate-200 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-2 flex flex-col items-center text-center">
+            <Link href="/trips" className="group relative overflow-hidden bg-white rounded-3xl p-8 lg:p-10 shadow-lg border border-slate-200 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-2 flex flex-col items-center text-center">
               <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-gradient-to-br from-blue-100 to-transparent rounded-full z-0 opacity-50 group-hover:scale-150 transition-transform duration-500"></div>
 
               <div className="relative z-10 w-24 h-24 mb-8 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center text-white shadow-xl shadow-cyan-500/30 group-hover:scale-110 transition-transform duration-300 group-hover:rotate-3">

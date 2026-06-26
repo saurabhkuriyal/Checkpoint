@@ -63,13 +63,17 @@ export default function page() {
         );
 
     /* ── Task helpers ── */
-    const addTask = (groupId: string) =>
+    const addTask = (groupId: string, index?: number) =>
         setGroups((p) =>
-            p.map((g) =>
-                g.groupId === groupId
-                    ? { ...g, tasks: [...g.tasks, emptyTask()] }
-                    : g
-            )
+            p.map((g) => {
+                if (g.groupId !== groupId) return g;
+                if (index !== undefined) {
+                    const newTasks = [...g.tasks];
+                    newTasks.splice(index, 0, emptyTask());
+                    return { ...g, tasks: newTasks };
+                }
+                return { ...g, tasks: [...g.tasks, emptyTask()] };
+            })
         );
 
     const removeTask = (groupId: string, taskId: string) =>
@@ -135,11 +139,11 @@ export default function page() {
         );
 
     return (
-        <div className="min-h-screen bg-[#f8fafc] font-sans">
+        <div className="min-h-screen bg-[#f8fafc] font-sans pt-28 pb-10">
 
             {/* ── Sticky Top Bar ── */}
-            <header className="sticky top-0 z-50 bg-white border-b border-slate-100 shadow-sm">
-                <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+            <header className="top-24 z-40 bg-white/80 backdrop-blur-md border border-slate-200/60 shadow-lg shadow-slate-200/50 rounded-2xl mx-4 md:mx-auto max-w-4xl mb-8">
+                <div className="px-5 py-3 flex items-center justify-between gap-3">
                     <div className="flex items-center gap-2.5 min-w-0">
                         <div className="w-8 h-8 shrink-0 rounded-lg bg-blue-600 flex items-center justify-center shadow shadow-blue-200">
                             <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -327,7 +331,9 @@ export default function page() {
                                                         Time <span className="text-red-400">*</span>
                                                     </span>
                                                 </th>
-                                                <th className="px-3 py-2 w-8" />
+                                                <th className="px-3 py-2 w-16 text-center">
+                                                    <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Actions</span>
+                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody className="divide-y divide-slate-50">
@@ -375,22 +381,32 @@ export default function page() {
                                                         />
                                                     </td>
 
-                                                    {/* Remove Task */}
-                                                    <td className="px-3 py-2.5 text-center">
-                                                        <button
-                                                            onClick={() => removeTask(group.groupId, task.id)}
-                                                            disabled={group.tasks.length === 1}
-                                                            title="Remove task"
-                                                            className={`w-6 h-6 rounded-lg flex items-center justify-center mx-auto transition-all
-                                                                ${group.tasks.length === 1
-                                                                    ? "opacity-20 cursor-not-allowed"
-                                                                    : "text-slate-300 hover:text-red-400 hover:bg-red-50 active:scale-90"}`}
-                                                        >
-                                                            <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5}
-                                                                    d="M6 18L18 6M6 6l12 12" />
-                                                            </svg>
-                                                        </button>
+                                                    {/* Actions */}
+                                                    <td className="px-3 py-2.5">
+                                                        <div className="flex items-center justify-center gap-1">
+                                                            <button
+                                                                onClick={() => addTask(group.groupId, taskIndex + 1)}
+                                                                title="Insert task below"
+                                                                className="w-6 h-6 rounded-lg flex items-center justify-center text-slate-300 hover:text-blue-500 hover:bg-blue-50 active:scale-90 transition-all"
+                                                            >
+                                                                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                                                </svg>
+                                                            </button>
+                                                            <button
+                                                                onClick={() => removeTask(group.groupId, task.id)}
+                                                                disabled={group.tasks.length === 1}
+                                                                title="Remove task"
+                                                                className={`w-6 h-6 rounded-lg flex items-center justify-center transition-all
+                                                                    ${group.tasks.length === 1
+                                                                        ? "opacity-20 cursor-not-allowed"
+                                                                        : "text-slate-300 hover:text-red-400 hover:bg-red-50 active:scale-90"}`}
+                                                            >
+                                                                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+                                                                </svg>
+                                                            </button>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             ))}

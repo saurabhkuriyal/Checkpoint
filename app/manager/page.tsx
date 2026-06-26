@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function ManagerPage() {
   const gridRef = useRef<HTMLDivElement>(null);
@@ -137,15 +138,15 @@ export default function ManagerPage() {
       `}</style>
 
       {/* Animated Background Orbs for Premium Light Vibe */}
-      <div 
+      <div
         className="absolute rounded-full blur-[100px] -z-10 opacity-70 -top-[10%] -left-[10%] w-[50vw] h-[50vw]"
         style={{ background: 'radial-gradient(circle, rgba(167,139,250,0.3) 0%, rgba(255,255,255,0) 70%)', animation: 'float 20s infinite alternate ease-in-out' }}
       ></div>
-      <div 
+      <div
         className="absolute rounded-full blur-[100px] -z-10 opacity-70 -bottom-[20%] -right-[10%] w-[60vw] h-[60vw]"
         style={{ background: 'radial-gradient(circle, rgba(96,165,250,0.2) 0%, rgba(255,255,255,0) 70%)', animation: 'float 20s infinite alternate ease-in-out -5s' }}
       ></div>
-      <div 
+      <div
         className="absolute rounded-full blur-[100px] -z-10 opacity-70 top-[40%] left-[30%] w-[40vw] h-[40vw]"
         style={{ background: 'radial-gradient(circle, rgba(52,211,153,0.15) 0%, rgba(255,255,255,0) 70%)', animation: 'float 20s infinite alternate ease-in-out -10s' }}
       ></div>
@@ -164,11 +165,11 @@ export default function ManagerPage() {
               Oversee daily meals, track dining hall inventory, and streamline your mess operations from a single, powerful dashboard.
             </p>
           </div>
-          <div 
-            className="hero-image-wrapper flex-1 relative h-[300px] md:h-[400px] w-full max-w-xl perspective-[1000px] group" 
+          <div
+            className="hero-image-wrapper flex-1 relative h-[300px] md:h-[400px] w-full max-w-xl perspective-[1000px] group"
             style={{ animation: 'slideLeftFade 1s cubic-bezier(0.16, 1, 0.3, 1) forwards' }}
           >
-            <div 
+            <div
               className="absolute -inset-5 bg-gradient-to-br from-indigo-300 to-emerald-200 blur-[40px] opacity-50 rounded-[40px] -z-10"
               style={{ animation: 'pulse-glow 4s infinite alternate ease-in-out' }}
             ></div>
@@ -185,8 +186,8 @@ export default function ManagerPage() {
 
       {/* Main Content */}
       <main className="max-w-6xl mx-auto px-8 pb-24 w-full flex flex-col gap-16">
-        <div 
-          className="flex flex-col md:flex-row items-center gap-6 bg-white/70 py-6 px-10 rounded-3xl backdrop-blur-xl border border-slate-200 shadow-[0_15px_35px_-10px_rgba(0,0,0,0.05)] self-center" 
+        <div
+          className="flex flex-col md:flex-row items-center gap-6 bg-white/70 py-6 px-10 rounded-3xl backdrop-blur-xl border border-slate-200 shadow-[0_15px_35px_-10px_rgba(0,0,0,0.05)] self-center"
           style={{ animation: 'slideUpFade 1s 0.2s cubic-bezier(0.16, 1, 0.3, 1) both' }}
         >
           <div className="relative">
@@ -205,6 +206,7 @@ export default function ManagerPage() {
 
         {/* Action Tiles */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full action-grid" ref={gridRef}>
+
           <button className="action-tile group text-left">
             <div className="bg-white/80 rounded-[19px] p-10 flex flex-col items-start gap-6 h-full z-10 relative backdrop-blur-md border border-slate-100 shadow-[inset_0_1px_1px_rgba(255,255,255,1)]">
               <div className="bg-indigo-50 border border-indigo-100 p-4 rounded-2xl text-indigo-600 flex items-center justify-center transition-all duration-400 group-hover:text-white group-hover:bg-gradient-to-br group-hover:from-indigo-500 group-hover:to-purple-600 group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-[0_10px_25px_rgba(99,102,241,0.3)] group-hover:border-transparent">
@@ -219,22 +221,24 @@ export default function ManagerPage() {
               </div>
             </div>
           </button>
-          
-          <button className="action-tile group text-left">
-            <div className="bg-white/80 rounded-[19px] p-10 flex flex-col items-start gap-6 h-full z-10 relative backdrop-blur-md border border-slate-100 shadow-[inset_0_1px_1px_rgba(255,255,255,1)]">
-              <div className="bg-emerald-50 border border-emerald-100 p-4 rounded-2xl text-emerald-600 flex items-center justify-center transition-all duration-400 group-hover:text-white group-hover:bg-gradient-to-br group-hover:from-emerald-500 group-hover:to-teal-600 group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-[0_10px_25px_rgba(16,185,129,0.3)] group-hover:border-transparent">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M3 3v18h18"></path>
-                  <path d="m19 9-5 5-4-4-3 3"></path>
-                </svg>
+
+          <Link href="/manager/manager-status">
+            <button className="action-tile group text-left">
+              <div className="bg-white/80 rounded-[19px] p-10 flex flex-col items-start gap-6 h-full z-10 relative backdrop-blur-md border border-slate-100 shadow-[inset_0_1px_1px_rgba(255,255,255,1)]">
+                <div className="bg-emerald-50 border border-emerald-100 p-4 rounded-2xl text-emerald-600 flex items-center justify-center transition-all duration-400 group-hover:text-white group-hover:bg-gradient-to-br group-hover:from-emerald-500 group-hover:to-teal-600 group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-[0_10px_25px_rgba(16,185,129,0.3)] group-hover:border-transparent">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M3 3v18h18"></path>
+                    <path d="m19 9-5 5-4-4-3 3"></path>
+                  </svg>
+                </div>
+                <div className="flex flex-col gap-2">
+                  <span className="text-xl font-bold text-slate-800 tracking-wide">Check Day Wise Status</span>
+                  <span className="text-base text-slate-500 leading-relaxed font-medium">Review meal counts, feedback, and daily mess operations.</span>
+                </div>
               </div>
-              <div className="flex flex-col gap-2">
-                <span className="text-xl font-bold text-slate-800 tracking-wide">Check Day Wise Status</span>
-                <span className="text-base text-slate-500 leading-relaxed font-medium">Review meal counts, feedback, and daily mess operations.</span>
-              </div>
-            </div>
-          </button>
-          
+            </button>
+          </Link>
+
           <button className="action-tile group text-left">
             <div className="bg-white/80 rounded-[19px] p-10 flex flex-col items-start gap-6 h-full z-10 relative backdrop-blur-md border border-slate-100 shadow-[inset_0_1px_1px_rgba(255,255,255,1)]">
               <div className="bg-blue-50 border border-blue-100 p-4 rounded-2xl text-blue-600 flex items-center justify-center transition-all duration-400 group-hover:text-white group-hover:bg-gradient-to-br group-hover:from-blue-500 group-hover:to-cyan-600 group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-[0_10px_25px_rgba(59,130,246,0.3)] group-hover:border-transparent">

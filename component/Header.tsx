@@ -106,7 +106,7 @@ export default function Header() {
           {['Home', 'About', 'Future Additions', 'Branches', 'Contact', 'Automations'].map((item, index) => (
             <Link
               key={item}
-              href={`#${item.toLowerCase()}`}
+              href={item === 'Home' ? '/' : `#${item.toLowerCase()}`}
               className="text-4xl font-extrabold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
               onClick={() => setIsMenuOpen(false)}
               style={{

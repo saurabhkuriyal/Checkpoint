@@ -207,20 +207,22 @@ export default function ManagerPage() {
         {/* Action Tiles */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full action-grid" ref={gridRef}>
 
-          <button className="action-tile group text-left">
-            <div className="bg-white/80 rounded-[19px] p-10 flex flex-col items-start gap-6 h-full z-10 relative backdrop-blur-md border border-slate-100 shadow-[inset_0_1px_1px_rgba(255,255,255,1)]">
-              <div className="bg-indigo-50 border border-indigo-100 p-4 rounded-2xl text-indigo-600 flex items-center justify-center transition-all duration-400 group-hover:text-white group-hover:bg-gradient-to-br group-hover:from-indigo-500 group-hover:to-purple-600 group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-[0_10px_25px_rgba(99,102,241,0.3)] group-hover:border-transparent">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 20h9"></path>
-                  <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-                </svg>
+          <Link href="/manager/mangerial/98dffo39jf9wu302">
+            <button className="action-tile group text-left">
+              <div className="bg-white/80 rounded-[19px] p-10 flex flex-col items-start gap-6 h-full z-10 relative backdrop-blur-md border border-slate-100 shadow-[inset_0_1px_1px_rgba(255,255,255,1)]">
+                <div className="bg-indigo-50 border border-indigo-100 p-4 rounded-2xl text-indigo-600 flex items-center justify-center transition-all duration-400 group-hover:text-white group-hover:bg-gradient-to-br group-hover:from-indigo-500 group-hover:to-purple-600 group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-[0_10px_25px_rgba(99,102,241,0.3)] group-hover:border-transparent">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 20h9"></path>
+                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                  </svg>
+                </div>
+                <div className="flex flex-col gap-2">
+                  <span className="text-xl font-bold text-slate-800 tracking-wide">Get Mess Task</span>
+                  <span className="text-base text-slate-500 leading-relaxed font-medium">Log the daily menu, inventory checks, or new meal assignments.</span>
+                </div>
               </div>
-              <div className="flex flex-col gap-2">
-                <span className="text-xl font-bold text-slate-800 tracking-wide">Create Mess Task</span>
-                <span className="text-base text-slate-500 leading-relaxed font-medium">Log the daily menu, inventory checks, or new meal assignments.</span>
-              </div>
-            </div>
-          </button>
+            </button>
+          </Link>
 
           <Link href="/manager/manager-status">
             <button className="action-tile group text-left">

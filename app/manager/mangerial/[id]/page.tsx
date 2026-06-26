@@ -267,6 +267,7 @@ export default function ManagerialPage() {
                                                 id={`file1-${idx}`}
                                                 accept="image/*"
                                                 className="hidden"
+                                                capture="environment"
                                                 onChange={(e) => handleFileChange(idx, "firstImage", e)}
                                             />
                                             <label
@@ -292,6 +293,7 @@ export default function ManagerialPage() {
                                                 id={`file2-${idx}`}
                                                 accept="image/*"
                                                 className="hidden"
+                                                capture="environment"
                                                 onChange={(e) => handleFileChange(idx, "secondImage", e)}
                                             />
                                             <label

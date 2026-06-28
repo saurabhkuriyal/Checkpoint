@@ -11,7 +11,7 @@ export default function Header() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const pathname = usePathname();
 
-  if (pathname === '/auth/login') {
+  if (pathname === '/auth/login' || pathname === '/auth/signup') {
     return null;
   }
 

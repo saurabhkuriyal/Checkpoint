@@ -1,4 +1,5 @@
 import react, { useState } from "react";
+import Signup from "@/services/signup.services";
 
 export default function useSignUp() {
     const [formData, setFormData] = useState({
@@ -15,15 +16,17 @@ export default function useSignUp() {
         });
     };
 
-    const handleSubmit = () => {
-        console.log("forData", formData);
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
 
         if (formData.password !== formData.confirmPassword) {
             alert("Passwords do not match");
 
             return;
         }
-        console.log(formData);
+        const response = await Signup(formData);
+
     };
 
     return {

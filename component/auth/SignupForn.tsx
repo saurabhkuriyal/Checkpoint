@@ -8,8 +8,6 @@ import useSignUp from '@/hooks/auth/useSignUp';
 export default function SignupForn() {
   const { formData, handleChange, handleSubmit } = useSignUp();
 
-
-
   return (
     <>
       <style>{`
@@ -45,7 +43,7 @@ export default function SignupForn() {
               Sign up to join our community.
             </p>
 
-            <form className="flex flex-col gap-5" >
+            <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
               <div className="relative">
                 <input
                   type="text"
@@ -125,7 +123,7 @@ export default function SignupForn() {
               <button
                 type="submit"
                 className="p-3.5 sm:p-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl text-base sm:text-lg font-semibold cursor-pointer transition-all duration-300 mt-2 shadow-[0_4px_15px_rgba(59,130,246,0.3)] hover:-translate-y-[2px] hover:shadow-[0_6px_20px_rgba(59,130,246,0.4)] hover:from-blue-700 hover:to-indigo-700 active:translate-y-0"
-                onClick={() => handleSubmit()}
+
               >
                 Sign Up
               </button>

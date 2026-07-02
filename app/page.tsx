@@ -1,11 +1,12 @@
 "use client"
 
 import Link from "next/link"
-
+import WelcomeAnimation from "../component/WelcomeAnimation"
 
 export default function page() {
   return (
     <div className="min-h-screen bg-slate-50 font-sans selection:bg-blue-200 overflow-hidden">
+      <WelcomeAnimation />
 
       <main className="pt-28 pb-24 px-4 md:px-8 max-w-7xl mx-auto space-y-24">
 

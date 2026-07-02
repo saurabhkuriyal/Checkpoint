@@ -1,8 +1,17 @@
+"use client";
+
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 export default function Footer() {
+    const pathname = usePathname();
+
+    if (pathname === '/auth/login' || pathname === '/auth/signup') {
+        return null;
+    }
+
     return (
         <footer className="bg-white border-t border-slate-200 relative overflow-hidden">
             {/* Decorative gradient blur */}

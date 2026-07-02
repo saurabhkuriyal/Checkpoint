@@ -3,11 +3,17 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 export default function Header() {
   const [isVisible, setIsVisible] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const pathname = usePathname();
+
+  if (pathname === '/auth/login' || pathname === '/auth/signup') {
+    return null;
+  }
 
   useEffect(() => {
     const handleScroll = () => {

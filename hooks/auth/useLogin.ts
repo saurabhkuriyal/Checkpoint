@@ -15,8 +15,6 @@ export default function useLogin() {
             [e.target.name]: e.target.value
         }
         )
-        console.log("----", formData);
-
     }
 
 

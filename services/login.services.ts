@@ -7,12 +7,12 @@ export default async function Login(data: any) {
 
         console.log("Hitting here");
 
-        const response = await axios.post("something", data)
+        const response = await axios.post(API.login, data)
 
         console.log("Login respoonse", response);
 
-    } catch (error) {
-        console.error("error", error)
+    } catch (error: any) {
+        console.error("error", error.response?.data)
         return error
     }
 }

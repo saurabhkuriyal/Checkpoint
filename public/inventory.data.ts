@@ -1,4 +1,5 @@
 export const defaultInventoryItems = {
+  messName: "ITS Greater Noida",
 
   items: [
     { item_id: "ITM01", item_name: "Dhaniya Powder", current_stock: 6, unit: "kg" },

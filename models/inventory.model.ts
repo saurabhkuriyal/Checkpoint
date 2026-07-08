@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const itemSchema = new mongoose.Schema({
-    itemName: {
+    item_name: {
         type: String,
         required: [true, "Item name is required"],
     },
@@ -9,7 +9,7 @@ const itemSchema = new mongoose.Schema({
         type: String,
         required: [true, "Item ID is required"],
     },
-    stock: {
+    current_stock: {
         type: Number,
         required: [true, "Stock is required"],
         default: 0,

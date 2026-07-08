@@ -1,4 +1,5 @@
 export const API = {
     signup: "http://localhost:4000/api/v1/auth/signup",
-    login: "http://localhost:4000/api/v1/auth/login"
+    login: "http://localhost:4000/api/v1/auth/login",
+    inventory: "http://localhost:4000/api/v1/mess/updatestock"
 }

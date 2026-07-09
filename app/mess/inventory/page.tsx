@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import InventoryTable from '@/component/InventoryTable';
 import { getInventory } from '@/services/inventory.services';
+import Link from 'next/link';
 
 interface InventoryItem {
     _id: string;
@@ -23,10 +24,12 @@ const InventoryStatusPage = () => {
         item.item_name.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
+    const id = "6a4fe5ee25faa16a764e7b2b";
+
     useEffect(() => {
         const fetchInventory = async () => {
             try {
-                const data = await getInventory("6a4fe5ee25faa16a764e7b2b");
+                const data = await getInventory(id);
                 // Assumes the backend returns { success: true, data: [...] }
                 console.log("from get invenroty", data.data.items);
 
@@ -63,9 +66,11 @@ const InventoryStatusPage = () => {
                             onChange={(e) => setSearchQuery(e.target.value)}
                             className="px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm w-full sm:w-64"
                         />
-                        <button className="inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 whitespace-nowrap">
-                            Add Item
-                        </button>
+                        <Link href={`/mess/addItems/${id}`}>
+                            <button className="inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 whitespace-nowrap">
+                                Add Item
+                            </button>
+                        </Link>
                     </div>
                 </div>
 

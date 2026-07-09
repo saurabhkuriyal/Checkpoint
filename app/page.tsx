@@ -106,6 +106,28 @@ export default function page() {
               </div>
             </Link>
 
+            {/* Inventory Box */}
+            <Link href="/mess/inventory" className="group relative overflow-hidden bg-white rounded-3xl p-8 lg:p-10 shadow-lg border border-slate-200 transition-all duration-300 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 flex flex-col items-center text-center">
+              <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-gradient-to-br from-emerald-100 to-transparent rounded-full z-0 opacity-50 group-hover:scale-150 transition-transform duration-500"></div>
+
+              <div className="relative z-10 w-24 h-24 mb-8 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-400 flex items-center justify-center text-white shadow-xl shadow-teal-500/30 group-hover:scale-110 transition-transform duration-300 group-hover:-rotate-3">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                </svg>
+              </div>
+              <h3 className="relative z-10 text-2xl lg:text-3xl font-extrabold text-slate-900 mb-4 group-hover:text-emerald-600 transition-colors">Inventory</h3>
+              <p className="relative z-10 text-slate-500 text-lg leading-relaxed">
+                Track mess stock levels, manage supplies, and ensure everything runs smoothly in your inventory system.
+              </p>
+
+              <div className="relative z-10 mt-10 flex items-center text-emerald-600 font-bold text-lg group-hover:gap-3 transition-all">
+                Enter Portal
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                </svg>
+              </div>
+            </Link>
+
             {/* Social Media Automation Box */}
             <Link href="/social-media-automation" className="group relative overflow-hidden bg-white rounded-3xl p-8 lg:p-10 shadow-lg border border-slate-200 transition-all duration-300 hover:shadow-2xl hover:shadow-pink-500/10 hover:-translate-y-2 flex flex-col items-center text-center">
               <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-gradient-to-br from-pink-100 to-transparent rounded-full z-0 opacity-50 group-hover:scale-150 transition-transform duration-500"></div>

@@ -79,5 +79,5 @@ export const defaultInventoryItems = {
     { item_id: "ITM75", item_name: "Tej Patta", current_stock: 500, unit: "g" },
     { item_id: "ITM76", item_name: "Urad Sabut", current_stock: 15, unit: "kg" },
     { item_id: "ITM77", item_name: "Wiper", current_stock: 4, unit: "pcs" },
-  ];
+  ]
 };

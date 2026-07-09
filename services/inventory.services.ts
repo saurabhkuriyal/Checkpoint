@@ -2,7 +2,7 @@ import axios from 'axios';
 import { API } from "@/constants/api";
 import { defaultInventoryItems } from "@/public/inventory.data";
 
-export const getInventory = async () => {
+export const createInventory = async () => {
     try {
         console.log("reacher here in inventory service");
 
@@ -10,9 +10,25 @@ export const getInventory = async () => {
         const response = await axios.post(API.inventory, data);
         console.log("response", response);
 
-        return response.data;
+        return response;
     } catch (error: any) {
         console.error("Error fetching inventory:", error.response?.data || error.message);
         throw error;
     }
 };
+
+export const getInventory = async (id?: string) => {
+    try {
+        console.log("reacher here in get inventory service");
+
+        const response = await axios.get(API.getInventory, {
+            params: { id }
+        });
+        console.log("response", response);
+
+        return response.data;
+    } catch (error: any) {
+        console.error("Error fetching inventory:", error.response?.data || error.message);
+        throw error;
+    }
+}

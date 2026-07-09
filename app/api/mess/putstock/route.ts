@@ -7,7 +7,7 @@ export async function POST(req: NextRequest) {
         await dbConnect();
 
         const data = await req.json();
-        console.log("-----", data);
+        // console.log("-----", data);
 
 
         if (!data || !data.messName || !data.items) {

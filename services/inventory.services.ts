@@ -32,3 +32,19 @@ export const getInventory = async (id?: string) => {
         throw error;
     }
 }
+
+
+export const addItem = async (id: string, data: any) => {
+    try {
+
+        console.log("reacher here in add item service");
+
+        const response = await axios.post(`https:localhost:3000/api/mess/addItem/${id}`, data);
+        console.log("response", response);
+
+        return response;
+    } catch (error: any) {
+        console.error("Error fetching inventory:", error.response?.data || error.message);
+        throw error;
+    }
+}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import InventoryTable from '@/component/InventoryTable';
+
 import { getInventory } from '@/services/inventory.services';
 
 

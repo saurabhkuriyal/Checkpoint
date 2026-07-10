@@ -1,7 +1,12 @@
 "use client";
-
+import { useParams } from 'next/navigation';
 import { useAddItem } from "@/hooks/inventory/useAddItem";
 const AddItem = () => {
+
+
+    const params = useParams();
+    const id = params.id;
+    console.log("here is the ID", id)
 
     const { formData, handleChange, handleSubmit } = useAddItem()
     return (

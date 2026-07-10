@@ -5,5 +5,6 @@ export const API = {
     login: "http://localhost:4000/api/v1/auth/login",
     // inventory: "http://localhost:4000/api/v1/mess/updatestock"
     inventory: "/api/mess/putstock",
-    getInventory: "/api/mess/getStock"
+    getInventory: "/api/mess/getStock",
+    addItems: "/api/mess/addItems"
 }

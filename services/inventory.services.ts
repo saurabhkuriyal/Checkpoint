@@ -39,7 +39,7 @@ export const addItem = async (id: string, data: any) => {
 
         console.log("reacher here in add item service");
 
-        const response = await axios.post(`https:localhost:3000/api/mess/addItem/${id}`, data);
+        const response = await axios.post(`${API.addItems}/${id}`, data);
         console.log("response", response);
 
         return response;

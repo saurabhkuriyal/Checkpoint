@@ -1,6 +1,6 @@
 import { useState } from "react";
-
-export const useAddItem = () => {
+import { addItem } from "@/services/inventory.services";
+export const useAddItem = (id: string) => {
     const [formData, setFormData] = useState({
         item_name: '',
         item_id: '',
@@ -20,8 +20,12 @@ export const useAddItem = () => {
         e.preventDefault();
         console.log('Submitting:', formData);
 
-        // TODO: Implement API call here to actually save the item
-        alert("Form submitted! Check console for data.");
+        const res = await addItem(id, formData);
+        console.log("ress for add items", res);
+
+        if (res) {
+            alert("Form submitted!");
+        }
     };
 
     return {

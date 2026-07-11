@@ -8,9 +8,10 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
 
         const { id } = await params;
 
-        console.log("reacher here in item api");
+        console.log("reacher here in item api", id);
 
         const { item_name, item_id, unit, quantity } = await req.json();
+
         console.log("item_name", item_name);
         console.log("item_id", item_id);
         console.log("unit", unit);
@@ -24,10 +25,27 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
             );
         }
 
-        console.log("inventory found", checkInventory);
+        const existItem = checkInventory.items.find((item: any) => item.name === item_name);
+        if (existItem) {
+            return NextResponse.json(
+                { success: false, message: "Item already exists in inventory" },
+                { status: 400 }
+            );
+        }
 
+        checkInventory.items.push({
+            item_name: item_name,
+            item_id: item_id,
+            unit: unit,
+            current_stock: quantity
+        });
 
+        await checkInventory.save();
 
+        return NextResponse.json(
+            { success: true, message: "Item added successfully", data: checkInventory },
+            { status: 200 }
+        );
     } catch (error: any) {
         console.error("Error adding item:", error);
         return NextResponse.json(

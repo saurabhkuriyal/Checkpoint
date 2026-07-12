@@ -26,12 +26,12 @@ export async function GET(req: NextRequest) {
         }
 
         // Otherwise, fetch all stocks
-        const allStocks = await InventoryModel.find({});
+        // const allStocks = await InventoryModel.find({});
 
-        return NextResponse.json(
-            { success: true, data: allStocks },
-            { status: 200 }
-        );
+        // return NextResponse.json(
+        //     { success: true, data: allStocks },
+        //     { status: 200 }
+        // );
 
     } catch (error: any) {
         console.error("Error fetching stock:", error);

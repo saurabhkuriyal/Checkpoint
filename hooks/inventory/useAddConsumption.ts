@@ -22,6 +22,7 @@ export default function useAddConsumption() {
     const [error, setError] = useState<string | null>(null);
 
     const [rows, setRows] = useState<ConsumptionRow[]>([{ id: Date.now(), item_name: '', quantity: '', unit: '' }]);
+    const [image, setImage] = useState<File | null>(null);
 
 
     useEffect(() => {
@@ -70,6 +71,11 @@ export default function useAddConsumption() {
         ));
     };
 
+    const handleSubmit = async () => {
+        console.log("Submitting consumption", { rows, image });
+        // Backend integration will go here
+    };
+
     return {
         items,
         error,
@@ -78,6 +84,9 @@ export default function useAddConsumption() {
         handleAddRow,
         handleRemoveRow,
         handleItemChange,
-        handleQuantityChange
+        handleQuantityChange,
+        image,
+        setImage,
+        handleSubmit
     }
 }

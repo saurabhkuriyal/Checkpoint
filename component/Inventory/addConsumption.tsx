@@ -27,7 +27,10 @@ export default function AddConsumption() {
     handleAddRow,
     handleRemoveRow,
     handleItemChange,
-    handleQuantityChange
+    handleQuantityChange,
+    image,
+    setImage,
+    handleSubmit
   } = useAddConsumption()
 
   if (isLoading) return <div className="p-6 text-center text-gray-500">Loading items...</div>;
@@ -112,8 +115,26 @@ export default function AddConsumption() {
         </table>
       </div>
 
+      <div className="mt-6 p-4 border border-gray-200 rounded-lg bg-gray-50">
+        <label className="block text-sm font-semibold text-gray-700 mb-2">Upload Image</label>
+        <input 
+          type="file" 
+          accept="image/*"
+          onChange={(e) => {
+            if (e.target.files && e.target.files[0]) {
+              setImage(e.target.files[0]);
+            }
+          }}
+          className="block w-full text-sm text-gray-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+        />
+        {image && <p className="mt-2 text-sm text-gray-600 font-medium">Selected file: {image.name}</p>}
+      </div>
+
       <div className="mt-8 flex justify-end">
-        <button className="px-6 py-2.5 bg-blue-600 text-white font-medium text-sm rounded-lg shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+        <button 
+          onClick={handleSubmit}
+          className="px-6 py-2.5 bg-blue-600 text-white font-medium text-sm rounded-lg shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
+        >
           Submit Consumption
         </button>
       </div>

@@ -6,5 +6,6 @@ export const API = {
     // inventory: "http://localhost:4000/api/v1/mess/updatestock"
     inventory: "/api/mess/putstock",
     getInventory: "/api/mess/getStock",
-    addItems: "/api/mess/addItem"
+    addItems: "/api/mess/addItem",
+    addConsumption: "/api/mess/addConsumption"
 }

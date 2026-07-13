@@ -48,3 +48,17 @@ export const addItem = async (id: string, data: any) => {
         throw error;
     }
 }
+
+export const addConsumption = async (data: any) => {
+    try {
+        console.log("reached here in add consumption service");
+
+        const response = await axios.post(API.addConsumption, data);
+        console.log("response", response);
+
+        return response.data;
+    } catch (error: any) {
+        console.error("Error adding consumption:", error.response?.data || error.message);
+        throw error;
+    }
+}

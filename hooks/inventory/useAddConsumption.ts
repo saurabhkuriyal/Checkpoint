@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { getInventory } from '@/services/inventory.services';
+import { getInventory, addConsumption } from '@/services/inventory.services';
 
 interface InventoryItem {
     _id: string;
@@ -124,7 +124,16 @@ export default function useAddConsumption() {
 
         console.log("Submitting consumption", JSON.stringify(payload, null, 2));
         console.log("Image attached:", image);
-        // Backend integration will go here
+        
+        try {
+            const response = await addConsumption(payload);
+            console.log("Consumption added successfully", response);
+            alert("Consumption submitted successfully!");
+            // Reset state here if needed
+        } catch (err: any) {
+            console.error("Failed to submit consumption", err);
+            alert("Failed to submit consumption. Please try again.");
+        }
     };
 
     return {

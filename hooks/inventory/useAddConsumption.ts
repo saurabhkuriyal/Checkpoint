@@ -32,11 +32,12 @@ export default function useAddConsumption() {
     ]);
     const [image, setImage] = useState<File | null>(null);
 
+    const [inventoryId, setInventoryId] = useState<string>("6a4fe5ee25faa16a764e7b2b");
+
     useEffect(() => {
         const fetchInventory = async () => {
             try {
-                const id = "6a4fe5ee25faa16a764e7b2b";
-                const data = await getInventory(id);
+                const data = await getInventory(inventoryId);
 
                 if (data && data.data && data.data.items) {
                     setItems(data.data.items);
@@ -51,7 +52,7 @@ export default function useAddConsumption() {
         };
 
         fetchInventory();
-    }, []);
+    }, [inventoryId]);
 
     const handleAddMealBlock = () => {
         setMealBlocks([...mealBlocks, { id: Date.now(), meal_type: '', rows: [{ id: Date.now() + 1, item_name: '', quantity: '', unit: '' }] }]);
@@ -107,7 +108,9 @@ export default function useAddConsumption() {
     };
 
     const handleSubmit = async () => {
-        const payload: Record<string, any> = {};
+        const payload: Record<string, any> = {
+            documentId: inventoryId
+        };
         mealBlocks.forEach(block => {
             if (block.meal_type) {
                 payload[block.meal_type] = block.rows.map((r) => {
@@ -124,8 +127,10 @@ export default function useAddConsumption() {
 
         console.log("Submitting consumption", JSON.stringify(payload, null, 2));
         console.log("Image attached:", image);
-        
+
         try {
+            console.log("-----", payload);
+
             const response = await addConsumption(payload);
             console.log("Consumption added successfully", response);
             alert("Consumption submitted successfully!");

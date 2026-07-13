@@ -7,6 +7,7 @@ export async function POST(req: NextRequest) {
         await dbConnect();
 
         const data = await req.json();
+        console.log("reached here in add consumption api", data);
 
         const createConsumption = await ConsumptionModel.create(data);
 

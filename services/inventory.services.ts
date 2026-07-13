@@ -51,7 +51,7 @@ export const addItem = async (id: string, data: any) => {
 
 export const addConsumption = async (data: any) => {
     try {
-        console.log("reached here in add consumption service");
+        console.log("reached here in add consumption service", data);
 
         const response = await axios.post(API.addConsumption, data);
         console.log("response", response);

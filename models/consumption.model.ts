@@ -3,23 +3,27 @@ import mongoose from "mongoose";
 const consumptionItemSchema = new mongoose.Schema({
     id: {
         type: String,
-        required: [true, "Item ID is required"],
+        //required: [true, "Item ID is required"],
     },
     item: {
         type: String,
-        required: [true, "Item name is required"],
+        //required: [true, "Item name is required"],
     },
     quantity: {
         type: Number,
-        required: [true, "Quantity is required"],
+        //required: [true, "Quantity is required"],
     },
     unit: {
         type: String,
-        required: [true, "Unit is required"],
+        //required: [true, "Unit is required"],
     }
 });
 
 const consumptionSchema = new mongoose.Schema({
+    documentId: {
+        type: String,
+        required: [true, "Document ID is required"],
+    },
     Breakfast: {
         type: [consumptionItemSchema],
         default: []

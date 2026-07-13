@@ -110,12 +110,15 @@ export default function useAddConsumption() {
         const payload: Record<string, any> = {};
         mealBlocks.forEach(block => {
             if (block.meal_type) {
-                payload[block.meal_type] = block.rows.map((r, i) => ({
-                    "s.no": i + 1,
-                    item: r.item_name,
-                    quantity: r.quantity,
-                    unit: r.unit
-                }));
+                payload[block.meal_type] = block.rows.map((r) => {
+                    const matchedItem = items.find(item => item.item_name === r.item_name);
+                    return {
+                        id: matchedItem ? (matchedItem._id || matchedItem.item_id) : "",
+                        item: r.item_name,
+                        quantity: r.quantity,
+                        unit: r.unit
+                    };
+                });
             }
         });
 

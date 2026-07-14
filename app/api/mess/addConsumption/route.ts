@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
         }
 
 
-        console.log("here is that stock", getStockToBeUpdated);
+        //console.log("here is that stock", getStockToBeUpdated);
 
         const mealTypes = ['Breakfast', 'Lunch', 'Snack', 'Dinner', 'Other'];
 

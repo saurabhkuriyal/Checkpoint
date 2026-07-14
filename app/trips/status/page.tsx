@@ -3,6 +3,7 @@
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import AnimatedLoader from '@/component/AnimatedLoader';
 
 export default function Page() {
 
@@ -43,7 +44,9 @@ export default function Page() {
     ];
 
     return (
-        <div className="min-h-screen flex flex-col items-center" style={{ background: "linear-gradient(180deg, #f0f4ff 0%, #fafafa 100%)" }}>
+        <>
+        {isLoading && <AnimatedLoader />}
+        <div className={`min-h-screen flex flex-col items-center ${isLoading ? 'blur-sm pointer-events-none' : ''}`} style={{ background: "linear-gradient(180deg, #f0f4ff 0%, #fafafa 100%)" }}>
             <div className="w-full max-w-md px-5 py-10 sm:px-6">
 
                 {/* Header */}
@@ -61,12 +64,7 @@ export default function Page() {
                     <p className="text-slate-400 text-[15px] font-medium">Tap a trip to see its dashboard.</p>
                 </header>
 
-                {isLoading ? (
-                    <div className="flex flex-col justify-center items-center py-24 gap-4">
-                        <div className="w-12 h-12 border-[3px] border-slate-200 border-t-indigo-500 rounded-full animate-spin"></div>
-                        <p className="text-slate-400 text-sm font-semibold animate-pulse">Loading trips...</p>
-                    </div>
-                ) : tripData.length === 0 ? (
+                {!isLoading && tripData.length === 0 ? (
                     <div className="text-center bg-white rounded-3xl py-16 px-8 border border-slate-100 shadow-sm">
                         <div className="w-20 h-20 mx-auto rounded-full flex items-center justify-center mb-5" style={{ background: "linear-gradient(135deg, #eef2ff, #fdf2f8)" }}>
                             <svg className="w-9 h-9 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
@@ -123,5 +121,6 @@ export default function Page() {
                 )}
             </div>
         </div>
+        </>
     )
 }

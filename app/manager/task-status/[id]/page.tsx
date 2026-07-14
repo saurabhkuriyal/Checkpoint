@@ -14,6 +14,8 @@ interface Task {
     secondImageUrl?: string;
 }
 
+import AnimatedLoader from '@/component/AnimatedLoader';
+
 export default function TaskStatusPage() {
     const router = useRouter();
     const params = useParams();
@@ -85,7 +87,9 @@ export default function TaskStatusPage() {
     }
 
     return (
-        <div className="min-h-screen bg-slate-50 p-4 md:p-8 font-sans text-slate-800">
+        <>
+        {loading && <AnimatedLoader />}
+        <div className={`min-h-screen bg-slate-50 p-4 md:p-8 font-sans text-slate-800 ${loading ? 'blur-sm pointer-events-none' : ''}`}>
             <div className="max-w-5xl mx-auto space-y-6">
 
                 {/* Header */}
@@ -113,12 +117,7 @@ export default function TaskStatusPage() {
                 </div>
 
                 {/* Tasks Grid */}
-                {loading ? (
-                    <div className="py-20 text-center flex flex-col items-center justify-center gap-4">
-                        <div className="w-8 h-8 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
-                        <p className="text-slate-500 font-medium">Loading report...</p>
-                    </div>
-                ) : tasks.length === 0 ? (
+                {!loading && tasks.length === 0 ? (
                     <div className="bg-white py-20 rounded-3xl text-center shadow-sm border border-slate-100 text-slate-400 font-medium text-lg">
                         No tasks found for this date.
                     </div>
@@ -235,5 +234,6 @@ export default function TaskStatusPage() {
                 </div>
             )}
         </div>
+        </>
     );
 }

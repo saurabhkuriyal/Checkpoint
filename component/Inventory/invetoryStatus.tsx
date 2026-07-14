@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import useInventory from '@/hooks/inventory/useInventory';
 import InventoryTable from '@/component/Inventory/InventoryTable';
-
+import AnimatedLoader from '@/component/AnimatedLoader';
 
 const InventoryStatusPage = () => {
 
@@ -16,7 +16,9 @@ const InventoryStatusPage = () => {
     );
 
     return (
-        <div className="min-h-screen bg-gray-50 pt-24 pb-8 px-4 sm:px-6 lg:px-8">
+        <>
+        {isLoading && <AnimatedLoader />}
+        <div className={`min-h-screen bg-gray-50 pt-24 pb-8 px-4 sm:px-6 lg:px-8 ${isLoading ? 'blur-sm pointer-events-none' : ''}`}>
             <div className="max-w-7xl mx-auto">
                 <div className="mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                     <div>
@@ -47,15 +49,10 @@ const InventoryStatusPage = () => {
                     </div>
                 )}
 
-                {isLoading ? (
-                    <div className="flex justify-center items-center h-64">
-                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
-                    </div>
-                ) : (
-                    <InventoryTable items={filteredItems} />
-                )}
+                <InventoryTable items={filteredItems} />
             </div>
         </div>
+        </>
     );
 };
 

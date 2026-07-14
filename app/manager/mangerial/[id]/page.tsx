@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useParams } from 'next/navigation';
 import { newtasks } from '@/public/manager-task';
 import imageCompression from 'browser-image-compression';
+import AnimatedLoader from '@/component/AnimatedLoader';
 
 interface Task {
     _id?: string;
@@ -174,7 +175,9 @@ export default function ManagerialPage() {
     };
 
     return (
-        <div className="min-h-screen bg-slate-50 p-4 md:p-6 font-sans text-slate-800">
+        <>
+        {loading && <AnimatedLoader />}
+        <div className={`min-h-screen bg-slate-50 p-4 md:p-6 font-sans text-slate-800 ${loading ? 'blur-sm pointer-events-none' : ''}`}>
             <div className="max-w-5xl mx-auto space-y-6">
                 {/* Header */}
                 <div className="flex flex-col md:flex-row md:items-end justify-between bg-white p-6 rounded-2xl shadow-sm border border-slate-100 gap-6">
@@ -203,14 +206,7 @@ export default function ManagerialPage() {
 
                 {/* Task List (Mobile First Cards) */}
                 <div className="space-y-4">
-                    {loading ? (
-                        <div className="bg-white p-8 rounded-2xl text-center shadow-sm border border-slate-100 text-slate-400 font-medium">
-                            <div className="flex justify-center items-center gap-3">
-                                <div className="w-5 h-5 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
-                                Loading tasks...
-                            </div>
-                        </div>
-                    ) : tasks.length === 0 ? (
+                    {!loading && tasks.length === 0 ? (
                         <div className="bg-white p-8 rounded-2xl text-center shadow-sm border border-slate-100 text-slate-400 font-medium">
                             No tasks found for this date.
                         </div>
@@ -355,5 +351,6 @@ export default function ManagerialPage() {
                 </div>
             </div>
         </div>
+        </>
     );
 }

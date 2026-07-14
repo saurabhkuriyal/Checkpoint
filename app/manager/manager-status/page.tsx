@@ -3,6 +3,8 @@ import React, { useEffect } from 'react'
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
+import AnimatedLoader from '@/component/AnimatedLoader';
+
 function page() {
     const router = useRouter();
     const [allDate, setAllDates] = React.useState<any[]>([]);
@@ -48,7 +50,9 @@ function page() {
     }
 
     return (
-        <div className="min-h-screen bg-slate-50 p-4 md:p-6 font-sans text-slate-800">
+        <>
+        {loading && <AnimatedLoader />}
+        <div className={`min-h-screen bg-slate-50 p-4 md:p-6 font-sans text-slate-800 ${loading ? 'blur-sm pointer-events-none' : ''}`}>
             <div className="max-w-5xl mx-auto space-y-6">
                 {/* Header */}
                 <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex flex-col md:flex-row md:items-end justify-between gap-4">
@@ -64,12 +68,7 @@ function page() {
 
                 {/* List Area */}
                 <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-4 md:p-6">
-                    {loading ? (
-                        <div className="py-12 text-center text-slate-400 font-medium flex justify-center items-center gap-3">
-                            <div className="w-5 h-5 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
-                            Loading dates...
-                        </div>
-                    ) : allDate.length === 0 ? (
+                    {!loading && allDate.length === 0 ? (
                         <div className="py-12 text-center text-slate-400 font-medium">
                             No records found.
                         </div>
@@ -101,6 +100,7 @@ function page() {
                 </div>
             </div>
         </div>
+        </>
     )
 }
 

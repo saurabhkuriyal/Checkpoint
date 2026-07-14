@@ -3,6 +3,7 @@
 import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import AnimatedLoader from '@/component/AnimatedLoader';
 
 export default function Page() {
 
@@ -31,7 +32,9 @@ export default function Page() {
     }
 
     return (
-        <div className="min-h-screen flex flex-col items-center" style={{ background: "linear-gradient(180deg, #f0f4ff 0%, #fafafa 100%)" }}>
+        <>
+        {isLoading && <AnimatedLoader />}
+        <div className={`min-h-screen flex flex-col items-center ${isLoading ? 'blur-sm pointer-events-none' : ''}`} style={{ background: "linear-gradient(180deg, #f0f4ff 0%, #fafafa 100%)" }}>
             <div className="w-full max-w-lg px-4 py-8 sm:px-6">
 
                 {/* Back button + Header */}
@@ -56,20 +59,14 @@ export default function Page() {
                     )}
                 </header>
 
-                {/* Loading State */}
-                {isLoading ? (
-                    <div className="flex flex-col justify-center items-center py-24 gap-4">
-                        <div className="w-12 h-12 border-[3px] border-slate-200 border-t-indigo-500 rounded-full animate-spin"></div>
-                        <p className="text-slate-400 text-sm font-semibold animate-pulse">Loading tasks...</p>
-                    </div>
-                ) : !tripData ? (
+                {!tripData && !isLoading ? (
                     <div className="text-center bg-white rounded-3xl py-16 px-8 border border-slate-100 shadow-sm">
                         <h3 className="text-xl font-bold text-slate-800 mb-1">Trip not found</h3>
                         <p className="text-slate-400 text-sm">Could not load trip details.</p>
                     </div>
                 ) : (
                     <div className="flex flex-col gap-8">
-                        {tripData.groups && tripData.groups.map((group: any, groupIndex: number) => (
+                        {tripData?.groups && tripData.groups.map((group: any, groupIndex: number) => (
                             <section key={groupIndex}>
                                 {/* Day / Date Header */}
                                 <div className="flex items-center gap-3 mb-4">
@@ -167,5 +164,6 @@ export default function Page() {
                 )}
             </div>
         </div>
+        </>
     );
 }

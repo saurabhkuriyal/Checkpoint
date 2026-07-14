@@ -16,6 +16,7 @@ interface ConsumptionRow {
   quantity: number | string;
   unit: string;
 }
+import AnimatedLoader from '@/component/AnimatedLoader';
 
 export default function AddConsumption() {
 
@@ -36,12 +37,13 @@ export default function AddConsumption() {
     handleSubmit
   } = useAddConsumption()
 
-  if (isLoading) return <div className="p-6 text-center text-gray-500">Loading items...</div>;
   if (error) return <div className="p-6 text-center text-red-500">Error: {error}</div>;
 
   return (
-    <div className="p-6 bg-white rounded-xl shadow-lg border border-gray-100 mt-6 mx-auto max-w-5xl">
-      <h2 className="text-2xl font-bold mb-6 text-gray-800">Add Consumption</h2>
+    <>
+      {isLoading && <AnimatedLoader />}
+      <div className={`p-6 bg-white rounded-xl shadow-lg border border-gray-100 mt-6 mx-auto max-w-5xl ${isLoading ? 'blur-sm pointer-events-none' : ''}`}>
+        <h2 className="text-2xl font-bold mb-6 text-gray-800">Add Consumption</h2>
 
       {mealBlocks.map((block, blockIndex) => (
         <div key={block.id} className="mb-8 bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
@@ -185,5 +187,6 @@ export default function AddConsumption() {
         </button>
       </div>
     </div>
+    </>
   );
 }

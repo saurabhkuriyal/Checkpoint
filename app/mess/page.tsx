@@ -73,13 +73,13 @@ const MessDashboardPage = () => {
                         </Link>
 
                         {/* 2. Add Stock (Inventory) */}
-                        <Link href="/mess/inventory" className="group flex flex-col items-center p-6 bg-gray-50 rounded-2xl hover:bg-white hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-transparent hover:border-emerald-100">
+                        <Link href="/mess/purchaseStock" className="group flex flex-col items-center p-6 bg-gray-50 rounded-2xl hover:bg-white hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-transparent hover:border-emerald-100">
                             <div className="w-14 h-14 mb-4 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300 shadow-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
                                 </svg>
                             </div>
-                            <h3 className="font-semibold text-gray-800 text-center">Add Stock</h3>
+                            <h3 className="font-semibold text-gray-800 text-center">Purchase Stock</h3>
                         </Link>
 
                         {/* 3. Add Consumption */}

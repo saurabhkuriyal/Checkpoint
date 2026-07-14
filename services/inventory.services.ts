@@ -62,3 +62,17 @@ export const addConsumption = async (data: any) => {
         throw error;
     }
 }
+
+export const purchaseStock = async (data: any) => {
+    try {
+        console.log("reached here in purchase stock service", data);
+
+        const response = await axios.post(API.purchaseStock, data);
+        console.log("response", response);
+
+        return response.data;
+    } catch (error: any) {
+        console.error("Error purchasing stock:", error.response?.data || error.message);
+        throw error;
+    }
+}

@@ -71,7 +71,11 @@ export const purchaseStock = async (data: any) => {
     try {
         console.log("reached here in purchase stock service", data);
 
-        const response = await axios.post(API.purchaseStock, data);
+        const response = await axios.post(API.purchaseStock, data, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
         console.log("response", response);
 
         return response.data;

@@ -87,10 +87,16 @@ export default function usePurchaseStock() {
         console.log("Submitting purchase stock", JSON.stringify(payload, null, 2));
         console.log("Image attached:", image);
 
-        try {
-            console.log("-----", payload);
+        const formData = new FormData();
+        formData.append("data", JSON.stringify(payload));
+        if (image) {
+            formData.append("image", image);
+        }
 
-            const response = await purchaseStock(payload);
+        try {
+            console.log("purchase stock payload", await formData);
+
+            const response = await purchaseStock(formData);
             console.log("Purchase stock added successfully", response);
             alert("Stock purchase submitted successfully!");
             // Reset state here if needed

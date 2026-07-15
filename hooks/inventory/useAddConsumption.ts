@@ -129,9 +129,14 @@ export default function useAddConsumption() {
         console.log("Image attached:", image);
 
         try {
-            console.log("-----", payload);
+            const formData = new FormData();
+            formData.append('data', JSON.stringify(payload));
+            if (image) {
+                formData.append('image', image);
+            }
+            console.log("-----", formData);
 
-            const response = await addConsumption(payload);
+            const response = await addConsumption(formData);
             console.log("Consumption added successfully", response);
             alert("Consumption submitted successfully!");
             // Reset state here if needed

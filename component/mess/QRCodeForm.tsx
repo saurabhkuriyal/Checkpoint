@@ -1,11 +1,23 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Image from 'next/image';
+import confetti from 'canvas-confetti';
 import { useQRCodeForm } from '@/hooks/mess/useQRCodeForm';
 
 export const QRCodeForm: React.FC = () => {
   const { formData, isSubmitting, isSuccess, handleTextChange, handleImageChange, handleSubmit, closeSuccessModal } = useQRCodeForm();
+
+  useEffect(() => {
+    if (isSuccess) {
+      confetti({
+        particleCount: 150,
+        spread: 80,
+        origin: { y: 0.6 },
+        colors: ['#22c55e', '#10b981', '#84cc16', '#fcd34d']
+      });
+    }
+  }, [isSuccess]);
 
   return (
     <div className="relative w-full max-w-lg">
@@ -99,7 +111,19 @@ export const QRCodeForm: React.FC = () => {
       {/* Success Modal */}
       {isSuccess && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity">
-          <div className="bg-white rounded-3xl p-8 max-w-sm w-full shadow-2xl transform scale-100 transition-transform flex flex-col items-center text-center">
+          <div className="relative bg-white rounded-3xl p-10 max-w-md w-full shadow-2xl transform scale-100 transition-transform flex flex-col items-center text-center">
+            
+            {/* Top Right Close Button */}
+            <button 
+              onClick={closeSuccessModal}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-full p-2 transition-colors focus:outline-none"
+              aria-label="Close modal"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+
             <div className="w-28 h-28 bg-green-50 rounded-full flex items-center justify-center mb-6 border-4 border-white shadow-inner">
               <Image 
                 src="/backpackers.png" 
@@ -109,13 +133,17 @@ export const QRCodeForm: React.FC = () => {
                 className="object-contain"
               />
             </div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">Thank You!</h3>
-            <p className="text-gray-500 mb-8">Your feedback has been successfully submitted. We appreciate your input!</p>
+            <h3 className="text-3xl font-bold text-gray-900 mb-3">Thank You!</h3>
+            <p className="text-gray-500 mb-8 text-lg">Your feedback has been successfully submitted. We appreciate your input!</p>
+            
             <button
-              onClick={closeSuccessModal}
-              className="w-full py-3 px-4 bg-gradient-to-r from-green-600 to-emerald-500 hover:from-green-700 hover:to-emerald-600 text-white font-semibold rounded-xl transition-colors shadow-md"
+              onClick={() => {
+                alert("Claimed!"); // Add claim logic here
+                closeSuccessModal();
+              }}
+              className="w-full py-4 px-6 bg-gradient-to-r from-green-600 to-emerald-500 hover:from-green-700 hover:to-emerald-600 text-white font-bold text-lg rounded-xl shadow-[0_10px_20px_rgba(16,185,129,0.3)] hover:shadow-[0_15px_30px_rgba(16,185,129,0.4)] hover:-translate-y-1 transition-all duration-300"
             >
-              Close
+              Claim Reward
             </button>
           </div>
         </div>

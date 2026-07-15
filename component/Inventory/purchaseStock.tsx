@@ -24,14 +24,14 @@ export default function PurchaseStock() {
   return (
     <div className="relative min-h-screen py-10 px-4 sm:px-6 lg:px-8 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-indigo-100 via-purple-50 to-white overflow-hidden">
       {isLoading && <AnimatedLoader />}
-      
+
       {/* Decorative blobs for modern aesthetic */}
       <div className="absolute top-0 -left-4 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
       <div className="absolute top-0 -right-4 w-72 h-72 bg-indigo-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse" style={{ animationDelay: '2s' }}></div>
       <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse" style={{ animationDelay: '4s' }}></div>
 
       <div className={`relative max-w-5xl mx-auto bg-white/70 backdrop-blur-2xl rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-white/60 overflow-hidden ${isLoading ? 'blur-sm pointer-events-none' : ''}`}>
-        
+
         {/* Header Banner */}
         <div className="relative px-8 py-10 bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-700 overflow-hidden">
           {/* Subtle overlay pattern */}
@@ -60,7 +60,7 @@ export default function PurchaseStock() {
 
         {/* Main Content Area */}
         <div className="p-6 md:p-10 space-y-10">
-          
+
           {/* Rows List */}
           <div className="space-y-4">
             {rows.map((row, index) => (
@@ -69,9 +69,9 @@ export default function PurchaseStock() {
                 <div className="absolute -left-3 -top-3 bg-gradient-to-br from-indigo-500 to-purple-600 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold shadow-lg border-2 border-white z-10">
                   {index + 1}
                 </div>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 items-end">
-                  
+
                   {/* Item Selector */}
                   <div className="md:col-span-5">
                     <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2 ml-1">Item</label>
@@ -148,9 +148,10 @@ export default function PurchaseStock() {
           <div>
             <label className="block text-sm font-bold text-gray-700 mb-3 ml-1">Upload Invoice (Optional)</label>
             <div className="relative border-2 border-dashed border-indigo-200 hover:border-indigo-400 bg-indigo-50/30 hover:bg-indigo-50/60 rounded-3xl p-10 transition-all duration-300 flex flex-col items-center justify-center group cursor-pointer overflow-hidden">
-              <input 
-                type="file" 
+              <input
+                type="file"
                 accept="image/*"
+                capture="environment"
                 onChange={(e) => {
                   if (e.target.files && e.target.files[0]) {
                     setImage(e.target.files[0]);
@@ -167,7 +168,7 @@ export default function PurchaseStock() {
                 <span className="text-indigo-600">Click to upload</span> or drag and drop
               </p>
               <p className="text-sm text-gray-400 mt-2 font-medium">PNG, JPG, GIF up to 5MB</p>
-              
+
               {image && (
                 <div className="mt-6 px-5 py-2.5 bg-indigo-100 text-indigo-800 rounded-xl flex items-center gap-3 text-sm font-bold z-20 shadow-sm">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -181,7 +182,7 @@ export default function PurchaseStock() {
 
           {/* Submit Action */}
           <div className="pt-4 flex justify-center md:justify-end">
-            <button 
+            <button
               onClick={handleSubmit}
               className="w-full md:w-auto px-10 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold text-lg rounded-2xl shadow-[0_10px_20px_rgba(79,70,229,0.3)] hover:shadow-[0_15px_30px_rgba(79,70,229,0.4)] hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-indigo-300 transition-all duration-300 flex items-center justify-center gap-3"
             >

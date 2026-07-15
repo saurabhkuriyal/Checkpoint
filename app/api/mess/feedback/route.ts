@@ -1,30 +1,64 @@
 import { NextRequest, NextResponse } from "next/server";
 import dbConnect from "@/utils/db";
 import FeedbackModel from "@/models/feedback.model";
+import { v2 as cloudinary, UploadApiResponse } from "cloudinary";
 
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 export async function POST(req: NextRequest) {
     try {
         await dbConnect();
 
         // Parse the incoming multipart/form-data request
         const formData = await req.formData();
-        
+
         const subject = formData.get("subject") as string;
         const message = formData.get("message") as string;
-        const imageFile = formData.get("image"); // This will be the File object if provided
+        const imageFile = formData.get("image") as File; // This will be the File object if provided
 
         console.log("Feedback data received:", { subject, message, hasImage: !!imageFile });
 
-        // Note: For now, we are saving only text data. To save the image, 
-        // you would typically upload `imageFile` to an S3 bucket or Cloudinary and save the URL here.
+        //Saving image to coudinary and getting URL
+
+        let imageURL: string = "";
+
+        if (imageFile && imageFile instanceof File && imageFile.size > 0) {
+            const arrayBuffer1 = await imageFile.arrayBuffer();
+            const buffer1 = Buffer.from(arrayBuffer1);
+
+            const uploadResponse1 = await new Promise<UploadApiResponse>((resolve, reject) => {
+                const uploadStream = cloudinary.uploader.upload_stream({
+                    folder: "task-manager", //optional organization of images
+                },
+                    (error, result) => {
+                        if (error) reject(error);
+                        else if (!result) reject(new Error("No result from Cloudinary"));
+                        else resolve(result);
+                    }
+                );
+                uploadStream.end(buffer1)
+            })
+
+            // console.log("-----------result", uploadResponse1);
+
+            imageURL = uploadResponse1.secure_url;
+            //console.log("Image uploaded successfully", billImageURL);
+
+        }
+
         const createFeedback = await FeedbackModel.create({
             subject,
             message,
+            image: imageURL
         });
 
         return NextResponse.json(
             {
-                success: true, 
+                success: true,
                 message: "Feedback saved successfully",
                 data: createFeedback
             },

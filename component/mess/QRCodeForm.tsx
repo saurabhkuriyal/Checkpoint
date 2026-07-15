@@ -10,13 +10,13 @@ export const QRCodeForm: React.FC = () => {
   return (
     <div className="relative w-full max-w-lg">
       {/* Background glowing effects for premium look */}
-      <div className="absolute top-0 -left-4 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-2xl opacity-30 animate-pulse"></div>
-      <div className="absolute top-0 -right-4 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-2xl opacity-30 animate-pulse" style={{ animationDelay: '2s' }}></div>
-      <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-2xl opacity-30 animate-pulse" style={{ animationDelay: '4s' }}></div>
+      <div className="absolute top-0 -left-4 w-72 h-72 bg-green-300 rounded-full mix-blend-multiply filter blur-2xl opacity-30 animate-pulse"></div>
+      <div className="absolute top-0 -right-4 w-72 h-72 bg-emerald-300 rounded-full mix-blend-multiply filter blur-2xl opacity-30 animate-pulse" style={{ animationDelay: '2s' }}></div>
+      <div className="absolute -bottom-8 left-20 w-72 h-72 bg-lime-300 rounded-full mix-blend-multiply filter blur-2xl opacity-30 animate-pulse" style={{ animationDelay: '4s' }}></div>
 
       <form onSubmit={handleSubmit} className="relative bg-white/80 backdrop-blur-xl border border-white/50 p-8 sm:p-10 rounded-3xl shadow-2xl space-y-8">
         <div className="text-center">
-          <h2 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500">
+          <h2 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-emerald-500">
             Delhi Delight Feedback form
           </h2>
           <p className="mt-2 text-gray-500 text-sm">We'd love to hear your thoughts to improve our services!</p>
@@ -32,7 +32,7 @@ export const QRCodeForm: React.FC = () => {
               value={formData.subject}
               onChange={handleTextChange}
               required
-              className="w-full px-4 py-3 bg-white/50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 shadow-sm"
+              className="w-full px-4 py-3 bg-white/50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 shadow-sm"
               placeholder="What is this regarding?"
             />
           </div>
@@ -46,14 +46,14 @@ export const QRCodeForm: React.FC = () => {
               onChange={handleTextChange}
               required
               rows={4}
-              className="w-full px-4 py-3 bg-white/50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 shadow-sm resize-none"
+              className="w-full px-4 py-3 bg-white/50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 shadow-sm resize-none"
               placeholder="Tell us everything..."
             />
           </div>
 
           <div className="space-y-2">
             <label htmlFor="image" className="block text-sm font-semibold text-gray-700">Upload Image <span className="text-gray-400 font-normal">(Optional)</span></label>
-            <div className="relative border-2 border-dashed border-gray-300 rounded-xl p-4 hover:border-purple-500 transition-colors bg-white/50">
+            <div className="relative border-2 border-dashed border-gray-300 rounded-xl p-4 hover:border-green-500 transition-colors bg-white/50">
               <input
                 type="file"
                 id="image"
@@ -77,7 +77,7 @@ export const QRCodeForm: React.FC = () => {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full py-3.5 px-4 bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white font-bold rounded-xl shadow-lg transform hover:-translate-y-0.5 hover:shadow-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none flex justify-center items-center gap-2"
+          className="w-full py-3.5 px-4 bg-gradient-to-r from-green-600 to-emerald-500 hover:from-green-700 hover:to-emerald-600 text-white font-bold rounded-xl shadow-lg transform hover:-translate-y-0.5 hover:shadow-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none flex justify-center items-center gap-2"
         >
           {isSubmitting ? (
             <>
@@ -100,7 +100,7 @@ export const QRCodeForm: React.FC = () => {
       {isSuccess && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity">
           <div className="bg-white rounded-3xl p-8 max-w-sm w-full shadow-2xl transform scale-100 transition-transform flex flex-col items-center text-center">
-            <div className="w-28 h-28 bg-purple-50 rounded-full flex items-center justify-center mb-6 border-4 border-white shadow-inner">
+            <div className="w-28 h-28 bg-green-50 rounded-full flex items-center justify-center mb-6 border-4 border-white shadow-inner">
               <Image 
                 src="/backpackers.png" 
                 alt="Success" 
@@ -113,7 +113,7 @@ export const QRCodeForm: React.FC = () => {
             <p className="text-gray-500 mb-8">Your feedback has been successfully submitted. We appreciate your input!</p>
             <button
               onClick={closeSuccessModal}
-              className="w-full py-3 px-4 bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white font-semibold rounded-xl transition-colors shadow-md"
+              className="w-full py-3 px-4 bg-gradient-to-r from-green-600 to-emerald-500 hover:from-green-700 hover:to-emerald-600 text-white font-semibold rounded-xl transition-colors shadow-md"
             >
               Close
             </button>

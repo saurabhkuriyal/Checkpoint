@@ -1,4 +1,5 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
+import { submitFeedback } from '@/services/mess.services';
 
 export interface QRCodeFormData {
   subject: string;
@@ -14,6 +15,7 @@ export const useQRCodeForm = () => {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const handleTextChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -32,27 +34,36 @@ export const useQRCodeForm = () => {
     }
   };
 
-  const handleSubmit = async (e: FormEvent, onSubmit: (data: QRCodeFormData) => Promise<void> | void) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      await onSubmit(formData);
-      console.log("QR code Hook", formData);
+      const res = await submitFeedback(formData);
+      console.log("QR code Hook", res);
+      
+      if (res.success) {
+        setIsSuccess(true);
+        setFormData({ subject: '', message: '', image: null });
+      }
 
     } catch (error) {
       console.error("Form submission failed", error);
-
-
     } finally {
       setIsSubmitting(false);
     }
   };
 
+  const closeSuccessModal = () => {
+    setIsSuccess(false);
+  };
+
   return {
     formData,
     isSubmitting,
+    isSuccess,
     handleTextChange,
     handleImageChange,
     handleSubmit,
+    closeSuccessModal
   };
 };

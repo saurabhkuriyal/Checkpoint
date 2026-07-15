@@ -3,7 +3,24 @@ import { API } from '../constants/api';
 
 export const submitFeedback = async (data: { subject: string; message: string; image?: File | string | null }) => {
     try {
-        const response = await axios.post(API.feedback, data);
+        console.log("arrived in the QR code services", data);
+
+        // Convert the standard object into FormData for multipart/form-data support
+        const formData = new FormData();
+        formData.append("subject", data.subject);
+        formData.append("message", data.message);
+
+        // Append the image only if it exists
+        if (data.image) {
+            formData.append("image", data.image);
+        }
+
+        // Axios handles the multipart/form-data headers automatically when you pass a FormData instance
+        const response = await axios.post(API.feedback, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
         return response.data;
     } catch (error: any) {
         console.error("Error submitting feedback:", error);

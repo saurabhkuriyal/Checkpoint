@@ -8,5 +8,6 @@ export const API = {
     getInventory: "/api/mess/getStock",
     addItems: "/api/mess/addItem",
     addConsumption: "/api/mess/addConsumption",
-    purchaseStock: "/api/mess/purchaseStock"
+    purchaseStock: "/api/mess/purchaseStock",
+    feedback: "/api/mess/feedback"
 }

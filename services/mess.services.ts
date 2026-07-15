@@ -27,3 +27,13 @@ export const submitFeedback = async (data: { subject: string; message: string; i
         throw error.response?.data || error.message;
     }
 };
+
+export const getFeedback = async () => {
+    try {
+        const response = await axios.get(API.feedback);
+        return response.data;
+    } catch (error: any) {
+        console.error("Error fetching feedback:", error);
+        throw error.response?.data || error.message;
+    }
+};

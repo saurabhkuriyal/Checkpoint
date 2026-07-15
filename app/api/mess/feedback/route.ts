@@ -73,3 +73,28 @@ export async function POST(req: NextRequest) {
         );
     }
 }
+
+export async function GET(req: NextRequest) {
+    try {
+        await dbConnect();
+        
+        // Fetch all feedback sorted by newest first
+        const feedbacks = await FeedbackModel.find().sort({ createdAt: -1 });
+
+        return NextResponse.json(
+            {
+                success: true,
+                message: "Feedback retrieved successfully",
+                data: feedbacks
+            },
+            { status: 200 }
+        );
+
+    } catch (error: any) {
+        console.error("Error fetching feedback:", error);
+        return NextResponse.json(
+            { success: false, message: "Server error", error: error.message },
+            { status: 500 }
+        );
+    }
+}

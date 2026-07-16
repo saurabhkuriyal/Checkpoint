@@ -123,6 +123,16 @@ const MessDashboardPage = () => {
                             <h3 className="font-semibold text-gray-800 text-center">Issues</h3>
                         </Link>
 
+                        {/* 7. Feedbacks */}
+                        <Link href="/feedback/messFeedback" className="group flex flex-col items-center p-6 bg-gray-50 rounded-2xl hover:bg-white hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-transparent hover:border-indigo-100">
+                            <div className="w-14 h-14 mb-4 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center group-hover:scale-110 group-hover:bg-indigo-500 group-hover:text-white transition-all duration-300 shadow-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                                </svg>
+                            </div>
+                            <h3 className="font-semibold text-gray-800 text-center">Feedbacks</h3>
+                        </Link>
+
                     </div>
                 </div>
             </div>

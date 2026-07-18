@@ -20,6 +20,7 @@ const tiles = [
     { title: "Upcoming trips", href: "/trips/upcoming", icon: icons.upcoming, color: "bg-teal-50 text-teal-600", border: "border-teal-100" },
     { title: "Expense report", href: "/trips/expenses", icon: icons.expense, color: "bg-red-50 text-red-600", border: "border-red-100" },
     { title: "Stats", href: "/trips/stats", icon: icons.stats, color: "bg-indigo-50 text-indigo-600", border: "border-indigo-100" },
+    { title: "Destinations", href: "/trips/destinations", icon: icons.all, color: "bg-purple-50 text-purple-600", border: "border-indigo-100" },
 ];
 
 export default function TripsPage() {

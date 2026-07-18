@@ -22,7 +22,7 @@ export default function DestinationsPage() {
         // Filter
         if (searchQuery) {
             const query = searchQuery.toLowerCase();
-            result = result.filter(dest => 
+            result = result.filter(dest =>
                 dest.destinationName.toLowerCase().includes(query) ||
                 dest.price.toLowerCase().includes(query) ||
                 dest.address.toLowerCase().includes(query) ||
@@ -57,12 +57,12 @@ export default function DestinationsPage() {
     return (
         <div className="min-h-screen bg-slate-50 pt-24 pb-12 px-4 sm:px-6 lg:px-8 font-sans">
             <div className="max-w-7xl mx-auto">
-                
+
                 {/* Header */}
                 <div className="mb-8 animate-fade-in-down">
                     <div className="bg-white rounded-3xl p-8 shadow-sm border border-slate-100/60 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 relative overflow-hidden">
                         <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
-                        
+
                         <div className="relative z-10">
                             <h1 className="text-3xl font-extrabold text-slate-800 tracking-tight mb-2 flex items-center gap-3">
                                 <span className="bg-blue-100 text-blue-600 p-2 rounded-xl">
@@ -76,7 +76,7 @@ export default function DestinationsPage() {
                                 Browse our curated list of exciting trip locations and their pricing details.
                             </p>
                         </div>
-                        
+
                         <div className="relative z-10">
                             <div className="inline-flex items-center justify-center px-4 py-2 bg-slate-100 text-slate-600 text-sm font-semibold rounded-full border border-slate-200 shadow-sm">
                                 {filteredAndSortedDestinations.length} Destinations
@@ -142,8 +142,8 @@ export default function DestinationsPage() {
                             <tbody className="divide-y divide-slate-100">
                                 {filteredAndSortedDestinations.length > 0 ? (
                                     filteredAndSortedDestinations.map((dest, idx) => (
-                                        <tr 
-                                            key={dest.id} 
+                                        <tr
+                                            key={dest.id}
                                             className="group hover:bg-blue-50/40 transition-colors duration-300"
                                             style={{ animationDelay: `${idx * 40}ms` }}
                                         >
@@ -174,7 +174,7 @@ export default function DestinationsPage() {
                                             </td>
                                             <td className="py-4 px-6 text-sm text-center">
                                                 <div className="inline-flex items-center justify-center px-3 py-1 bg-green-100 text-green-700 rounded-lg font-bold text-xs border border-green-200 shadow-sm group-hover:bg-green-500 group-hover:text-white transition-colors duration-300">
-                                                    {dest.profit}%
+                                                    Rs{dest.profit}
                                                 </div>
                                             </td>
                                             <td className="py-4 px-6 text-sm text-slate-500 font-medium">

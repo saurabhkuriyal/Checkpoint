@@ -16,11 +16,17 @@ export async function POST(req: NextRequest) {
         // Parse the incoming multipart/form-data request
         const formData = await req.formData();
 
-        const subject = formData.get("subject") as string;
         const message = formData.get("message") as string;
+        const name = formData.get("name") as string;
+        const email = formData.get("email") as string;
+        const ratingTaste = Number(formData.get("ratingTaste"));
+        const ratingFreshness = Number(formData.get("ratingFreshness"));
+        const ratingQuality = Number(formData.get("ratingQuality"));
+        const ratingPortion = Number(formData.get("ratingPortion"));
+        const ratingOverall = Number(formData.get("ratingOverall"));
         const imageFile = formData.get("image") as File; // This will be the File object if provided
 
-        console.log("Feedback data received:", { subject, message, hasImage: !!imageFile });
+        console.log("Feedback data received:", { message, name, email, hasImage: !!imageFile });
 
         //Saving image to coudinary and getting URL
 
@@ -51,8 +57,14 @@ export async function POST(req: NextRequest) {
         }
 
         const createFeedback = await FeedbackModel.create({
-            subject,
             message,
+            name,
+            email,
+            ratingTaste,
+            ratingFreshness,
+            ratingQuality,
+            ratingPortion,
+            ratingOverall,
             image: imageURL
         });
 

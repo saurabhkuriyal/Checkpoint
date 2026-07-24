@@ -2,15 +2,27 @@ import { useState, ChangeEvent, FormEvent } from 'react';
 import { submitFeedback } from '@/services/mess.services';
 
 export interface QRCodeFormData {
-  subject: string;
   message: string;
+  name: string;
+  email: string;
+  ratingTaste: number;
+  ratingFreshness: number;
+  ratingQuality: number;
+  ratingPortion: number;
+  ratingOverall: number;
   image: File | null;
 }
 
 export const useQRCodeForm = () => {
   const [formData, setFormData] = useState<QRCodeFormData>({
-    subject: '',
     message: '',
+    name: '',
+    email: '',
+    ratingTaste: 0,
+    ratingFreshness: 0,
+    ratingQuality: 0,
+    ratingPortion: 0,
+    ratingOverall: 0,
     image: null,
   });
 
@@ -19,6 +31,13 @@ export const useQRCodeForm = () => {
 
   const handleTextChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleRatingChange = (name: string, value: number) => {
     setFormData((prev) => ({
       ...prev,
       [name]: value,
@@ -43,7 +62,11 @@ export const useQRCodeForm = () => {
       
       if (res.success) {
         setIsSuccess(true);
-        setFormData({ subject: '', message: '', image: null });
+        setFormData({ 
+          message: '', name: '', email: '', 
+          ratingTaste: 0, ratingFreshness: 0, ratingQuality: 0, 
+          ratingPortion: 0, ratingOverall: 0, image: null 
+        });
       }
 
     } catch (error) {
@@ -62,6 +85,7 @@ export const useQRCodeForm = () => {
     isSubmitting,
     isSuccess,
     handleTextChange,
+    handleRatingChange,
     handleImageChange,
     handleSubmit,
     closeSuccessModal

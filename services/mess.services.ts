@@ -1,14 +1,30 @@
 import axios from 'axios';
 import { API } from '../constants/api';
 
-export const submitFeedback = async (data: { subject: string; message: string; image?: File | string | null }) => {
+export const submitFeedback = async (data: { 
+    message: string; 
+    name: string;
+    email: string;
+    ratingTaste: number;
+    ratingFreshness: number;
+    ratingQuality: number;
+    ratingPortion: number;
+    ratingOverall: number;
+    image?: File | string | null 
+}) => {
     try {
         console.log("arrived in the QR code services", data);
 
         // Convert the standard object into FormData for multipart/form-data support
         const formData = new FormData();
-        formData.append("subject", data.subject);
         formData.append("message", data.message);
+        formData.append("name", data.name);
+        formData.append("email", data.email);
+        formData.append("ratingTaste", String(data.ratingTaste));
+        formData.append("ratingFreshness", String(data.ratingFreshness));
+        formData.append("ratingQuality", String(data.ratingQuality));
+        formData.append("ratingPortion", String(data.ratingPortion));
+        formData.append("ratingOverall", String(data.ratingOverall));
 
         // Append the image only if it exists
         if (data.image) {

@@ -6,7 +6,7 @@ import confetti from 'canvas-confetti';
 import { useQRCodeForm } from '@/hooks/mess/useQRCodeForm';
 
 export const QRCodeForm: React.FC = () => {
-  const { formData, isSubmitting, isSuccess, handleTextChange, handleImageChange, handleSubmit, closeSuccessModal } = useQRCodeForm();
+  const { formData, isSubmitting, isSuccess, handleTextChange, handleRatingChange, handleImageChange, handleSubmit, closeSuccessModal } = useQRCodeForm();
 
   useEffect(() => {
     if (isSuccess) {
@@ -36,17 +36,86 @@ export const QRCodeForm: React.FC = () => {
         
         <div className="space-y-6">
           <div className="space-y-2">
-            <label htmlFor="subject" className="block text-sm font-semibold text-gray-700">Subject</label>
+            <label htmlFor="name" className="block text-sm font-semibold text-gray-700">Name</label>
             <input
               type="text"
-              id="subject"
-              name="subject"
-              value={formData.subject}
+              id="name"
+              name="name"
+              value={formData.name}
               onChange={handleTextChange}
               required
               className="w-full px-4 py-3 bg-white/50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 shadow-sm"
-              placeholder="What is this regarding?"
+              placeholder="Your Name"
             />
+          </div>
+
+          <div className="space-y-2">
+            <label htmlFor="email" className="block text-sm font-semibold text-gray-700">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleTextChange}
+              required
+              className="w-full px-4 py-3 bg-white/50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 shadow-sm"
+              placeholder="Your Email"
+            />
+          </div>
+
+          {/* Rating Section */}
+          <div className="space-y-4 bg-white/60 p-4 rounded-xl border border-gray-100">
+             <div className="text-sm font-bold text-gray-700 mb-2 border-b pb-2 border-gray-200">
+                Rate your experience (1 to 5 Stars)
+             </div>
+             
+             {[
+               { id: 'ratingTaste', label: '1. How would you rate the taste of the food served?' },
+               { id: 'ratingFreshness', label: '2. How would you rate the freshness and serving temperature of the food?' },
+               { id: 'ratingQuality', label: '3. How would you rate the quality and hygiene of the meal?' },
+               { id: 'ratingPortion', label: '4. Was the quantity/portion served sufficient?' },
+               { id: 'ratingOverall', label: '5. Overall, how satisfied are you with this meal?' },
+             ].map((q) => (
+                <div key={q.id} className="space-y-2">
+                  <label className="block text-sm font-semibold text-gray-700">{q.label}</label>
+                  <div className="flex max-w-sm gap-2">
+                     {[1, 2, 3, 4, 5].map((num) => {
+                        const currentValue = (formData as any)[q.id] || 0;
+                        const isFilled = num <= currentValue;
+                        
+                        return (
+                          <label 
+                            key={num} 
+                            className={`cursor-pointer transition-all hover:scale-110 flex items-center justify-center p-1`}
+                          >
+                             <input 
+                               type="radio" 
+                               name={q.id} 
+                               value={num} 
+                               checked={currentValue === num} 
+                               onChange={() => handleRatingChange(q.id, num)} 
+                               className="hidden" 
+                             />
+                             <svg 
+                               xmlns="http://www.w3.org/2000/svg" 
+                               viewBox="0 0 24 24" 
+                               fill={isFilled ? "currentColor" : "none"} 
+                               stroke="currentColor" 
+                               strokeWidth={1.5} 
+                               className={`w-8 h-8 sm:w-10 sm:h-10 transition-colors ${isFilled ? 'text-yellow-400 drop-shadow-sm border-none' : 'text-gray-300 hover:text-yellow-300'}`}
+                             >
+                               <path 
+                                 strokeLinecap="round" 
+                                 strokeLinejoin="round" 
+                                 d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" 
+                               />
+                             </svg>
+                          </label>
+                        );
+                     })}
+                  </div>
+                </div>
+             ))}
           </div>
 
           <div className="space-y-2">
@@ -57,7 +126,7 @@ export const QRCodeForm: React.FC = () => {
               value={formData.message}
               onChange={handleTextChange}
               required
-              rows={4}
+              rows={3}
               className="w-full px-4 py-3 bg-white/50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 shadow-sm resize-none"
               placeholder="Tell us everything..."
             />

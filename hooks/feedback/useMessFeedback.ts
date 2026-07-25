@@ -3,8 +3,14 @@ import { getFeedback } from '@/services/mess.services';
 
 export interface FeedbackData {
   _id: string;
-  subject: string;
+  name: string;
+  email: string;
   message: string;
+  ratingTaste: number;
+  ratingFreshness: number;
+  ratingQuality: number;
+  ratingPortion: number;
+  ratingOverall: number;
   image?: string;
   createdAt: string;
 }

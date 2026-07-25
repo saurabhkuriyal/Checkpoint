@@ -4,6 +4,22 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { useMessFeedback } from '@/hooks/feedback/useMessFeedback';
 
+const renderStars = (rating: number) => {
+  return (
+    <div className="flex">
+      {[1, 2, 3, 4, 5].map((star) => (
+        <svg 
+          key={star} 
+          className={`w-3.5 h-3.5 ${star <= (rating || 0) ? 'text-yellow-400 drop-shadow-sm' : 'text-gray-200'}`} 
+          fill="currentColor" viewBox="0 0 20 20"
+        >
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+      ))}
+    </div>
+  );
+};
+
 export const MessFeedbackTable: React.FC = () => {
   const { feedbacks, isLoading, error, refetch } = useMessFeedback();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -72,25 +88,57 @@ export const MessFeedbackTable: React.FC = () => {
               className="bg-white border border-gray-100/80 rounded-3xl p-5 md:p-6 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_-4px_rgba(0,0,0,0.1)] transition-all duration-300 transform hover:-translate-y-1 animate-fade-in-up flex flex-col h-full"
               style={{ animationDelay: `${index * 80}ms` }}
             >
-              {/* Card Header (Date + Subject) */}
-              <div className="flex justify-between items-start mb-4 gap-3">
-                <h3 className="font-bold text-gray-800 text-lg leading-tight line-clamp-2 flex-1">
-                  {item.subject}
-                </h3>
+              {/* Card Header (Name + Email + Date) */}
+              <div className="flex justify-between items-start mb-3 gap-3">
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-bold text-gray-900 text-lg leading-tight truncate capitalize">
+                    {item.name || "Anonymous"}
+                  </h3>
+                  <p className="text-xs text-gray-500 truncate">{item.email}</p>
+                </div>
                 <div className="flex flex-col items-end shrink-0">
-                  <span className="text-xs font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-lg">
+                  <span className="text-xs font-bold text-indigo-600 bg-indigo-50 px-2 py-1 rounded-md border border-indigo-100">
                     {new Date(item.createdAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
                   </span>
-                  <span className="text-[10px] font-medium text-gray-400 mt-1.5 uppercase tracking-wider">
+                  <span className="text-[10px] font-medium text-gray-400 mt-1 uppercase tracking-wider">
                     {new Date(item.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                   </span>
                 </div>
               </div>
 
+              {/* Ratings Summary Grid */}
+              <div className="bg-slate-50/80 rounded-xl p-3 mb-4 border border-slate-100 shadow-inner">
+                 <div className="grid grid-cols-2 gap-y-2.5 gap-x-3 text-xs">
+                    <div className="flex justify-between items-center bg-white px-2 py-1 rounded-md shadow-sm border border-slate-100">
+                       <span className="text-slate-600 font-medium">Taste</span>
+                       {renderStars(item.ratingTaste)}
+                    </div>
+                    <div className="flex justify-between items-center bg-white px-2 py-1 rounded-md shadow-sm border border-slate-100">
+                       <span className="text-slate-600 font-medium">Freshness</span>
+                       {renderStars(item.ratingFreshness)}
+                    </div>
+                    <div className="flex justify-between items-center bg-white px-2 py-1 rounded-md shadow-sm border border-slate-100">
+                       <span className="text-slate-600 font-medium">Quality</span>
+                       {renderStars(item.ratingQuality)}
+                    </div>
+                    <div className="flex justify-between items-center bg-white px-2 py-1 rounded-md shadow-sm border border-slate-100">
+                       <span className="text-slate-600 font-medium">Portion</span>
+                       {renderStars(item.ratingPortion)}
+                    </div>
+                    <div className="col-span-2 flex justify-between items-center mt-1 pt-2.5 border-t border-slate-200">
+                       <span className="text-slate-800 font-bold text-sm">Overall Satisfaction</span>
+                       <div className="scale-125 origin-right">
+                         {renderStars(item.ratingOverall)}
+                       </div>
+                    </div>
+                 </div>
+              </div>
+
               {/* Card Body (Message) */}
               <div className="flex-1 mb-5">
-                <p className="text-gray-600 text-sm leading-relaxed line-clamp-4">
-                  {item.message}
+                <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">Feedback Message</h4>
+                <p className="text-gray-700 text-sm leading-relaxed line-clamp-3 bg-gray-50/50 p-3 rounded-lg border border-gray-100">
+                  {item.message || <span className="text-gray-400 italic">No message provided.</span>}
                 </p>
               </div>
 

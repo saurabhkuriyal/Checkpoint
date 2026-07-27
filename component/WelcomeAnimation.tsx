@@ -81,36 +81,35 @@ export default function WelcomeAnimation() {
           opacity: 0;
         }
       `}</style>
-      <div 
-        className={`fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#fdfdfd] overflow-hidden transition-opacity duration-1000 ease-in-out ${
-          isFadingOut ? 'opacity-0 pointer-events-none' : 'opacity-100'
-        }`}
+      <div
+        className={`fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#fdfdfd] overflow-hidden transition-opacity duration-1000 ease-in-out ${isFadingOut ? 'opacity-0 pointer-events-none' : 'opacity-100'
+          }`}
       >
         {/* Very subtle premium radial gradient background */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-slate-50 via-white to-slate-100 opacity-60"></div>
 
         <div className="relative z-10 flex flex-col items-center justify-center px-6 w-full h-full">
           {/* Brand Logo - Premium Subtle Scale (No Bounce) */}
-          <div className="w-32 h-32 md:w-44 md:h-44 mb-10 flex items-center justify-center animate-subtle-scale">
-            <img 
-              src="/backpackers.png" 
-              alt="Backpackers Suite Logo" 
+          <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-60 md:h-60 mb-6 md:mb-10 flex items-center justify-center animate-subtle-scale">
+            <img
+              src="/backpackers.png"
+              alt="Backpackers Suite Logo"
               className="w-full h-full object-contain"
             />
           </div>
 
           {/* Handwriting Text - Deep Black */}
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-semibold text-center max-w-4xl tracking-tight min-h-[5rem] md:min-h-[8rem] flex items-center justify-center">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-semibold text-center max-w-4xl tracking-tight min-h-[6rem] md:min-h-[8rem] flex items-center justify-center leading-tight px-2">
             <span className="handwriting-text inline-block pb-2 px-2">
               Welcome to Backpackers Suite
             </span>
           </h1>
         </div>
-        
+
         {/* Travel Quote (Bottom) */}
-        <div className="absolute bottom-12 md:bottom-16 px-8 text-center max-w-xl mx-auto z-10 w-full animate-fade-in-up">
-          <div className="w-12 h-[1px] bg-slate-200 mx-auto mb-6"></div>
-          <p className="text-slate-500 text-sm md:text-lg italic font-light tracking-wide font-serif">
+        <div className="absolute bottom-8 sm:bottom-12 md:bottom-16 px-6 text-center max-w-xl mx-auto z-10 w-full animate-fade-in-up">
+          <div className="w-12 h-[1px] bg-slate-300 mx-auto mb-4 md:mb-6"></div>
+          <p className="text-slate-500 text-xs sm:text-sm md:text-lg italic font-light tracking-wide font-serif">
             {quote ? `"${quote}"` : ""}
           </p>
         </div>

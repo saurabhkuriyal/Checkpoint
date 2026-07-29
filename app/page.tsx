@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import WelcomeAnimation from "../component/WelcomeAnimation"
+import PortalCard from "../component/PortalCard"
 
 export default function page() {
   return (
@@ -62,93 +63,65 @@ export default function page() {
           </div>
 
           <div className="grid lg:grid-cols-3 gap-8 max-w-7xl mx-auto px-4 md:px-8">
-            {/* TRIP Box */}
-            <Link href="/trips" className="group relative overflow-hidden bg-white rounded-3xl p-8 lg:p-10 shadow-lg border border-slate-200 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-2 flex flex-col items-center text-center">
-              <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-gradient-to-br from-blue-100 to-transparent rounded-full z-0 opacity-50 group-hover:scale-150 transition-transform duration-500"></div>
-
-              <div className="relative z-10 w-24 h-24 mb-8 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center text-white shadow-xl shadow-cyan-500/30 group-hover:scale-110 transition-transform duration-300 group-hover:rotate-3">
+            <PortalCard
+              href="/trips"
+              title="TRIP"
+              description="Plan your next great adventure, view comprehensive itineraries, and manage all your travel details seamlessly in one unified space."
+              theme="blue"
+              icon={
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-              </div>
-              <h3 className="relative z-10 text-2xl lg:text-3xl font-extrabold text-slate-900 mb-4 group-hover:text-blue-600 transition-colors">TRIP</h3>
-              <p className="relative z-10 text-slate-500 text-lg leading-relaxed">
-                Plan your next great adventure, view comprehensive itineraries, and manage all your travel details seamlessly in one unified space.
-              </p>
+              }
+            />
 
-              <div className="relative z-10 mt-10 flex items-center text-blue-600 font-bold text-lg group-hover:gap-3 transition-all">
-                Enter Portal
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                </svg>
-              </div>
-            </Link>
-
-            {/* Manager Box */}
-            <Link href="/manager" className="group relative overflow-hidden bg-white rounded-3xl p-8 lg:p-10 shadow-lg border border-slate-200 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/10 hover:-translate-y-2 flex flex-col items-center text-center">
-              <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-gradient-to-br from-purple-100 to-transparent rounded-full z-0 opacity-50 group-hover:scale-150 transition-transform duration-500"></div>
-
-              <div className="relative z-10 w-24 h-24 mb-8 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-xl shadow-purple-500/30 group-hover:scale-110 transition-transform duration-300 group-hover:-rotate-3">
+            <PortalCard
+              href="/manager"
+              title="Manager"
+              description="Access your secure administrative dashboard to oversee global bookings, manage branches, and view high-level analytics."
+              theme="purple"
+              icon={
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
-              </div>
-              <h3 className="relative z-10 text-2xl lg:text-3xl font-extrabold text-slate-900 mb-4 group-hover:text-purple-600 transition-colors">Manager</h3>
-              <p className="relative z-10 text-slate-500 text-lg leading-relaxed">
-                Access your secure administrative dashboard to oversee global bookings, manage branches, and view high-level analytics.
-              </p>
+              }
+            />
 
-              <div className="relative z-10 mt-10 flex items-center text-purple-600 font-bold text-lg group-hover:gap-3 transition-all">
-                Enter Portal
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                </svg>
-              </div>
-            </Link>
-
-            {/* Inventory Box */}
-            <Link href="/mess" className="group relative overflow-hidden bg-white rounded-3xl p-8 lg:p-10 shadow-lg border border-slate-200 transition-all duration-300 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 flex flex-col items-center text-center">
-              <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-gradient-to-br from-emerald-100 to-transparent rounded-full z-0 opacity-50 group-hover:scale-150 transition-transform duration-500"></div>
-
-              <div className="relative z-10 w-24 h-24 mb-8 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-400 flex items-center justify-center text-white shadow-xl shadow-teal-500/30 group-hover:scale-110 transition-transform duration-300 group-hover:-rotate-3">
+            <PortalCard
+              href="/mess"
+              title="Inventory"
+              description="Track mess stock levels, manage supplies, and ensure everything runs smoothly in your inventory system."
+              theme="emerald"
+              icon={
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
                 </svg>
-              </div>
-              <h3 className="relative z-10 text-2xl lg:text-3xl font-extrabold text-slate-900 mb-4 group-hover:text-emerald-600 transition-colors">Inventory</h3>
-              <p className="relative z-10 text-slate-500 text-lg leading-relaxed">
-                Track mess stock levels, manage supplies, and ensure everything runs smoothly in your inventory system.
-              </p>
+              }
+            />
 
-              <div className="relative z-10 mt-10 flex items-center text-emerald-600 font-bold text-lg group-hover:gap-3 transition-all">
-                Enter Portal
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                </svg>
-              </div>
-            </Link>
-
-            {/* Social Media Automation Box */}
-            <Link href="/social-media-automation" className="group relative overflow-hidden bg-white rounded-3xl p-8 lg:p-10 shadow-lg border border-slate-200 transition-all duration-300 hover:shadow-2xl hover:shadow-pink-500/10 hover:-translate-y-2 flex flex-col items-center text-center">
-              <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-gradient-to-br from-pink-100 to-transparent rounded-full z-0 opacity-50 group-hover:scale-150 transition-transform duration-500"></div>
-
-              <div className="relative z-10 w-24 h-24 mb-8 rounded-2xl bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center text-white shadow-xl shadow-pink-500/30 group-hover:scale-110 transition-transform duration-300 group-hover:rotate-3">
+            <PortalCard
+              href="/social-media-automation"
+              title="Social Media Automation"
+              description="Automate your social media presence, schedule engaging posts, and seamlessly interact with your community."
+              theme="pink"
+              icon={
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
                 </svg>
-              </div>
-              <h3 className="relative z-10 text-2xl lg:text-3xl font-extrabold text-slate-900 mb-4 group-hover:text-pink-600 transition-colors leading-tight">Social Media Automation</h3>
-              <p className="relative z-10 text-slate-500 text-lg leading-relaxed">
-                Automate your social media presence, schedule engaging posts, and seamlessly interact with your community.
-              </p>
+              }
+            />
 
-              <div className="relative z-10 mt-10 flex items-center text-pink-600 font-bold text-lg group-hover:gap-3 transition-all">
-                Enter Portal
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+            <PortalCard
+              href="/itinerary-generator"
+              title="Itinerary Generator"
+              description="Instantly create perfectly planned, customizable itineraries for any destination using our AI-powered tool."
+              theme="amber"
+              icon={
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                 </svg>
-              </div>
-            </Link>
+              }
+            />
           </div>
         </section>
 

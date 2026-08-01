@@ -95,6 +95,10 @@ export const MessFeedbackTable: React.FC = () => {
                     {item.name || "Anonymous"}
                   </h3>
                   <p className="text-xs text-gray-500 truncate">{item.email}</p>
+                  <p className="text-xs text-gray-500 truncate">Phone: {item.number}</p>
+                  {item.batchNumber && (
+                    <p className="text-xs text-gray-500 truncate">Batch: {item.batchNumber}</p>
+                  )}
                 </div>
                 <div className="flex flex-col items-end shrink-0">
                   <span className="text-xs font-bold text-indigo-600 bg-indigo-50 px-2 py-1 rounded-md border border-indigo-100">

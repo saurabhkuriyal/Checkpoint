@@ -4,6 +4,8 @@ import { getFeedback } from '@/services/mess.services';
 export interface FeedbackData {
   _id: string;
   name: string;
+  number: string;
+  batchNumber?: string;
   email: string;
   message: string;
   ratingTaste: number;

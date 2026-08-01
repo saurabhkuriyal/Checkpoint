@@ -4,6 +4,8 @@ import { submitFeedback } from '@/services/mess.services';
 export interface QRCodeFormData {
   message: string;
   name: string;
+  number: string;
+  batchNumber: string;
   email: string;
   ratingTaste: number;
   ratingFreshness: number;
@@ -17,6 +19,8 @@ export const useQRCodeForm = () => {
   const [formData, setFormData] = useState<QRCodeFormData>({
     message: '',
     name: '',
+    number: '',
+    batchNumber: '',
     email: '',
     ratingTaste: 0,
     ratingFreshness: 0,
@@ -55,6 +59,17 @@ export const useQRCodeForm = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+
+    if (!formData.ratingTaste || !formData.ratingFreshness || !formData.ratingQuality || !formData.ratingPortion || !formData.ratingOverall) {
+      alert("Please provide a rating for all questions before submitting.");
+      return;
+    }
+
+    if (!formData.image) {
+      alert("Please upload an image before submitting.");
+      return;
+    }
+
     setIsSubmitting(true);
     try {
       const res = await submitFeedback(formData);
@@ -63,7 +78,7 @@ export const useQRCodeForm = () => {
       if (res.success) {
         setIsSuccess(true);
         setFormData({ 
-          message: '', name: '', email: '', 
+          message: '', name: '', number: '', batchNumber: '', email: '', 
           ratingTaste: 0, ratingFreshness: 0, ratingQuality: 0, 
           ratingPortion: 0, ratingOverall: 0, image: null 
         });

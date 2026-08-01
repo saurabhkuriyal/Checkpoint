@@ -4,6 +4,8 @@ import { API } from '../constants/api';
 export const submitFeedback = async (data: { 
     message: string; 
     name: string;
+    number: string;
+    batchNumber?: string;
     email: string;
     ratingTaste: number;
     ratingFreshness: number;
@@ -19,6 +21,10 @@ export const submitFeedback = async (data: {
         const formData = new FormData();
         formData.append("message", data.message);
         formData.append("name", data.name);
+        formData.append("number", data.number);
+        if (data.batchNumber) {
+            formData.append("batchNumber", data.batchNumber);
+        }
         formData.append("email", data.email);
         formData.append("ratingTaste", String(data.ratingTaste));
         formData.append("ratingFreshness", String(data.ratingFreshness));

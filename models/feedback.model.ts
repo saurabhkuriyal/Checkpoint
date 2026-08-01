@@ -9,6 +9,14 @@ const feedbackSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    number: {
+        type: String,
+        required: true,
+    },
+    batchNumber: {
+        type: String,
+        required: false,
+    },
     email: {
         type: String,
         required: true,

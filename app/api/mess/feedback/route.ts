@@ -18,6 +18,8 @@ export async function POST(req: NextRequest) {
 
         const message = formData.get("message") as string;
         const name = formData.get("name") as string;
+        const number = formData.get("number") as string;
+        const batchNumber = formData.get("batchNumber") as string || "";
         const email = formData.get("email") as string;
         const ratingTaste = Number(formData.get("ratingTaste"));
         const ratingFreshness = Number(formData.get("ratingFreshness"));
@@ -26,7 +28,7 @@ export async function POST(req: NextRequest) {
         const ratingOverall = Number(formData.get("ratingOverall"));
         const imageFile = formData.get("image") as File; // This will be the File object if provided
 
-        console.log("Feedback data received:", { message, name, email, hasImage: !!imageFile });
+        console.log("Feedback data received:", { message, name, number, email, hasImage: !!imageFile });
 
         //Saving image to coudinary and getting URL
 
@@ -59,6 +61,8 @@ export async function POST(req: NextRequest) {
         const createFeedback = await FeedbackModel.create({
             message,
             name,
+            number,
+            batchNumber,
             email,
             ratingTaste,
             ratingFreshness,

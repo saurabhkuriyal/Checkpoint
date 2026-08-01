@@ -50,6 +50,33 @@ export const QRCodeForm: React.FC = () => {
           </div>
 
           <div className="space-y-2">
+            <label htmlFor="number" className="block text-sm font-semibold text-gray-700">Contact Number</label>
+            <input
+              type="text"
+              id="number"
+              name="number"
+              value={formData.number}
+              onChange={handleTextChange}
+              required
+              className="w-full px-4 py-3 bg-white/50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 shadow-sm"
+              placeholder="Your Contact Number"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <label htmlFor="batchNumber" className="block text-sm font-semibold text-gray-700">Batch Number <span className="text-gray-400 font-normal">(Optional)</span></label>
+            <input
+              type="text"
+              id="batchNumber"
+              name="batchNumber"
+              value={formData.batchNumber}
+              onChange={handleTextChange}
+              className="w-full px-4 py-3 bg-white/50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 shadow-sm"
+              placeholder="Your Batch Number"
+            />
+          </div>
+
+          <div className="space-y-2">
             <label htmlFor="email" className="block text-sm font-semibold text-gray-700">Email</label>
             <input
               type="email"
@@ -133,7 +160,7 @@ export const QRCodeForm: React.FC = () => {
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="image" className="block text-sm font-semibold text-gray-700">Upload Image <span className="text-gray-400 font-normal">(Optional)</span></label>
+            <label htmlFor="image" className="block text-sm font-semibold text-gray-700">Upload Image</label>
             <div className="relative border-2 border-dashed border-gray-300 rounded-xl p-4 hover:border-green-500 transition-colors bg-white/50">
               <input
                 type="file"

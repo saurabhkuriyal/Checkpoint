@@ -10,6 +10,16 @@ interface FieldDef {
     type: FieldType;
 }
 
+const LOCATIONS = [
+    { value: "shimla", label: "Shimla" },
+    { value: "dharamshala", label: "Dharamshala" },
+    { value: "jaipur", label: "Jaipur" },
+    { value: "manali", label: "Manali" },
+    { value: "goa", label: "Goa" },
+    { value: "rishikesh", label: "Rishikesh" },
+    { value: "other", label: "Other (Specify in comments)" },
+];
+
 const CATEGORIES: Record<string, FieldDef[]> = {
     "Location": [
         { name: "Distance from major attractions", type: "rating" },
@@ -362,13 +372,9 @@ export default function RecciToursPage() {
                                         className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all outline-none appearance-none"
                                     >
                                         <option value="" disabled>Select a destination</option>
-                                        <option value="shimla">Shimla</option>
-                                        <option value="dharamshala">Dharamshala</option>
-                                        <option value="jaipur">Jaipur</option>
-                                        <option value="manali">Manali</option>
-                                        <option value="goa">Goa</option>
-                                        <option value="rishikesh">Rishikesh</option>
-                                        <option value="other">Other (Specify in comments)</option>
+                                        {LOCATIONS.map(loc => (
+                                            <option key={loc.value} value={loc.value}>{loc.label}</option>
+                                        ))}
                                     </select>
                                     <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none text-slate-500">
                                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>

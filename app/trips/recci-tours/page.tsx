@@ -230,8 +230,8 @@ const StarRating = ({ value, onChange }: { value: string, onChange: (val: string
                 >
                     <svg
                         className={`w-7 h-7 transition-colors duration-200 ${rating <= (hoverValue || parseInt(value) || 0)
-                                ? 'text-amber-400 fill-amber-400 drop-shadow-sm'
-                                : 'text-slate-200 fill-transparent'
+                            ? 'text-amber-400 fill-amber-400 drop-shadow-sm'
+                            : 'text-slate-200 fill-transparent'
                             }`}
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -322,12 +322,12 @@ export default function RecciToursPage() {
                     <div className="space-y-4">
                         <h3 className="text-sm font-semibold text-slate-800 uppercase tracking-wider flex items-center border-b border-slate-100 pb-2">
                             <svg className="w-4 h-4 mr-2 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
-                            Institutional Details
+                            Hotel Details
                         </h3>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div className="space-y-1.5">
-                                <label className="text-sm font-medium text-slate-700">Name of School</label>
+                                <label className="text-sm font-medium text-slate-700">Name of Hotel/Resort</label>
                                 <input
                                     type="text"
                                     name="schoolName"
@@ -407,10 +407,10 @@ export default function RecciToursPage() {
                                 const isExpanded = expandedCategory === category;
                                 // Calculate how many fields are filled in this category
                                 const filledFields = fields.filter(f => categoryData[category]?.[f.name]).length;
-                                
+
                                 return (
                                     <div key={category} className="border border-slate-200 rounded-xl overflow-hidden bg-white shadow-sm transition-all">
-                                        <button 
+                                        <button
                                             type="button"
                                             onClick={() => toggleCategory(category)}
                                             className={`w-full flex items-center justify-between p-4 transition-colors ${isExpanded ? 'bg-indigo-50/50' : 'hover:bg-slate-50'}`}
@@ -418,7 +418,7 @@ export default function RecciToursPage() {
                                             <div className="flex items-center gap-3">
                                                 <div className={`p-1.5 rounded-lg ${filledFields === fields.length ? 'bg-green-100 text-green-600' : 'bg-indigo-100 text-indigo-600'}`}>
                                                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        {filledFields === fields.length 
+                                                        {filledFields === fields.length
                                                             ? <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                                             : <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                                                         }
@@ -431,19 +431,19 @@ export default function RecciToursPage() {
                                             </div>
                                             <svg className={`w-5 h-5 text-slate-400 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
                                         </button>
-                                        
+
                                         {isExpanded && (
                                             <div className="p-5 border-t border-slate-100 bg-slate-50/50 animate-fade-in-down">
                                                 <div className="grid grid-cols-1 xl:grid-cols-2 gap-x-8 gap-y-6">
                                                     {fields.map((field, idx) => {
                                                         const value = categoryData[category]?.[field.name] || '';
-                                                        
+
                                                         return (
                                                             <div key={idx} className={`space-y-2 ${field.type === 'textarea' ? 'xl:col-span-2' : ''}`}>
                                                                 <label className="text-sm font-medium text-slate-700 flex justify-between items-center">
                                                                     <span>{field.name}</span>
                                                                 </label>
-                                                                
+
                                                                 {field.type === 'rating' ? (
                                                                     <StarRating
                                                                         value={value}

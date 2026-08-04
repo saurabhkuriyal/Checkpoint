@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 
-type FieldType = 'rating' | 'text' | 'textarea';
+type FieldType = 'rating' | 'text' | 'textarea' | 'image';
 
 interface FieldDef {
     name: string;
@@ -31,6 +31,7 @@ const CATEGORIES: Record<string, FieldDef[]> = {
         { name: "Nearby pharmacy", type: "rating" },
         { name: "Mobile network", type: "rating" },
         { name: "Overall location", type: "rating" },
+        { name: "Review", type: "textarea" },
     ],
     "Exterior": [
         { name: "Overall cleanliness", type: "rating" },
@@ -42,6 +43,7 @@ const CATEGORIES: Record<string, FieldDef[]> = {
         { name: "Parking area", type: "rating" },
         { name: "Landscaping", type: "rating" },
         { name: "Overall exterior", type: "rating" },
+        { name: "Review", type: "textarea" },
     ],
     "Reception": [
         { name: "Reception capacity", type: "rating" },
@@ -53,6 +55,7 @@ const CATEGORIES: Record<string, FieldDef[]> = {
         { name: "Drinking water", type: "rating" },
         { name: "Hospitality", type: "rating" },
         { name: "Overall reception", type: "rating" },
+        { name: "Review", type: "textarea" },
     ],
     "Rooms": [
         { name: "Room size", type: "rating" },
@@ -76,6 +79,7 @@ const CATEGORIES: Record<string, FieldDef[]> = {
         { name: "Room odour", type: "rating" },
         { name: "Luggage space", type: "rating" },
         { name: "Overall room condition", type: "rating" },
+        { name: "Review", type: "textarea" },
     ],
     "Bathrooms": [
         { name: "Hot water", type: "rating" },
@@ -92,6 +96,7 @@ const CATEGORIES: Record<string, FieldDef[]> = {
         { name: "Anti-slip flooring", type: "rating" },
         { name: "Odour", type: "rating" },
         { name: "Overall bathroom", type: "rating" },
+        { name: "Review", type: "textarea" },
     ],
     "Dining": [
         { name: "Dining capacity", type: "rating" },
@@ -107,6 +112,7 @@ const CATEGORIES: Record<string, FieldDef[]> = {
         { name: "Food refill speed", type: "rating" },
         { name: "Queue management", type: "rating" },
         { name: "Overall dining", type: "rating" },
+        { name: "Review", type: "textarea" },
     ],
     "Kitchen": [
         { name: "Staff hygiene", type: "rating" },
@@ -122,6 +128,7 @@ const CATEGORIES: Record<string, FieldDef[]> = {
         { name: "Pest control", type: "rating" },
         { name: "Cooking oil quality", type: "rating" },
         { name: "Overall kitchen hygiene", type: "rating" },
+        { name: "Review", type: "textarea" },
     ],
     "Food": [
         { name: "Breakfast", type: "rating" },
@@ -138,6 +145,7 @@ const CATEGORIES: Record<string, FieldDef[]> = {
         { name: "Jain food availability", type: "rating" },
         { name: "Special diet availability", type: "rating" },
         { name: "Overall food quality", type: "rating" },
+        { name: "Review", type: "textarea" },
     ],
     "Safety": [
         { name: "Fire extinguishers", type: "rating" },
@@ -155,6 +163,7 @@ const CATEGORIES: Record<string, FieldDef[]> = {
         { name: "Electrical safety", type: "rating" },
         { name: "Swimming pool safety", type: "rating" },
         { name: "Overall safety", type: "rating" },
+        { name: "Review", type: "textarea" },
     ],
     "Activities": [
         { name: "Adventure equipment", type: "rating" },
@@ -172,6 +181,7 @@ const CATEGORIES: Record<string, FieldDef[]> = {
         { name: "Sports ground", type: "rating" },
         { name: "Swimming pool", type: "rating" },
         { name: "Overall recreation", type: "rating" },
+        { name: "Review", type: "textarea" },
     ],
     "Medical": [
         { name: "Doctor on call", type: "rating" },
@@ -181,6 +191,7 @@ const CATEGORIES: Record<string, FieldDef[]> = {
         { name: "Wheelchair", type: "rating" },
         { name: "Emergency contacts", type: "rating" },
         { name: "Overall medical preparedness", type: "rating" },
+        { name: "Review", type: "textarea" },
     ],
     "Staff": [
         { name: "Courtesy", type: "rating" },
@@ -193,6 +204,7 @@ const CATEGORIES: Record<string, FieldDef[]> = {
         { name: "Security staff", type: "rating" },
         { name: "Group handling experience", type: "rating" },
         { name: "Overall professionalism", type: "rating" },
+        { name: "Review", type: "textarea" },
     ],
     "Commercial": [
         { name: "Driver accommodation", type: "rating" },
@@ -207,6 +219,25 @@ const CATEGORIES: Record<string, FieldDef[]> = {
         { name: "Packed lunch", type: "rating" },
         { name: "Late dinner", type: "rating" },
         { name: "Meal customization", type: "rating" },
+        { name: "Review", type: "textarea" },
+    ],
+    "Image documentation": [
+        { name: "Hotel entrance", type: "image" },
+        { name: "Parking", type: "image" },
+        { name: "Reception", type: "image" },
+        { name: "Standard rooms", type: "image" },
+        { name: "Washrooms", type: "image" },
+        { name: "Dining hall", type: "image" },
+        { name: "Adventure area", type: "image" },
+        { name: "Play area", type: "image" },
+        { name: "Fire extinguishers", type: "image" },
+        { name: "Emergency exits", type: "image" },
+        { name: "View", type: "image" },
+        { name: "Corridors", type: "image" },
+        { name: "Staircases", type: "image" },
+        { name: "Bus parking", type: "image" },
+        { name: "Night lighting", type: "image" },
+        { name: "Review", type: "textarea" },
     ],
     "Final Review": [
         { name: "Overall hotel score", type: "rating" },
@@ -457,6 +488,27 @@ export default function RecciToursPage() {
                                                                         className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white focus:bg-white focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all outline-none resize-none shadow-sm"
                                                                         placeholder={`Enter ${field.name.toLowerCase()}...`}
                                                                     ></textarea>
+                                                                ) : field.type === 'image' ? (
+                                                                    <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-slate-300 border-dashed rounded-xl hover:border-indigo-400 transition-colors bg-white">
+                                                                        <div className="space-y-1 text-center">
+                                                                            <svg className="mx-auto h-12 w-12 text-slate-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                                                                                <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                                                            </svg>
+                                                                            <div className="flex text-sm text-slate-600 justify-center">
+                                                                                <label htmlFor={`file-upload-${category}-${idx}`} className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                                                                                    <span>Upload a file</span>
+                                                                                    <input id={`file-upload-${category}-${idx}`} name={`file-upload-${category}-${idx}`} type="file" accept="image/*" className="sr-only" onChange={(e) => {
+                                                                                        if (e.target.files && e.target.files.length > 0) {
+                                                                                            handleCategoryFieldChange(category, field.name, e.target.files[0].name);
+                                                                                        }
+                                                                                    }} />
+                                                                                </label>
+                                                                                <p className="pl-1">or drag and drop</p>
+                                                                            </div>
+                                                                            <p className="text-xs text-slate-500">PNG, JPG, GIF up to 10MB</p>
+                                                                            {value && <p className="text-xs text-indigo-600 font-semibold mt-2">Selected: {value}</p>}
+                                                                        </div>
+                                                                    </div>
                                                                 ) : (
                                                                     <input
                                                                         type="text"

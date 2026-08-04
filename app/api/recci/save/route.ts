@@ -7,7 +7,7 @@ export async function POST(request: NextRequest) {
         await connectDB();
 
         const recciData = await request.json();
-        console.log("Saving RECCI data:", recciData);
+        //console.log("Saving RECCI data:", recciData);
 
         const newRecci = new RecciModel(recciData);
         await newRecci.save();

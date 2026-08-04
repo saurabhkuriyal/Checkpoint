@@ -35,25 +35,7 @@ export default function useRecciTour() {
         e.preventDefault();
         setIsSubmitting(true);
         try {
-            const formattedCategoryData: Record<string, any> = {};
-            for (const [category, fields] of Object.entries(categoryData)) {
-                let totalScore = 0;
-                let count = 0;
-                for (const [key, value] of Object.entries(fields)) {
-                    // Check if value is a number (rating) and not a review or empty text
-                    if (!isNaN(Number(value)) && String(value).trim() !== "" && key !== "Review") {
-                        totalScore += Number(value);
-                        count++;
-                    }
-                }
-                const score = count > 0 ? Number((totalScore / count).toFixed(1)) : 0;
-                formattedCategoryData[category] = {
-                    ...fields,
-                    score
-                };
-            }
-
-            const dataToSave = { ...formData, ...formattedCategoryData };
+            const dataToSave = { ...formData, ...categoryData };
             console.log("Submitting Data:", dataToSave);
             
             const response = await saveRecci(dataToSave);

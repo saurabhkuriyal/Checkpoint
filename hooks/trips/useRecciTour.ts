@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import saveRecci from '@/services/recci.services';
 export default function useRecciTour() {
     const [formData, setFormData] = useState({
         schoolName: '',
@@ -31,14 +31,46 @@ export default function useRecciTour() {
         setExpandedCategory(prev => prev === category ? null : category);
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
-        console.log("Submitted Data:", { ...formData, categoryData });
-        setTimeout(() => {
+        try {
+            const formattedCategoryData: Record<string, any> = {};
+            for (const [category, fields] of Object.entries(categoryData)) {
+                let totalScore = 0;
+                let count = 0;
+                for (const [key, value] of Object.entries(fields)) {
+                    // Check if value is a number (rating) and not a review or empty text
+                    if (!isNaN(Number(value)) && String(value).trim() !== "" && key !== "Review") {
+                        totalScore += Number(value);
+                        count++;
+                    }
+                }
+                const score = count > 0 ? Number((totalScore / count).toFixed(1)) : 0;
+                formattedCategoryData[category] = {
+                    ...fields,
+                    score
+                };
+            }
+
+            const dataToSave = { ...formData, ...formattedCategoryData };
+            console.log("Submitting Data:", dataToSave);
+            
+            const response = await saveRecci(dataToSave);
+            if (response?.success) {
+                alert('RECCI Tour Request Submitted Successfully!');
+                // Reset form (optional) or redirect
+                setFormData({ schoolName: '', coordinatorName: '', travelDate: '', location: '' });
+                setCategoryData({});
+            } else {
+                alert('Failed to submit RECCI Tour Request.');
+            }
+        } catch (error) {
+            console.error("Error submitting RECCI Form:", error);
+            alert('An error occurred while saving.');
+        } finally {
             setIsSubmitting(false);
-            alert('RECCI Tour Request Submitted Successfully!');
-        }, 1500);
+        }
     };
 
     return {

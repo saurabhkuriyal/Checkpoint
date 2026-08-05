@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import { getAllRecci } from '@/services/recci.services';
+import { useRouter } from 'next/navigation';
 
 export default function useAllResorts() {
     const [resorts, setResorts] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const router = useRouter();
 
     useEffect(() => {
         const fetchResorts = async () => {
@@ -26,7 +28,7 @@ export default function useAllResorts() {
     }, []);
 
     const handleResortClick = (id: string) => {
-        console.log("Clicked Resort ID:", id);
+        router.push(`/trips/getSpecificResort/${id}`);
     };
 
     return {

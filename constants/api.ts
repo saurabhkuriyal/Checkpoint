@@ -11,5 +11,6 @@ export const API = {
     purchaseStock: "/api/mess/purchaseStock",
     feedback: "/api/mess/feedback",
     recciSave: "/api/recci/save",
-    recciGetAll: "/api/recci/getAll"
+    recciGetAll: "/api/recci/getAll",
+    recciGetById: "/api/recci/getById"
 }

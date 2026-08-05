@@ -27,3 +27,17 @@ export async function getAllRecci() {
         throw error;
     }
 }
+
+export async function getRecciById(id: string) {
+    try {
+        console.log(`----RECCI GET BY ID: ${id}`);
+
+        const response = await axios.get(`${API.recciGetById}/${id}`);
+        console.log("Recci specific data", response.data);
+
+        return response.data;
+    } catch (error: any) {
+        console.error(`Error fetching RECCI tour with ID ${id}:`, error.response?.data || error.message);
+        throw error;
+    }
+}

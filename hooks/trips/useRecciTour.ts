@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import saveRecci from '@/services/recci.services';
+
 export default function useRecciTour() {
     const [formData, setFormData] = useState({
         schoolName: '',
@@ -9,7 +10,7 @@ export default function useRecciTour() {
     });
 
     const [expandedCategory, setExpandedCategory] = useState<string | null>("Location");
-    const [categoryData, setCategoryData] = useState<Record<string, Record<string, string>>>({});
+    const [categoryData, setCategoryData] = useState<Record<string, Record<string, any>>>({});
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -17,7 +18,7 @@ export default function useRecciTour() {
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
-    const handleCategoryFieldChange = (category: string, field: string, value: string) => {
+    const handleCategoryFieldChange = (category: string, field: string, value: any) => {
         setCategoryData(prev => ({
             ...prev,
             [category]: {
@@ -34,14 +35,32 @@ export default function useRecciTour() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
+        console.log("Category Data", categoryData);
+
         try {
-            const dataToSave = { ...formData, ...categoryData };
-            console.log("Submitting Data:", dataToSave);
-            
-            const response = await saveRecci(dataToSave);
+            const formDataPayload = new FormData();
+
+            // Append core fields
+            for (const key in formData) {
+                formDataPayload.append(key, formData[key as keyof typeof formData]);
+            }
+
+            // Append category data
+            for (const category in categoryData) {
+                for (const field in categoryData[category]) {
+                    const value = categoryData[category][field];
+                    const formKey = `${category}[${field}]`;
+                    if (value instanceof File) {
+                        formDataPayload.append(formKey, value);
+                    } else {
+                        formDataPayload.append(formKey, value);
+                    }
+                }
+            }
+
+            const response = await saveRecci(formDataPayload);
             if (response?.success) {
                 alert('RECCI Tour Request Submitted Successfully!');
-                // Reset form (optional) or redirect
                 setFormData({ schoolName: '', coordinatorName: '', travelDate: '', location: '' });
                 setCategoryData({});
             } else {

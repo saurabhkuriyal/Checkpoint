@@ -12,3 +12,18 @@ export default async function saveRecci(data: any) {
         throw error;
     }
 }
+
+export async function getAllRecci() {
+    try {
+        console.log("----RECCI GET ALL");
+
+        const response = await axios.get(API.recciGetAll);
+        console.log("Recci data", response.data);
+
+        return response.data;
+
+    } catch (error: any) {
+        console.error("Error fetching RECCI tours:", error.response?.data || error.message);
+        throw error;
+    }
+}

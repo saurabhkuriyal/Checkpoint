@@ -203,23 +203,6 @@ export default function DestinationsPage() {
                 </div>
             </div>
 
-            <style dangerouslySetInnerHTML={{
-                __html: `
-                @keyframes fadeInDown {
-                    from { opacity: 0; transform: translateY(-15px); }
-                    to { opacity: 1; transform: translateY(0); }
-                }
-                @keyframes fadeUp {
-                    from { opacity: 0; transform: translateY(20px); }
-                    to { opacity: 1; transform: translateY(0); }
-                }
-                .animate-fade-in-down {
-                    animation: fadeInDown 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-                }
-                .animate-fade-up {
-                    animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-                }
-            `}} />
         </div>
     );
 }

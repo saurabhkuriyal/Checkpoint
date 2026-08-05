@@ -470,14 +470,14 @@ export default function RecciForm() {
                                                                                     <span>Upload a file</span>
                                                                                     <input id={`file-upload-${category}-${idx}`} name={`file-upload-${category}-${idx}`} type="file" accept="image/*" className="sr-only" onChange={(e) => {
                                                                                         if (e.target.files && e.target.files.length > 0) {
-                                                                                            handleCategoryFieldChange(category, field.name, e.target.files[0].name);
+                                                                                            handleCategoryFieldChange(category, field.name, e.target.files[0]);
                                                                                         }
                                                                                     }} />
                                                                                 </label>
                                                                                 <p className="pl-1">or drag and drop</p>
                                                                             </div>
                                                                             <p className="text-xs text-slate-500">PNG, JPG, GIF up to 10MB</p>
-                                                                            {value && <p className="text-xs text-indigo-600 font-semibold mt-2">Selected: {value}</p>}
+                                                                            {value && <p className="text-xs text-indigo-600 font-semibold mt-2">Selected: {value.name || value}</p>}
                                                                         </div>
                                                                     </div>
                                                                 ) : (

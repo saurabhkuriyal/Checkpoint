@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import saveRecci from '@/services/recci.services';
-
+import imageCompression from 'browser-image-compression';
 export default function useRecciTour() {
     const [formData, setFormData] = useState({
         schoolName: '',
@@ -18,9 +18,24 @@ export default function useRecciTour() {
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
-    const handleCategoryFieldChange = (category: string, field: string, value: any) => {
+    const handleCategoryFieldChange = async (category: string, field: string, value: any) => {
+
+        //image compression
+        if (value instanceof File) {
+            const options = {
+                maxSizeMB: 1,
+                maxWidthOrHeight: 1920,
+                useWebWorker: true,
+            }
+
+            const compressedFile = await imageCompression(value, options);
+            value = compressedFile;
+        }
+
+        //end of compression
         setCategoryData(prev => ({
             ...prev,
+
             [category]: {
                 ...(prev[category] || {}),
                 [field]: value

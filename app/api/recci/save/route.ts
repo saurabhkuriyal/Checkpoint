@@ -14,12 +14,14 @@ export async function POST(request: NextRequest) {
         await connectDB();
 
         const formData = await request.formData();
+        console.log("Form Data:", formData);
+
         const recciData: any = {};
 
         for (const [key, value] of formData.entries()) {
             let catKey = "";
             let fieldKey = "";
-            
+
             if (key.includes('[')) {
                 const parts = key.split('[');
                 catKey = parts[0];

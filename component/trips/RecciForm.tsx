@@ -19,6 +19,9 @@ const LOCATIONS = [
     { value: "manali", label: "Manali" },
     { value: "goa", label: "Goa" },
     { value: "rishikesh", label: "Rishikesh" },
+    { value: "Diu", label: "Diu" },
+    { value: "Somnath", label: "Somnath" },
+    { value: "Gir", label: "Gir" },
     { value: "other", label: "Other (Specify in comments)" },
 ];
 

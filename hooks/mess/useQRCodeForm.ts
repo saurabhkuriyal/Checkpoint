@@ -65,22 +65,22 @@ export const useQRCodeForm = () => {
       return;
     }
 
-    if (!formData.image) {
-      alert("Please upload an image before submitting.");
-      return;
-    }
+    // if (!formData.image) {
+    //   alert("Please upload an image before submitting.");
+    //   return;
+    // }
 
     setIsSubmitting(true);
     try {
       const res = await submitFeedback(formData);
       console.log("QR code Hook", res);
-      
+
       if (res.success) {
         setIsSuccess(true);
-        setFormData({ 
-          message: '', name: '', number: '', batchNumber: '', email: '', 
-          ratingTaste: 0, ratingFreshness: 0, ratingQuality: 0, 
-          ratingPortion: 0, ratingOverall: 0, image: null 
+        setFormData({
+          message: '', name: '', number: '', batchNumber: '', email: '',
+          ratingTaste: 0, ratingFreshness: 0, ratingQuality: 0,
+          ratingPortion: 0, ratingOverall: 0, image: null
         });
       }
 

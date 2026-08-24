@@ -59,3 +59,62 @@ export const getFeedback = async () => {
         throw error.response?.data || error.message;
     }
 };
+
+export const submitStaffFeedback = async (data: {
+    name: string;
+    email: string;
+    number: string;
+    batchNumber?: string;
+    staffName: string;
+    ratingBehaviour: number;
+    ratingHygiene: number;
+    ratingSpeed: number;
+    ratingCleanliness: number;
+    ratingOverall: number;
+    message: string;
+    image?: File | string | null;
+}) => {
+    try {
+        console.log("Submitting staff feedback data:", data);
+
+        const formData = new FormData();
+        formData.append("name", data.name);
+        formData.append("email", data.email);
+        formData.append("number", data.number);
+        if (data.batchNumber) {
+            formData.append("batchNumber", data.batchNumber);
+        }
+        formData.append("staffName", data.staffName);
+        formData.append("ratingBehaviour", String(data.ratingBehaviour));
+        formData.append("ratingHygiene", String(data.ratingHygiene));
+        formData.append("ratingSpeed", String(data.ratingSpeed));
+        formData.append("ratingCleanliness", String(data.ratingCleanliness));
+        formData.append("ratingOverall", String(data.ratingOverall));
+        formData.append("message", data.message);
+
+        if (data.image) {
+            formData.append("image", data.image);
+        }
+
+        const response = await axios.post(API.staffFeedback, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+        return response.data;
+    } catch (error: any) {
+        console.error("Error submitting staff feedback:", error);
+        throw error.response?.data || error.message;
+    }
+};
+
+export const getStaffFeedback = async () => {
+    try {
+        const response = await axios.get(API.staffFeedback);
+        return response.data;
+    } catch (error: any) {
+        console.error("Error fetching staff feedback:", error);
+        throw error.response?.data || error.message;
+    }
+};
+

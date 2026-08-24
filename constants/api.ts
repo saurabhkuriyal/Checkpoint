@@ -10,6 +10,7 @@ export const API = {
     addConsumption: "/api/mess/addConsumption",
     purchaseStock: "/api/mess/purchaseStock",
     feedback: "/api/mess/feedback",
+    staffFeedback: "/api/mess/staffFeedback",
     recciSave: "/api/recci/save",
     recciGetAll: "/api/recci/getAll",
     recciGetById: "/api/recci/getById"

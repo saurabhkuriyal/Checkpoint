@@ -11,7 +11,13 @@ export default function Header() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const pathname = usePathname();
 
-  if (pathname === '/auth/login' || pathname === '/auth/signup' || pathname === '/mess/QRCodeform') {
+  if (
+    pathname === '/auth/login' ||
+    pathname === '/auth/signup' ||
+    pathname === '/mess/QRCodeform' ||
+    pathname === '/mess/staffQRCodeform' ||
+    pathname === '/mess/staffFeedbackForm'
+  ) {
     return null;
   }
 

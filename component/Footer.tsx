@@ -8,7 +8,13 @@ import { usePathname } from 'next/navigation';
 export default function Footer() {
     const pathname = usePathname();
 
-    if (pathname === '/auth/login' || pathname === '/auth/signup' || pathname === '/mess/QRCodeform') {
+    if (
+        pathname === '/auth/login' ||
+        pathname === '/auth/signup' ||
+        pathname === '/mess/QRCodeform' ||
+        pathname === '/mess/staffQRCodeform' ||
+        pathname === '/mess/staffFeedbackForm'
+    ) {
         return null;
     }
 

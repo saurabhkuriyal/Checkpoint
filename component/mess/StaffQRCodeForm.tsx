@@ -6,12 +6,20 @@ import confetti from 'canvas-confetti';
 import { useStaffQRCodeForm } from '@/hooks/mess/useStaffQRCodeForm';
 
 const STAFF_LIST = [
-  "Ramesh Kumar (Head Chef)",
-  "Suresh Singh (Mess Supervisor)",
-  "Amit Sharma (Counter Staff)",
-  "Priya Verma (Kitchen Helper)",
-  "Rajesh Gupta (Cleaning Staff)",
-  "Vikas Kumar (Service Staff)",
+  "Aakash",
+  "Akhlesh",
+  "Anuj",
+  "Bhagwati",
+  "Brij Kishore",
+  "Mahendra",
+  "Monu",
+  "Pappu",
+  "Raju",
+  "Rajveer",
+  "Ravindra",
+  "Santosh Bhola",
+  "Saurav Kumar",
+  "Seelu",
   "Other",
 ];
 
@@ -206,11 +214,10 @@ export const StaffQRCodeForm: React.FC = () => {
                             fill={isFilled ? "currentColor" : "none"}
                             stroke="currentColor"
                             strokeWidth={1.5}
-                            className={`w-8 h-8 sm:w-10 sm:h-10 transition-colors ${
-                              isFilled
-                                ? 'text-yellow-400 drop-shadow-sm'
-                                : 'text-gray-300 hover:text-yellow-300'
-                            }`}
+                            className={`w-8 h-8 sm:w-10 sm:h-10 transition-colors ${isFilled
+                              ? 'text-yellow-400 drop-shadow-sm'
+                              : 'text-gray-300 hover:text-yellow-300'
+                              }`}
                           >
                             <path
                               strokeLinecap="round"

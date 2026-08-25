@@ -11,15 +11,6 @@ export default function Header() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const pathname = usePathname();
 
-  if (
-    pathname === '/auth/login' ||
-    pathname === '/auth/signup' ||
-    pathname === '/mess/QRCodeform' ||
-    pathname === '/mess/staffQRCodeform' ||
-    pathname === '/mess/staffFeedbackForm'
-  ) {
-    return null;
-  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -49,6 +40,16 @@ export default function Header() {
     // Cleanup on unmount
     return () => { document.body.style.overflow = 'unset'; };
   }, [isMenuOpen]);
+
+  if (
+    pathname === '/auth/login' ||
+    pathname === '/auth/signup' ||
+    pathname === '/mess/QRCodeform' ||
+    pathname === '/mess/staffQRCodeform' ||
+    pathname === '/mess/staffFeedbackForm'
+  ) {
+    return null;
+  }
 
   return (
     <>
